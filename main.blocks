@@ -1,1 +1,18 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><block type="pxt-on-start" id="gokccyMtbl%QkkgI*p9o" x="0" y="0"></block></xml>
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable type="KIND_SpriteKind" id="cuI/V/wh^Ahnl2za68jw">Player</variable><variable type="KIND_SpriteKind" id="e=#,y+1MVzF5gBcnJ4bD">Projectile</variable><variable type="KIND_SpriteKind" id="@`|,/h^PL:m^;SV7[n%S">Food</variable><variable type="KIND_SpriteKind" id="x_KhZw~lNm-LY_mOlM*`">Enemy</variable><variable id="3*RAGg~BQ_4XyXUj*QEV">mySprite</variable><variable id="7/CfI`O6Y*ptaie=*n%(">item</variable><variable id=",~=,oT^M,4.yO(F0}=q;">Warrior</variable></variables><block type="function_definition" id="kt*S|}w7Td-tbzXLY5TQ" x="430" y="-30"><mutation name="SpawnCharecter" functionid="[S{4xsC|/Q=wa6H-_.Vy"></mutation><field name="function_name">SpawnCharecter</field><statement name="STACK"><block type="variables_set" id="Y!XSKeB]CO@?gw2o#NIZ"><field name="VAR" id=",~=,oT^M,4.yO(F0}=q;">Warrior</field><value name="VALUE"><shadow xmlns="http://www.w3.org/1999/xhtml" type="math_number"><field name="NUM">0</field></shadow><block type="spritescreate" id="w8^|HXWd8?h.Z-0CYek}"><value name="img"><shadow type="screen_image_picker" id="]9~6dzi$PpqJ*JQC.F!."><field name="img">img`
+. . . . . . f f f f . . . . . . 
+. . . . f f f 2 2 f f f . . . . 
+. . . f f f 2 2 2 2 f f f . . . 
+. . f f f e e e e e e f f f . . 
+. . f f e 2 2 2 2 2 2 e e f . . 
+. . f e 2 f f f f f f 2 e f . . 
+. . f f f f e e e e f f f f . . 
+. f f e f b f 4 4 f b f e f f . 
+. f e e 4 1 f d d f 1 4 e e f . 
+. . f e e d d d d d d e e f . . 
+. . . f e e 4 4 4 4 e e f . . . 
+. . e 4 f 2 2 2 2 2 2 f 4 e . . 
+. . 4 d f 2 2 2 2 2 2 f d 4 . . 
+. . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+. . . . . f f f f f f . . . . . 
+. . . . . f f . . f f . . . . . 
+`</field><data>{"commentRefs":[],"fieldData":{"img":"]9~6dzi$PpqJ*JQC.F!."}}</data></shadow></value><value name="kind"><shadow type="spritekind" id="Y}#{/uUhTkF4dg1?!#^{"><field name="MEMBER">Player</field></shadow></value></block></value></block></statement></block><block type="pxt-on-start" id="gokccyMtbl%QkkgI*p9o" x="0" y="0"><statement name="HANDLER"><block type="function_call" id="+p:IkG]PaOc~zpHQO/VO"><mutation name="SpawnCharecter" functionid="[S{4xsC|/Q=wa6H-_.Vy"></mutation></block></statement></block></xml>
