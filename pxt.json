@@ -5,19 +5,22 @@
         "device": "*",
         "Color Fading": "github:jwunderl/pxt-color#v0.2.2",
         "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.0.1",
-        "animation": "*"
+        "animation": "*",
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#10013ca1dcba54156faf7f4fefff9bc8db24ff26"
     },
     "files": [
         "main.blocks",
         "main.ts",
         "README.md",
-        "assets.json"
+        "assets.json",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
     ],
     "testFiles": [
         "test.ts"
     ],
     "targetVersions": {
-        "target": "1.8.26",
+        "target": "1.8.29",
         "targetId": "arcade"
     },
     "supportedTargets": [
