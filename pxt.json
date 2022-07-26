@@ -2,7 +2,10 @@
     "name": "Plastic Warriors",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.2",
+        "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.0.1",
+        "animation": "*"
     },
     "files": [
         "main.blocks",

@@ -1,3 +1,8 @@
+enum ActionKind {
+    Walking,
+    Idle,
+    Jumping
+}
 function SpawnCharecter () {
     Warrior = sprites.create(img`
         . . . . . . f f f f . . . . . . 
