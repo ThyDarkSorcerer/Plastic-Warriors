@@ -6,9 +6,24 @@ enum ActionKind {
 namespace SpriteKind {
     export const Logo = SpriteKind.create()
 }
+function Level__4__Future_Planet () {
+	
+}
 events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
 })
+function Level__2__Underwater_Palace () {
+	
+}
+function Level__6__Mossy_Dungeon () {
+	
+}
+function Level__8__Hell__Boss () {
+	
+}
+function Level__1__Ruins () {
+	
+}
 function LevelHomeTown () {
     tiles.setCurrentTilemap(tilemap`level1`)
 }
@@ -16,9 +31,15 @@ function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
 }
+function Level__3__Jungle () {
+	
+}
 events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
 })
+function Level__5__Lost_City () {
+	
+}
 function SpawnCharecter () {
     Warrior = sprites.create(img`
         . . . . . . f f f f . . . . . . 
@@ -41,6 +62,9 @@ function SpawnCharecter () {
     controller.moveSprite(Warrior, 100, 100)
     scene.cameraFollowSprite(Warrior)
     info.setLife(10)
+}
+function Level__7__Haunted_Mansion () {
+	
 }
 function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
