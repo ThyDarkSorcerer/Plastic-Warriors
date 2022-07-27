@@ -13,6 +13,7 @@ function LevelHomeTown () {
     tiles.setCurrentTilemap(tilemap`level1`)
 }
 function DestroySprites () {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {

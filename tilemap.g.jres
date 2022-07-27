@@ -28,23 +28,47 @@
         "tilemapTile": true,
         "displayName": "myTile4"
     },
-    "tile5": {
-        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fz////PzLvd/N/d/c/Pu938/////8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+    "tile11": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fzf3d3PzLvd/N/f38/Pu938393d/8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
-        "displayName": "myTile3"
+        "displayName": "myTile10"
+    },
+    "tile10": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fzf///PzLvd/N///8/Pu938393d/8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile9"
+    },
+    "tile9": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fzf3d3PzLvd/N/f38/Pu93839/d/8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile8"
+    },
+    "tile1": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fzf3d/PzLvd/N/f38/Pu93839/d/8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile7"
+    },
+    "tile8": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fzf3f/PzLvd/P/f/8/Pu938/93d/8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile6"
     },
     "tile7": {
-        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu9383939z8y73fz////PzLvd/N/d/c/Pu938/////8+73fzf3f38zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fzf39/PzLvd/N/f38/Pu938393d/8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "myTile5"
     },
-    "tile8": {
-        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu9383939z8y73fz////PzLvd/N/d/8/Pu938/9/9/8+73fzf3f/8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+    "tile5": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fzf393PzLvd/N/f38/Pu938393f/8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
-        "displayName": "myTile6"
+        "displayName": "myTile3"
     },
     "level2": {
         "id": "level2",
@@ -71,7 +95,7 @@
     "level3": {
         "id": "level3",
         "mimeType": "application/mkcd-tilemap",
-        "data": "MTAxMTAwMTEwMDA4MGIwYjBiMGIwYjBiMGIwYjBiMGIwYjBiMGIwYjBiMDYwOTBlMDUxMzA1MDMxNDAzMDMwMzE0MDMwMzE1MDUwZTBhMDkwMzAzMDMwZTBlMDMwZTA1MDMwNTBlMGUwNTA1MDMwYTA5MGUwMzBlMDEwZjAxMDEwMTAxMDEwZjAxMDMwNTAzMGEwOTA1MDUwMTBmMDIwMjAyMDIwMjAyMDIwZjAxMDMwNTBhMDkwMzBlMGYwMjAyMTExMDEwMDQxMTAyMDIwZjAzMDMwYTA5MDMwMzAxMDIxMTA0MTAxMDA0MTAxMTAyMDEwZTA1MGEwOTA1MDMwMTAyMTAxMDEwMTAxMDEwMTAwMjAxMDMwNTBhMDkwMzBlMDEwMjEwMDQxMDE2MTAxMDA0MDIwMTAzMDMwYTA5MDUwZTAxMDIxMDEwMTAxMDEwMTAxMDAyMDEwMzAzMGEwOTAzMDMwMTAyMTExMDA0MTAxMDA0MTEwMjAxMDUwMzBhMDkwNTAzMGYwMjAyMTEwNDA0MTAxMTAyMDIwZjA1MDUwYTA5MDMwZTAxMGYwMjAyMDIwMjAyMDIwMjBmMDEwMzAzMGEwOTAzMDMwMzAxMGYwMTAxMDEwMTAxMGYwMTA1MGUwMzBhMDkwMzAzMGUwMzBlMDMwZTAzMGUwMzA1MDMwMzA1MDMwYTA5MTIwMzAzMGUwMzAzMDMwMzAzMGUwMzAzMDMwZTEyMGEwNzBkMGQwZDBkMGQwZDBkMGQwZDBkMGQwZDBkMGQwZDBjMjIyMjIyMjIyMjIyMjIyMjIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDAwMjIwMDAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAwMDIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDAwMjIwMDAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAwMDIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAyMjIyMjIyMjIyMjIyMjIyMDI=",
+        "data": "MTAxMTAwMTEwMDA4MGIwYjBiMGIwYjBiMGIwYjBiMGIwYjBiMGIwYjBiMDYwOTBlMDUxYTA1MDMxMzAzMDMwMzE0MDMwMzE1MDUwZTBhMDkwMzAzMDMwZTBlMDMwZTA1MDMwNTBlMGUwNTA1MDMwYTA5MGUwMzBlMDEwZjAxMDEwMTAxMDEwZjAxMDMwNTAzMGEwOTA1MDUwMTBmMDIwMjAyMDIwMjAyMDIwZjAxMDMwNTBhMDkwMzBlMGYwMjAyMTExMDEwMDQxMTAyMDIwZjAzMDMwYTA5MDMwMzAxMDIxMTA0MTAxMDA0MTAxMTAyMDEwZTA1MGEwOTA1MDMwMTAyMTAxMDEwMTAxMDEwMTAwMjAxMDMwNTBhMDkwMzBlMDEwMjEwMDQxMDE2MTAxMDA0MDIwMTAzMDMwYTA5MDUwZTAxMDIxMDEwMTAxMDEwMTAxMDAyMDEwMzAzMGEwOTAzMDMwMTAyMTExMDA0MTAxMDA0MTEwMjAxMDUwMzBhMDkwNTAzMGYwMjAyMTEwNDA0MTAxMTAyMDIwZjA1MDUwYTA5MDMwZTAxMGYwMjAyMDIwMjAyMDIwMjBmMDEwMzAzMGEwOTAzMDMwMzAxMGYwMTAxMDEwMTAxMGYwMTA1MGUwMzBhMDkwMzAzMGUwMzBlMDMwZTAzMGUwMzA1MDMwMzA1MDMwYTA5MTIwMzE3MGUwMzE4MDMwMzAzMTkwMzAzMWIwZTEyMGEwNzBkMGQwZDBkMGQwZDBkMGQwZDBkMGQwZDBkMGQwZDBjMjIyMjIyMjIyMjIyMjIyMjIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDAwMjIwMDAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAwMDIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDAwMjIwMDAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAwMDIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAyMjIyMjIyMjIyMjIyMjIyMDI=",
         "tileset": [
             "myTiles.transparency16",
             "sprites.dungeon.floorDark2",
@@ -95,7 +119,12 @@
             "myTiles.tile5",
             "myTiles.tile7",
             "myTiles.tile8",
-            "sprites.dungeon.floorLight0"
+            "sprites.dungeon.floorLight0",
+            "myTiles.tile1",
+            "myTiles.tile9",
+            "myTiles.tile10",
+            "myTiles.tile6",
+            "myTiles.tile11"
         ],
         "displayName": "DeathGateHub"
     },
