@@ -164,7 +164,7 @@ scene.setBackgroundImage(img`
 if (!(MenuOpen)) {
     MenuOpen = true
     myMenu = miniMenu.createMenu(
-    miniMenu.createMenuItem("(1)", img`
+    miniMenu.createMenuItem(" ", img`
         ..33333.33....................
         .42222222223..................
         422222222222..................
@@ -186,23 +186,6 @@ if (!(MenuOpen)) {
         .....................3bab.....
         `)
     )
-    myMenu.setFrame(img`
-        c c c c c c c c c c c c c c c 
-        c e e 2 2 2 2 2 2 2 2 2 e e c 
-        c e a a a a a a a a a a a e c 
-        c a a 8 8 8 8 8 8 8 8 8 a a c 
-        c a a a a a a a a a a a a a c 
-        c a a a a a a a a a a a a a c 
-        c a a a a a a a a a a a a a c 
-        c a a a a a a a a a a a a a c 
-        c a a a a a a a a a a a a a c 
-        c a a a a a a a a a a a a a c 
-        c a a a a a a a a a a a a a c 
-        c a a 8 8 8 8 8 8 8 8 8 a a c 
-        c e a a a a a a a a a a a e c 
-        c e e 2 2 2 2 2 2 2 2 2 e e c 
-        c c c c c c c c c c c c c c c 
-        `)
     myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
         myMenu.close()
         LevelHomeTown()
