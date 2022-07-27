@@ -18,11 +18,11 @@ function Level__2__Underwater_Palace () {
 function Level__6__Mossy_Dungeon () {
 	
 }
-function Level__8__Hell__Boss () {
+function Level__8__Shadow_Realm__Boss () {
 	
 }
 function Level__1__Ruins () {
-	
+    tiles.setCurrentTilemap(tilemap`level8`)
 }
 function LevelHomeTown () {
     tiles.setCurrentTilemap(tilemap`level1`)
