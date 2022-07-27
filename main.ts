@@ -40,6 +40,7 @@ function SpawnCharecter () {
         `, SpriteKind.Player)
     controller.moveSprite(Warrior, 100, 100)
     scene.cameraFollowSprite(Warrior)
+    info.setLife(10)
 }
 function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
