@@ -6,7 +6,11 @@
         "Color Fading": "github:jwunderl/pxt-color#v0.2.2",
         "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.0.1",
         "animation": "*",
-        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#10013ca1dcba54156faf7f4fefff9bc8db24ff26"
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#10013ca1dcba54156faf7f4fefff9bc8db24ff26",
+        "Songs": "github:LucasMayhew/RPGMuisic#f26c7df84609da0be7af7e16d2a64dcd095c1716",
+        "pxt-countup": "github:shakao/pxt-countup#v0.0.2",
+        "Achievements": "github:UnsignedArduino/Achievements#a578c77dd75467b9b0b5238a9a31c5fdc427cb9d",
+        "arcade-sprite-events": "github:riknoll/arcade-sprite-events#dc93eec8412053ebbd2b8f01cf5b6ae285d28900"
     },
     "files": [
         "main.blocks",
