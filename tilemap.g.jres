@@ -4,12 +4,6 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
     },
-    "tile1": {
-        "data": "hwQQABAAAAB3d0dERERERHdHRERERERER0REJCIiIiJHRCQi7u7u7ndHIu5OREREd0TiTkR0R0RHJOJEREREREck7kRERERERyRORERERER3JEJERERERHdEQkREREREd0QiRERERER3RyQiRERERHd3RCQiIiIid3dERERERER3d3dERERERA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile"
-    },
     "tile2": {
         "data": "hwQQABAAAAB3d3fMfHd3d1d7zMbMfHdVd8dmZszMd3d3x2ZnbMZ3d3dsdmdm9nx3d2x3dmf8T3fHZndnZ2b8fsdnV3fGZvzux3d3Z2fM/O7HVWdmZ/bPd2dVd2dn/Hznd3Z1Z2bG73R3xnZWZ8Z/d3fHbHbG/Hd3tXfMZsZ8V7VXe8fMzHd3dw==",
         "mimeType": "image/x-mkcd-f4",
@@ -27,6 +21,30 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "myTile2"
+    },
+    "tile6": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fz////PzLvd/N/d/c/Pu938/////8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile4"
+    },
+    "tile5": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu938////z8y73fz////PzLvd/N/d/c/Pu938/////8+73fz////8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile3"
+    },
+    "tile7": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu9383939z8y73fz////PzLvd/N/d/c/Pu938/////8+73fzf3f38zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile5"
+    },
+    "tile8": {
+        "data": "hwQQABAAAADMzMzMzMzMzLzdvN3d293Nu9283d3b3d273by7u7y727vd/P/////Mu9383939z8y73fz////PzLvd/N/d/8/Pu938/9/9/8+73fzf3f/8zLvd/P////zMu938/////8y73by7u7y727vdvN3d293dvN283d3b3c3MzMzMzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile6"
     },
     "level2": {
         "id": "level2",
@@ -49,6 +67,37 @@
             "myTiles.tile4"
         ],
         "displayName": "level1"
+    },
+    "level3": {
+        "id": "level3",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAxMTAwMTEwMDA4MGIwYjBiMGIwYjBiMGIwYjBiMGIwYjBiMGIwYjBiMDYwOTBlMDUxMzA1MDMxNDAzMDMwMzE0MDMwMzE1MDUwZTBhMDkwMzAzMDMwZTBlMDMwZTA1MDMwNTBlMGUwNTA1MDMwYTA5MGUwMzBlMDEwZjAxMDEwMTAxMDEwZjAxMDMwNTAzMGEwOTA1MDUwMTBmMDIwMjAyMDIwMjAyMDIwZjAxMDMwNTBhMDkwMzBlMGYwMjAyMTExMDEwMDQxMTAyMDIwZjAzMDMwYTA5MDMwMzAxMDIxMTA0MTAxMDA0MTAxMTAyMDEwZTA1MGEwOTA1MDMwMTAyMTAxMDEwMTAxMDEwMTAwMjAxMDMwNTBhMDkwMzBlMDEwMjEwMDQxMDE2MTAxMDA0MDIwMTAzMDMwYTA5MDUwZTAxMDIxMDEwMTAxMDEwMTAxMDAyMDEwMzAzMGEwOTAzMDMwMTAyMTExMDA0MTAxMDA0MTEwMjAxMDUwMzBhMDkwNTAzMGYwMjAyMTEwNDA0MTAxMTAyMDIwZjA1MDUwYTA5MDMwZTAxMGYwMjAyMDIwMjAyMDIwMjBmMDEwMzAzMGEwOTAzMDMwMzAxMGYwMTAxMDEwMTAxMGYwMTA1MGUwMzBhMDkwMzAzMGUwMzBlMDMwZTAzMGUwMzA1MDMwMzA1MDMwYTA5MTIwMzAzMGUwMzAzMDMwMzAzMGUwMzAzMDMwZTEyMGEwNzBkMGQwZDBkMGQwZDBkMGQwZDBkMGQwZDBkMGQwZDBjMjIyMjIyMjIyMjIyMjIyMjIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDAwMjIwMDAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAwMDIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAwMjAwMDAwMDAwMDAwMDAwMjIwMDAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAwMDIyMDAwMDAwMDAwMDAwMDAyMDAyMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMjAyMjIyMjIyMjIyMjIyMjIyMDI=",
+        "tileset": [
+            "myTiles.transparency16",
+            "sprites.dungeon.floorDark2",
+            "sprites.dungeon.floorLight2",
+            "sprites.dungeon.floorDark0",
+            "sprites.dungeon.floorLightMoss",
+            "sprites.dungeon.floorDark1",
+            "sprites.dungeon.purpleOuterNorthEast",
+            "sprites.dungeon.purpleOuterSouthEast",
+            "sprites.dungeon.purpleOuterNorthWest",
+            "sprites.dungeon.purpleOuterWest0",
+            "sprites.dungeon.purpleOuterEast1",
+            "sprites.dungeon.purpleOuterNorth0",
+            "sprites.dungeon.purpleOuterSouthWest",
+            "sprites.dungeon.purpleOuterSouth1",
+            "sprites.dungeon.floorDark4",
+            "sprites.dungeon.floorDarkDiamond",
+            "sprites.dungeon.floorLight4",
+            "sprites.dungeon.floorLight5",
+            "sprites.dungeon.floorDark3",
+            "myTiles.tile5",
+            "myTiles.tile7",
+            "myTiles.tile8",
+            "sprites.dungeon.floorLight0"
+        ],
+        "displayName": "DeathGateHub"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",

@@ -7,7 +7,7 @@ namespace SpriteKind {
     export const Logo = SpriteKind.create()
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.StartOverlapping, function (sprite) {
-	
+    LevelTheDeathGateHub()
 })
 function LevelHomeTown () {
     tiles.setCurrentTilemap(tilemap`level1`)
@@ -16,7 +16,7 @@ function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
-	
+    LevelTheDeathGateHub()
 })
 function SpawnCharecter () {
     Warrior = sprites.create(img`
@@ -39,6 +39,10 @@ function SpawnCharecter () {
         `, SpriteKind.Player)
     controller.moveSprite(Warrior, 100, 100)
     scene.cameraFollowSprite(Warrior)
+}
+function LevelTheDeathGateHub () {
+    tiles.setCurrentTilemap(tilemap`DeathGateHub`)
+    tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
 }
 let Warrior: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
