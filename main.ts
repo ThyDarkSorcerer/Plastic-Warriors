@@ -48,6 +48,9 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile7`, events.TileEvent.Start
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
     }
 })
+function BlockMap () {
+    tiles.setCurrentTilemap(tilemap`level8`)
+}
 function Level__8__Shadow_Realm__Boss () {
 	
 }
@@ -62,7 +65,7 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile8`, events.TileEvent.Start
     }
 })
 function Level__1__Ruins () {
-    tiles.setCurrentTilemap(tilemap`level8`)
+    tiles.setCurrentTilemap(tilemap`level10`)
 }
 function LevelHomeTown () {
     tiles.setCurrentTilemap(tilemap`level1`)
