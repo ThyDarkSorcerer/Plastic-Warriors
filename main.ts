@@ -10,7 +10,14 @@ function Level__4__Future_Planet () {
 	
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile9`, events.TileEvent.StartOverlapping, function (sprite) {
-    Level__7__Haunted_Mansion()
+    CheckQualification(7)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__7__Haunted_Mansion()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+    }
 })
 events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
@@ -22,16 +29,37 @@ function Level__6__Mossy_Dungeon () {
 	
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile6`, events.TileEvent.StartOverlapping, function (sprite) {
-    Level__4__Future_Planet()
+    CheckQualification(4)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__4__Future_Planet()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+    }
 })
 events.tileEvent(SpriteKind.Player, assets.tile`myTile7`, events.TileEvent.StartOverlapping, function (sprite) {
-    Level__5__Lost_City()
+    CheckQualification(5)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__5__Lost_City()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+    }
 })
 function Level__8__Shadow_Realm__Boss () {
 	
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile8`, events.TileEvent.StartOverlapping, function (sprite) {
-    Level__6__Mossy_Dungeon()
+    CheckQualification(6)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__6__Mossy_Dungeon()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+    }
 })
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level8`)
@@ -47,22 +75,47 @@ function Level__3__Jungle () {
 	
 }
 function CheckQualification (LevelNumber: number) {
-	
+    if (DungeonLevel >= LevelNumber) {
+        IsQualified = true
+    } else {
+        IsQualified = false
+    }
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile3`, events.TileEvent.StartOverlapping, function (sprite) {
-    Level__2__Underwater_Palace()
+    CheckQualification(2)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__2__Underwater_Palace()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+    }
 })
 events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
 })
 events.tileEvent(SpriteKind.Player, assets.tile`myTile5`, events.TileEvent.StartOverlapping, function (sprite) {
-    Level__3__Jungle()
+    CheckQualification(3)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__3__Jungle()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+    }
 })
 function Level__5__Lost_City () {
 	
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile10`, events.TileEvent.StartOverlapping, function (sprite) {
-    Level__8__Shadow_Realm__Boss()
+    CheckQualification(8)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__8__Shadow_Realm__Boss()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+    }
 })
 function SpawnCharecter () {
     Warrior = sprites.create(img`
@@ -88,7 +141,14 @@ function SpawnCharecter () {
     info.setLife(10)
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile4`, events.TileEvent.StartOverlapping, function (sprite) {
-    Level__1__Ruins()
+    CheckQualification(1)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__1__Ruins()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+    }
 })
 function Level__7__Haunted_Mansion () {
 	
@@ -100,6 +160,8 @@ function LevelTheDeathGateHub () {
 let Warrior: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
+let IsQualified = false
+let DungeonLevel = 0
 scene.setBackgroundImage(img`
     eeeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbddbbbbbbbbbbddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     eeeeeeebbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbddbbdbbbbbbdbbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
@@ -214,6 +276,8 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcffcffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcfccfffffcfffffffffffffffffffffffffcefffffcff
     fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffff
     `)
+DungeonLevel = 0
+IsQualified = false
 if (!(MenuOpen)) {
     MenuOpen = true
     myMenu = miniMenu.createMenu(
