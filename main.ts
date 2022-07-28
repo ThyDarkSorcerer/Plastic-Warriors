@@ -9,6 +9,9 @@ namespace SpriteKind {
 function Level__4__Future_Planet () {
 	
 }
+events.tileEvent(SpriteKind.Player, assets.tile`myTile9`, events.TileEvent.StartOverlapping, function (sprite) {
+    Level__7__Haunted_Mansion()
+})
 events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
 })
@@ -18,9 +21,18 @@ function Level__2__Underwater_Palace () {
 function Level__6__Mossy_Dungeon () {
 	
 }
+events.tileEvent(SpriteKind.Player, assets.tile`myTile6`, events.TileEvent.StartOverlapping, function (sprite) {
+    Level__4__Future_Planet()
+})
+events.tileEvent(SpriteKind.Player, assets.tile`myTile7`, events.TileEvent.StartOverlapping, function (sprite) {
+    Level__5__Lost_City()
+})
 function Level__8__Shadow_Realm__Boss () {
 	
 }
+events.tileEvent(SpriteKind.Player, assets.tile`myTile8`, events.TileEvent.StartOverlapping, function (sprite) {
+    Level__6__Mossy_Dungeon()
+})
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level8`)
 }
@@ -34,12 +46,24 @@ function DestroySprites () {
 function Level__3__Jungle () {
 	
 }
+function CheckQualification (LevelNumber: number) {
+	
+}
+events.tileEvent(SpriteKind.Player, assets.tile`myTile3`, events.TileEvent.StartOverlapping, function (sprite) {
+    Level__2__Underwater_Palace()
+})
 events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
+})
+events.tileEvent(SpriteKind.Player, assets.tile`myTile5`, events.TileEvent.StartOverlapping, function (sprite) {
+    Level__3__Jungle()
 })
 function Level__5__Lost_City () {
 	
 }
+events.tileEvent(SpriteKind.Player, assets.tile`myTile10`, events.TileEvent.StartOverlapping, function (sprite) {
+    Level__8__Shadow_Realm__Boss()
+})
 function SpawnCharecter () {
     Warrior = sprites.create(img`
         . . . . . . f f f f . . . . . . 
@@ -63,6 +87,9 @@ function SpawnCharecter () {
     scene.cameraFollowSprite(Warrior)
     info.setLife(10)
 }
+events.tileEvent(SpriteKind.Player, assets.tile`myTile4`, events.TileEvent.StartOverlapping, function (sprite) {
+    Level__1__Ruins()
+})
 function Level__7__Haunted_Mansion () {
 	
 }
