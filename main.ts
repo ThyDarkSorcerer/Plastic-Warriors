@@ -25,6 +25,17 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.Start
 function Level__2__Underwater_Palace () {
 	
 }
+events.tileEvent(SpriteKind.Player, assets.tile`myTile3`, events.TileEvent.Enters, function (sprite) {
+    CheckQualification(2)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__2__Underwater_Palace()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        IsQualified = false
+    }
+})
 function Level__6__Mossy_Dungeon () {
 	
 }
@@ -78,34 +89,14 @@ function Level__3__Jungle () {
 	
 }
 function CheckQualification (LevelNumber: number) {
-    if (DungeonLevel >= LevelNumber) {
+    if (LevelNumber >= DungeonLevel) {
         IsQualified = true
     } else {
         IsQualified = false
     }
 }
-events.tileEvent(SpriteKind.Player, assets.tile`myTile3`, events.TileEvent.StartOverlapping, function (sprite) {
-    CheckQualification(2)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__2__Underwater_Palace()
-    } else {
-        music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-    }
-})
 events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
-})
-events.tileEvent(SpriteKind.Player, assets.tile`myTile5`, events.TileEvent.StartOverlapping, function (sprite) {
-    CheckQualification(3)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__3__Jungle()
-    } else {
-        music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-    }
 })
 function Level__5__Lost_City () {
 	
@@ -148,6 +139,17 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile4`, events.TileEvent.Start
     if (IsQualified == true) {
         IsQualified = false
         Level__1__Ruins()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        IsQualified = false
+    }
+})
+events.tileEvent(SpriteKind.Player, assets.tile`myTile5`, events.TileEvent.Enters, function (sprite) {
+    CheckQualification(3)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__3__Jungle()
     } else {
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
