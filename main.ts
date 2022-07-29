@@ -284,6 +284,7 @@ scene.setBackgroundImage(img`
     `)
 DungeonLevel = 0
 IsQualified = false
+info.setScore(0)
 if (!(MenuOpen)) {
     MenuOpen = true
     myMenu = miniMenu.createMenu(
