@@ -133,6 +133,7 @@ function SpawnCharecter () {
     controller.moveSprite(Warrior, 100, 100)
     scene.cameraFollowSprite(Warrior)
     info.setLife(10)
+    controller.moveSprite(Warrior)
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile4`, events.TileEvent.StartOverlapping, function (sprite) {
     CheckQualification(1)
