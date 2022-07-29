@@ -6,9 +6,6 @@ enum ActionKind {
 namespace SpriteKind {
     export const Logo = SpriteKind.create()
 }
-function Level__4__Future_Planet () {
-	
-}
 events.tileEvent(SpriteKind.Player, assets.tile`myTile9`, events.TileEvent.StartOverlapping, function (sprite) {
     CheckQualification(7)
     if (IsQualified == true) {
@@ -22,9 +19,6 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile9`, events.TileEvent.Start
 events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
 })
-function Level__2__Underwater_Palace () {
-	
-}
 events.tileEvent(SpriteKind.Player, assets.tile`myTile3`, events.TileEvent.Enters, function (sprite) {
     CheckQualification(2)
     if (IsQualified == true) {
@@ -36,9 +30,6 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile3`, events.TileEvent.Enter
         IsQualified = false
     }
 })
-function Level__6__Mossy_Dungeon () {
-	
-}
 events.tileEvent(SpriteKind.Player, assets.tile`myTile6`, events.TileEvent.StartOverlapping, function (sprite) {
     CheckQualification(4)
     if (IsQualified == true) {
@@ -62,9 +53,6 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile7`, events.TileEvent.Start
 function BlockMap () {
     tiles.setCurrentTilemap(tilemap`level8`)
 }
-function Level__8__Shadow_Realm__Boss () {
-	
-}
 events.tileEvent(SpriteKind.Player, assets.tile`myTile8`, events.TileEvent.StartOverlapping, function (sprite) {
     CheckQualification(6)
     if (IsQualified == true) {
@@ -75,17 +63,23 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile8`, events.TileEvent.Start
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
     }
 })
-function Level__1__Ruins () {
-    tiles.setCurrentTilemap(tilemap`level10`)
+function Level__8__Shadow_Realm__Boss () {
+	
 }
 function LevelHomeTown () {
     tiles.setCurrentTilemap(tilemap`level1`)
+}
+function Level__4__Future_Planet () {
+	
+}
+function Level__5__Lost_City () {
+	
 }
 function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
 }
-function Level__3__Jungle () {
+function Level__2__Underwater_Palace () {
 	
 }
 function CheckQualification (LevelNumber: number) {
@@ -95,10 +89,13 @@ function CheckQualification (LevelNumber: number) {
         IsQualified = false
     }
 }
+function Level__3__Jungle () {
+	
+}
 events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
     LevelTheDeathGateHub()
 })
-function Level__5__Lost_City () {
+function Level__6__Mossy_Dungeon () {
 	
 }
 events.tileEvent(SpriteKind.Player, assets.tile`myTile10`, events.TileEvent.StartOverlapping, function (sprite) {
@@ -146,6 +143,9 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile4`, events.TileEvent.Start
         IsQualified = false
     }
 })
+function Level__7__Haunted_Mansion () {
+	
+}
 events.tileEvent(SpriteKind.Player, assets.tile`myTile5`, events.TileEvent.Enters, function (sprite) {
     CheckQualification(3)
     if (IsQualified == true) {
@@ -156,8 +156,8 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile5`, events.TileEvent.Enter
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
     }
 })
-function Level__7__Haunted_Mansion () {
-	
+function Level__1__Ruins () {
+    tiles.setCurrentTilemap(tilemap`level10`)
 }
 function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
