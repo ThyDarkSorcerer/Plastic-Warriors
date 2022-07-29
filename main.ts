@@ -310,9 +310,9 @@ if (!(MenuOpen)) {
         .....................3bab.....
         `)
     )
-    myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
-        myMenu.close()
-        LevelHomeTown()
-        SpawnCharecter()
-    })
 }
+myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
+    myMenu.close()
+    LevelHomeTown()
+    SpawnCharecter()
+})
