@@ -6,31 +6,7 @@ enum ActionKind {
 namespace SpriteKind {
     export const Logo = SpriteKind.create()
 }
-events.tileEvent(SpriteKind.Player, assets.tile`myTile9`, events.TileEvent.StartOverlapping, function (sprite) {
-    CheckQualification(7)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__7__Haunted_Mansion()
-    } else {
-        music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-    }
-})
-events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.StartOverlapping, function (sprite) {
-    LevelTheDeathGateHub()
-})
-events.tileEvent(SpriteKind.Player, assets.tile`myTile3`, events.TileEvent.Enters, function (sprite) {
-    CheckQualification(2)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__2__Underwater_Palace()
-    } else {
-        music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        IsQualified = false
-    }
-})
-events.tileEvent(SpriteKind.Player, assets.tile`myTile6`, events.TileEvent.StartOverlapping, function (sprite) {
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
     CheckQualification(4)
     if (IsQualified == true) {
         IsQualified = false
@@ -38,9 +14,13 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile6`, events.TileEvent.Start
     } else {
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
 })
-events.tileEvent(SpriteKind.Player, assets.tile`myTile7`, events.TileEvent.StartOverlapping, function (sprite) {
+events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.StartOverlapping, function (sprite) {
+    LevelTheDeathGateHub()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
     CheckQualification(5)
     if (IsQualified == true) {
         IsQualified = false
@@ -49,18 +29,41 @@ events.tileEvent(SpriteKind.Player, assets.tile`myTile7`, events.TileEvent.Start
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
     }
+    tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
+    CheckQualification(1)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__1__Ruins()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        IsQualified = false
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
+    CheckQualification(7)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__7__Haunted_Mansion()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
 })
 function BlockMap () {
     tiles.setCurrentTilemap(tilemap`level8`)
 }
-events.tileEvent(SpriteKind.Player, assets.tile`myTile8`, events.TileEvent.StartOverlapping, function (sprite) {
-    CheckQualification(6)
-    if (IsQualified == true) {
         IsQualified = false
-        Level__6__Mossy_Dungeon()
+        Level__2__Underwater_Palace()
     } else {
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        IsQualified = false
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
 })
 function Level__8__Shadow_Realm__Boss () {
@@ -83,34 +86,22 @@ function Level__2__Underwater_Palace () {
 	
 }
 function CheckQualification (LevelNumber: number) {
-    if (LevelNumber >= DungeonLevel) {
+    if (DungeonLevel >= LevelNumber) {
         IsQualified = true
     } else {
         IsQualified = false
     }
 }
-function Level__3__Jungle () {
-	
-}
-events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
-    LevelTheDeathGateHub()
-})
-function Level__6__Mossy_Dungeon () {
-	
-}
-events.tileEvent(SpriteKind.Player, assets.tile`myTile10`, events.TileEvent.StartOverlapping, function (sprite) {
-    CheckQualification(8)
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
+    CheckQualification(6)
     if (IsQualified == true) {
         IsQualified = false
-        Level__8__Shadow_Realm__Boss()
     } else {
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
 })
-function SpawnCharecter () {
-    Warrior = sprites.create(img`
-        . . . . . . f f f f . . . . . . 
         . . . . f f f 2 2 f f f . . . . 
         . . . f f f 2 2 2 2 f f f . . . 
         . . f f f e e e e e e f f f . . 
@@ -128,34 +119,12 @@ function SpawnCharecter () {
         . . . . . f f . . f f . . . . . 
         `, SpriteKind.Player)
     controller.moveSprite(Warrior, 100, 100)
-    scene.cameraFollowSprite(Warrior)
     info.setLife(10)
     controller.moveSprite(Warrior)
 }
-events.tileEvent(SpriteKind.Player, assets.tile`myTile4`, events.TileEvent.StartOverlapping, function (sprite) {
-    CheckQualification(1)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__1__Ruins()
-    } else {
-        music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        IsQualified = false
-    }
-})
 function Level__7__Haunted_Mansion () {
 	
 }
-events.tileEvent(SpriteKind.Player, assets.tile`myTile5`, events.TileEvent.Enters, function (sprite) {
-    CheckQualification(3)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__3__Jungle()
-    } else {
-        music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-    }
-})
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level10`)
 }
