@@ -92,7 +92,7 @@ function Level__2__Underwater_Palace () {
 	
 }
 function CheckQualification (LevelNumber: number) {
-    if (DungeonLevel >= LevelNumber) {
+    if (LevelNumber >= DungeonLevel) {
         IsQualified = true
     } else {
         IsQualified = false
@@ -296,7 +296,7 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcffcffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcfccfffffcfffffffffffffffffffffffffcefffffcff
     fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffff
     `)
-DungeonLevel = 1
+DungeonLevel = 0
 IsQualified = false
 info.setScore(0)
 if (!(MenuOpen)) {
