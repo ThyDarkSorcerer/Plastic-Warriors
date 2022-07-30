@@ -13,6 +13,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         Level__4__Future_Planet()
     } else {
         music.zapped.play()
+        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
@@ -27,9 +28,10 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, l
         Level__5__Lost_City()
     } else {
         music.zapped.play()
+        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
-    tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
     CheckQualification(1)
@@ -38,8 +40,8 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, l
         Level__1__Ruins()
     } else {
         music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         IsQualified = false
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
 })
@@ -51,12 +53,16 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, l
     } else {
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        IsQualified = false
         tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
 })
 function BlockMap () {
     tiles.setCurrentTilemap(tilemap`level8`)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    CheckQualification(2)
+    if (IsQualified == true) {
         IsQualified = false
         Level__2__Underwater_Palace()
     } else {
@@ -86,7 +92,7 @@ function Level__2__Underwater_Palace () {
 	
 }
 function CheckQualification (LevelNumber: number) {
-    if (DungeonLevel >= LevelNumber) {
+    if (LevelNumber >= DungeonLevel) {
         IsQualified = true
     } else {
         IsQualified = false
@@ -96,12 +102,50 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, l
     CheckQualification(6)
     if (IsQualified == true) {
         IsQualified = false
+        Level__6__Mossy_Dungeon()
     } else {
         music.zapped.play()
+        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
 })
+function Level__3__Jungle () {
+	
+}
+events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
+    LevelTheDeathGateHub()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
+    CheckQualification(3)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__3__Jungle()
+    } else {
+        music.zapped.play()
+        IsQualified = false
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
+})
+function Level__6__Mossy_Dungeon () {
+	
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, location) {
+    CheckQualification(8)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__8__Shadow_Realm__Boss()
+    } else {
+        music.zapped.play()
+        IsQualified = false
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
+})
+function SpawnCharecter () {
+    Warrior = sprites.create(img`
+        . . . . . . f f f f . . . . . . 
         . . . . f f f 2 2 f f f . . . . 
         . . . f f f 2 2 2 2 f f f . . . 
         . . f f f e e e e e e f f f . . 
@@ -119,6 +163,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, l
         . . . . . f f . . f f . . . . . 
         `, SpriteKind.Player)
     controller.moveSprite(Warrior, 100, 100)
+    scene.cameraFollowSprite(Warrior)
     info.setLife(10)
     controller.moveSprite(Warrior)
 }
@@ -279,9 +324,9 @@ if (!(MenuOpen)) {
         .....................3bab.....
         `)
     )
+    myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
+        myMenu.close()
+        LevelHomeTown()
+        SpawnCharecter()
+    })
 }
-myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
-    myMenu.close()
-    LevelHomeTown()
-    SpawnCharecter()
-})
