@@ -77,6 +77,7 @@ function Level__8__Shadow_Realm__Boss () {
 }
 function LevelHomeTown () {
     tiles.setCurrentTilemap(tilemap`level1`)
+    SpawnCharecter()
 }
 function Level__4__Future_Planet () {
 	
@@ -170,6 +171,15 @@ function SpawnCharecter () {
 function Level__7__Haunted_Mansion () {
 	
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile15`)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile16`)
+})
+events.tileEvent(SpriteKind.Player, sprites.dungeon.stairLarge, events.TileEvent.StartOverlapping, function (sprite) {
+    LevelHomeTown()
+})
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level10`)
 }
@@ -296,7 +306,7 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcffcffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcfccfffffcfffffffffffffffffffffffffcefffffcff
     fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffff
     `)
-DungeonLevel = 0
+DungeonLevel = 1
 IsQualified = false
 info.setScore(0)
 if (!(MenuOpen)) {
@@ -327,6 +337,5 @@ if (!(MenuOpen)) {
     myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
         myMenu.close()
         LevelHomeTown()
-        SpawnCharecter()
     })
 }
