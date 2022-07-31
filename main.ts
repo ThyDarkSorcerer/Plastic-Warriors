@@ -92,7 +92,7 @@ function Level__2__Underwater_Palace () {
 	
 }
 function CheckQualification (LevelNumber: number) {
-    if (LevelNumber >= DungeonLevel) {
+    if (DungeonLevel >= LevelNumber) {
         IsQualified = true
     } else {
         IsQualified = false
