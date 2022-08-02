@@ -90,7 +90,7 @@ function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
 }
 function Level__2__Underwater_Palace () {
-	
+    tiles.setCurrentTilemap(tilemap`DungeonLevel2`)
 }
 function CheckQualification (LevelNumber: number) {
     if (DungeonLevel >= LevelNumber) {
@@ -178,6 +178,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
 events.tileEvent(SpriteKind.Player, sprites.dungeon.stairLarge, events.TileEvent.StartOverlapping, function (sprite) {
+    DungeonLevel += 1
     LevelHomeTown()
 })
 function Level__1__Ruins () {
