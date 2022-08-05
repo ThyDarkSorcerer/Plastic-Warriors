@@ -6,6 +6,9 @@ enum ActionKind {
 namespace SpriteKind {
     export const Logo = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
+    LevelTheDeathGateHub()
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
     CheckQualification(4)
     if (IsQualified == true) {
@@ -17,9 +20,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
-})
-events.tileEvent(SpriteKind.Player, assets.tile`myTile1`, events.TileEvent.StartOverlapping, function (sprite) {
-    LevelTheDeathGateHub()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
     CheckQualification(5)
@@ -90,6 +90,9 @@ function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
+    LevelTheDeathGateHub()
+})
 function Level__2__Underwater_Palace () {
     tiles.setCurrentTilemap(tilemap`DungeonLevel2`)
 }
@@ -115,7 +118,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, l
 function Level__3__Jungle () {
 	
 }
-events.tileEvent(SpriteKind.Player, assets.tile`myTile2`, events.TileEvent.StartOverlapping, function (sprite) {
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
     LevelTheDeathGateHub()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
@@ -178,15 +181,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
-events.tileEvent(SpriteKind.Player, sprites.dungeon.stairLarge, events.TileEvent.StartOverlapping, function (sprite) {
-    DungeonLevel += 1
-    LevelHomeTown()
-})
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level10`)
 }
-events.tileEvent(SpriteKind.Player, assets.tile`myTile37`, events.TileEvent.StartOverlapping, function (sprite) {
-    LevelTheDeathGateHub()
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
+    DungeonLevel += 1
+    LevelHomeTown()
 })
 function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
