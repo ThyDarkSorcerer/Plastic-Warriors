@@ -1,0 +1,12 @@
+{
+    "image2": {
+        "data": "hwQPAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAMwMAAAAAADMzAwAAAAAzMzMDAAAAMzMzMwMAADMzPz//AwAAADMzMzMDAAAAADMzMwMAAAAAADMzAwAAAAAAADMDAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Icon_Info"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myImages"
+    }
+}

@@ -269,7 +269,7 @@ function Level__8__Shadow_Realm__Boss () {
 }
 function LevelHomeTown () {
     SpawnCharecter()
-    tiles.setCurrentTilemap(tilemap`level1`)
+    tiles.setCurrentTilemap(tilemap`Tilemap_Hub`)
     tiles.placeOnRandomTile(Warrior, assets.tile`HomeSpawn`)
 }
 function Level__4__Future_Planet () {
@@ -387,11 +387,15 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
 function Level__1__Ruins () {
-    tiles.setCurrentTilemap(tilemap`level10`)
+    tiles.setCurrentTilemap(tilemap`Tilemap_Ruins-Lvl1`)
+    tiles.placeOnRandomTile(Warrior, sprites.dungeon.stairEast)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
     DungeonLevel += 1
     LevelHomeTown()
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
+    tiles.placeOnRandomTile(Warrior, sprites.dungeon.collectibleInsignia)
 })
 function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
