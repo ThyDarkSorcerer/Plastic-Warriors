@@ -7,6 +7,29 @@ namespace SpriteKind {
     export const Star = SpriteKind.create()
     export const Logo = SpriteKind.create()
 }
+function SpawnPlasticZombie (Amount: number, Health: number) {
+    for (let index = 0; index <= Amount; index++) {
+        PlasticZombie = sprites.create(img`
+            . . . . f f f f . . . . 
+            . . f f e e e e f f . . 
+            . f f e e e e e e f f . 
+            f f f f 3 e e e f f f f 
+            f f f 3 3 3 e e f f f f 
+            f f f 3 3 3 3 e e f f f 
+            f 3 e 3 3 3 3 3 3 e 3 f 
+            f 3 3 f f 3 3 f f 3 3 f 
+            f e 3 d d d d d d 3 e f 
+            . f e d d b b d d e f . 
+            . f f e 3 3 3 3 e f f . 
+            e 3 f b 1 1 1 1 b f 3 e 
+            3 d f 1 1 1 1 1 1 f d 3 
+            3 3 f 6 6 6 6 6 6 f 3 3 
+            . . . f f f f f f . . . 
+            . . . f f . . f f . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
+    }
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
     LevelTheDeathGateHub()
 })
@@ -269,7 +292,7 @@ function Level__8__Shadow_Realm__Boss () {
 }
 function LevelHomeTown () {
     SpawnCharecter()
-    tiles.setCurrentTilemap(tilemap`Tilemap_Hub`)
+    tiles.setCurrentTilemap(tilemap`level1`)
     tiles.placeOnRandomTile(Warrior, assets.tile`HomeSpawn`)
 }
 function Level__4__Future_Planet () {
@@ -287,6 +310,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, 
 })
 function Level__2__Underwater_Palace () {
     tiles.setCurrentTilemap(tilemap`DungeonLevel2`)
+}
+function SpawnWarlord () {
+    game.showLongText("You have made it to the end. Now you shall have the honour of getting killed by me. ", DialogLayout.Bottom)
+    NecronWarlord = sprites.create(assets.image`NecronWarlord`, SpriteKind.Enemy)
+    music.playMelody(music.convertRTTTLToMelody("mkombat:d=4,o=5,b=70:16a#,16a#,16c#6,16a#,16d#6,16a#,16f6,16d#6,16c#6,16c#6,16f6,16c#6,16g#6,16c#6,16f6,16c#6,16g#,16g#,16c6,16g#,16c#6,16g#,16d#6,16c#6,16f#,16f#,16a#,16f#,16c#6,16f#,16c#6,16c6"), 120)
 }
 function CheckQualification (LevelNumber: number) {
     if (DungeonLevel >= LevelNumber) {
@@ -387,27 +415,27 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
 function Level__1__Ruins () {
-    tiles.setCurrentTilemap(tilemap`Tilemap_Ruins-Lvl1`)
-    tiles.placeOnRandomTile(Warrior, sprites.dungeon.stairEast)
+    tiles.setCurrentTilemap(tilemap`level10`)
+    SpawnPlasticZombie(5, 1)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
     DungeonLevel += 1
+    DestroySprites()
     LevelHomeTown()
-})
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
-    tiles.placeOnRandomTile(Warrior, sprites.dungeon.collectibleInsignia)
 })
 function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
     tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
 }
 let SettingsMenu: miniMenu.MenuSprite = null
+let NecronWarlord: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
 let DungeonLevel = 0
 let Warrior: Sprite = null
 let IsQualified = false
 let hyper = 0
+let PlasticZombie: Sprite = null
 let star: Sprite = null
 let scroll = false
 let lineAdjust = 0
@@ -451,24 +479,7 @@ game.onUpdate(function () {
     if (sagaSprite.bottom < 0) {
         sagaSprite.destroy()
     }
-    if (Math.percentChance(25) || hyper) {
-        star = sprites.create(img`
-            1 
-            `, SpriteKind.Star)
-        star.setFlag(SpriteFlag.AutoDestroy, true)
-        star.setFlag(SpriteFlag.Ghost, true)
-        star.x = randint(0, scene.screenWidth())
-        star.y = randint(0, scene.screenHeight())
-        star.vx = (star.x < scene.screenWidth() / 2) ? -2 : 2
-        star.vy = (star.y < scene.screenHeight() / 2) ? -1 : 1
-        if (hyper) {
-            star.ax = star.vx * 1000
-            star.ay = star.vy * 1000
-            if (Math.percentChance(15)) {
-                let ship: Sprite = null
-                ship.x = randint(scene.screenWidth() / 2 - 5, scene.screenWidth() / 2 + 5)
-                ship.y = randint(scene.screenHeight() / 2 - 2, scene.screenHeight() / 2 + 2)
-            }
-        }
-    }
+})
+forever(function () {
+    Music.CatQuestVo1(songs.Ocean)
 })
