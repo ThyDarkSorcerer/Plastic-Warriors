@@ -292,6 +292,7 @@ function Level__8__Shadow_Realm__Boss () {
 }
 function LevelHomeTown () {
     SpawnCharecter()
+    SoundPhase = 2
     tiles.setCurrentTilemap(tilemap`level1`)
     tiles.placeOnRandomTile(Warrior, assets.tile`HomeSpawn`)
 }
@@ -415,6 +416,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
 function Level__1__Ruins () {
+    tiles.placeOnRandomTile(Warrior, sprites.dungeon.stairEast)
     tiles.setCurrentTilemap(tilemap`level10`)
     SpawnPlasticZombie(5, 1)
 }
@@ -436,6 +438,9 @@ let Warrior: Sprite = null
 let IsQualified = false
 let hyper = 0
 let PlasticZombie: Sprite = null
+let SoundPhase = 0
+let SagaTimeSpan = 32000
+SoundPhase = 1
 let star: Sprite = null
 let scroll = false
 let lineAdjust = 0
@@ -472,7 +477,7 @@ sagaSprite = sprites.create(sagaImage, 0)
 sagaSprite.top = scene.screenHeight() - 1
 sagaSprite.setFlag(SpriteFlag.AutoDestroy, true)
 sagaSprite.vy = -10
-timer.debounce("Saga", 36000, function () {
+timer.debounce("Saga", SagaTimeSpan, function () {
     Start_Game()
 })
 game.onUpdate(function () {
@@ -481,5 +486,11 @@ game.onUpdate(function () {
     }
 })
 forever(function () {
-    Music.CatQuestVo1(songs.Ocean)
+    if (SoundPhase == 1) {
+        Music.CatQuestVo1(songs.Ocean)
+    } else if (SoundPhase == 2) {
+        Music.CatQuestVo1(songs.Seaside_town)
+    } else if (SoundPhase == 3) {
+        Music.CatQuestVo1(songs.Tavern)
+    }
 })
