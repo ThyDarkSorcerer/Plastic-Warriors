@@ -11,7 +11,8 @@
         "pxt-countup": "github:shakao/pxt-countup#v0.0.2",
         "Achievements": "github:UnsignedArduino/Achievements#a578c77dd75467b9b0b5238a9a31c5fdc427cb9d",
         "arcade-sprite-events": "github:riknoll/arcade-sprite-events#dc93eec8412053ebbd2b8f01cf5b6ae285d28900",
-        "pxt-rtttl": "github:pelikhan/pxt-rtttl#v0.0.12"
+        "pxt-rtttl": "github:pelikhan/pxt-rtttl#v0.0.12",
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2"
     },
     "files": [
         "main.blocks",
