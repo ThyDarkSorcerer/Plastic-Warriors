@@ -243,6 +243,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
 })
+controller.combos.attachCombo("lA", function () {
+    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, Warrior, -50, 0)
+})
 function DrawSaga () {
     color.startFade(color.originalPalette, color.Black)
     color.pauseUntilFadeDone()
@@ -404,7 +407,6 @@ function DrawSaga () {
     sagaSprite.setFlag(SpriteFlag.AutoDestroy, true)
     sagaSprite.vy = -10
     timer.debounce("Saga", SagaTimeSpan, function () {
-        console.log("Saga finished")
         ShowSaga = false
         DrawMenu()
     })
@@ -475,6 +477,9 @@ function LevelHomeTown () {
     tiles.setCurrentTilemap(tilemap`level1`)
     tiles.placeOnRandomTile(Warrior, assets.tile`HomeSpawn`)
 }
+controller.combos.attachCombo("dA", function () {
+    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, Warrior, 0, 50)
+})
 function Level__4__Future_Planet () {
 	
 }
@@ -609,6 +614,9 @@ function CheckQualification (LevelNumber: number) {
         IsQualified = false
     }
 }
+controller.combos.attachCombo("uA", function () {
+    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, Warrior, 0, -50)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     CheckQualification(6)
     if (IsQualified == true) {
@@ -658,6 +666,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, 
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
     }
+})
+controller.combos.attachCombo("rA", function () {
+    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, Warrior, 50, 0)
 })
 function SpawnCharecter () {
     Warrior = sprites.create(img`
@@ -795,10 +806,12 @@ let PlasticZombie: Sprite = null
 let ShowSaga = false
 let SoundPhase = 0
 let SagaTimeSpan = 0
+let projectileSprite: Sprite = null
 let sagaImage: Image = null
 let lineAdjust = 0
 let star = null
 let storyLines: string[] = []
+projectileSprite = null
 SagaTimeSpan = 34000
 SoundPhase = 1
 ShowSaga = false
