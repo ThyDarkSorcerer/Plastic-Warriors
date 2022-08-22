@@ -30,87 +30,7 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
         tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
     }
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    LevelTheDeathGateHub()
-})
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(hyper)) {
-        sagaSprite.vy = 0
-        scroll = false
-        lineAdjust = (sagaSprite.bottom + 1) % 10
-        sagaSprite.bottom -= (lineAdjust > 0) ? lineAdjust : 10
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
-    CheckQualification(4)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__4__Future_Planet()
-    } else {
-        music.zapped.play()
-        IsQualified = false
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
-    }
-})
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(hyper)) {
-        sagaSprite.vy = scroll ? 0 : -10
-        scroll = !(scroll)
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
-    CheckQualification(5)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__5__Lost_City()
-    } else {
-        music.zapped.play()
-        IsQualified = false
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
-    CheckQualification(1)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__1__Ruins()
-    } else {
-        music.zapped.play()
-        IsQualified = false
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
-    CheckQualification(7)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__7__Haunted_Mansion()
-    } else {
-        music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        IsQualified = false
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
-    }
-})
-function BlockMap () {
-    tiles.setCurrentTilemap(tilemap`level8`)
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
-    CheckQualification(2)
-    if (IsQualified == true) {
-        IsQualified = false
-        Level__2__Underwater_Palace()
-    } else {
-        music.zapped.play()
-        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        IsQualified = false
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
-    }
-})
-function Start_Game () {
+function DrawMenu () {
     scene.setBackgroundImage(img`
         eeeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbddbbbbbbbbbbddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
         eeeeeeebbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbddbbdbbbbbbdbbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
@@ -225,69 +145,326 @@ function Start_Game () {
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcffcffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcfccfffffcfffffffffffffffffffffffffcefffffcff
         fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffff
         `)
-    DungeonLevel = 1
-    IsQualified = false
-    info.setScore(0)
     if (!(MenuOpen)) {
         MenuOpen = true
         myMenu = miniMenu.createMenu(
         miniMenu.createMenuItem(" ", img`
-            ..33333.33....................
-            .42222222223..................
-            422222222222..................
-            4245555444222222222442223.....
-            42454245452222222222222223....
-            42454245552244542442224224....
-            4245424545245445445224522eab3.
-            4245555445244224545425422aaaa.
-            4245442245244224544545222aaaab
-            424542224524522454255422aaaaab
-            424522224552555554245422aaaaa.
-            42222222222222222224422aaaaab.
-            .22222a2222222222245422aaaaa..
-            ..34baaaa22ae222222422eaaaab..
-            ....baaaaabaaaaaa22222aaaaa3..
-            .....baaab.baaaaaa222aaaaab...
-            ......3b.....bbbbbbbaaaaaab...
-            ....................3aaaab....
-            .....................3bab.....
+            ............eeee.......................
+            ..eeeeeee..222222......................
+            e2222222222245542e.....................
+            22555455542245542e.eeeeee.eeee..eeee...
+            22555455554245542e2222222222222222222..
+            2255522255524554224555554245542255522e.
+            2255522255524554225555555425552455522cc
+            2255522255524554222222255525554455422cc
+            225554445552455422444445552455455522ccc
+            225554555522455422555545552255455522cc.
+            22555244422245542455522555224555542ecc.
+            2255522222e245555455554555222455522ccc.
+            2255522c...e24555245552555222455422cc..
+            2222222.....e222222222222222255542ecc..
+            .e222ec......e2222e222e22222255522ccc..
+            ...................ccc.....2455422cc...
+            ...........................222222ccc...
+            ............................eeeeccc....
+            ..............................ccccc....
             `),
         miniMenu.createMenuItem(" ", img`
-            ...........................e22e............................
-            ...e222e..................e2222e...........................
-            ..22222222......e2222e222222..22...........................
-            .222222222ee22e.222222222222542222222e..e22222e.e222e......
-            e22455552222222222422224222222222222222222222222222222e....
-            2225222222222222225222252222222222222222222222222222222....
-            2225222222455542255552555522522254555222455444224555222ec..
-            2225422222542254225222252222522254225222522254225222222ccc.
-            e224555422522244225222252222522252224422522244225222222acc.
-            .222222522555554225222252222522252224422522244224555222eacc
-            e2222225425222222252222522225222522244225222442222244222acc
-            22222225225222222252222522225222522244225222542222244222acc
-            2225555422455552224552245522522252224422455454225555222eacc
-            2222222222222222222222222222222222222222222244222222222aacc
-            .22222222222222222222222222222222222222222225222222222aaacc
-            ...e222e..e2222e..e22ece22ee22ee22ee222244544222e222eaaaacc
-            ......................................222222222ecccaaaaacc.
-            .......................................2222222eccccccccccc.
-            ..........................................eec.cc.ccccccc...
-            .............................................cc............
-            .............................................cc............
+            ....................................eeee................................
+            ...eeeeee................e......e..222222...............................
+            ..222222222...........e2222..e2222e255542...............................
+            .22555555422..eeeee..224442e224442e255542eeeeeee....eeeeee....eeeeee....
+            225554555542e222222222555422255542222222222222222e.22222222..22222222...
+            2455522255422254555424555455455545525554255525552222554554222454555522..
+            2455544442222554555544555455455545525554255545555225554555424554455542e.
+            2255555555224554225552555422255542225554255522555245552255524554224222ec
+            e225555555524554445552555422255542225554255522555245552255524555555522ec
+            222244445552455455554255542e2555422255542555225552455522555224555555422c
+            24555222555245542222225554222555422255542555225552455522555224422455522c
+            22555554554225545555424555542455554255542555225552255554555245554455422c
+            .225555454222254555522245554224555425554255522555222555255522555545422cc
+            .e222222222ce22222222ee222222e222222222222222222222222225552222222222ccc
+            ..e2222222c..e222222e..e2222e.e22222222222222e222222555555422e222222cccc
+            .....................................cc...........e245555422c.ccccccccc.
+            ...................................................e2222222c....ccccc...
+            .....................................................eeeeecc............
+            .......................................................cccc.............
+            `),
+        miniMenu.createMenuItem(" ", img`
+            .............eeee....................................................................................
+            ......eee...222222e..................................................................................
+            ....e22222e.245542e.........................e222e....................................................
+            ....2255522.2455422ee....eeeeee..eeee.eeee2224522e......eeeee....eeeeee..eeeeeeeee.eee....eeeeee.....
+            ...e2545542e2455422222..222222222222222222245552222...e2222222e.22222222222222222222222..22222222....
+            ...225455522245544554222255455422455424555255554522..e24545552224555554222555255542555222254555422...
+            ...245455542245545555422555455542455424555255554522..245545555225555555422555455554555522554555542e..
+            ..2255545552245542455524554225552455424555245552222.e2555425554222222555225552255522555245542255522c.
+            ..245542555224554245552455422555245542455524555222e.e2555425554244444555225552255522555245544455522c.
+            .e24554255542455424555245542255524554245552455522e..e2555425554255554555225552255522555245545555422cc
+            .22555455555245542455524554225552455424555245552222.e2555425554455522555225552255522555245542222222cc
+            .24554555555445544555422555455542255554555225555522..245554555445555455522555225552255522554555542ecc
+            e25554222455545545554222255455422225544555222555522..e24554555424555255522555225552255522254555522ec.
+            e222222e22222222222222ce22222222ee22222222222222222...22222555422222222222222222222222222222222222cc.
+            .e2222c..222222222222c..e222222cc..22222222..22222....2455555522e222e22222222ee2222e2222ce222222eccc.
+            ..........................ccccccc.....................225555422eccccccccc..................cccccccc..
+            ............................ccc........................2222222ec....cc.......................cccc....
+            ........................................................eeeeecc...........3..........................
+            ..........................................................ccccc......................................
             `)
         )
         myMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.BackgroundColor, 0)
         myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
             myMenu.close()
             if (selectedIndex == 0) {
-                color.startFade(color.originalPalette, color.Black, 500)
-                color.startFade(color.Black, color.originalPalette, 500)
+                MenuOpen = false
                 LevelHomeTown()
             } else if (selectedIndex == 1) {
+                MenuOpen = false
                 SettingsView()
+            } else if (selectedIndex == 2) {
+                MenuOpen = false
+                DrawSaga()
             }
         })
     }
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
+    LevelTheDeathGateHub()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
+    CheckQualification(4)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__4__Future_Planet()
+    } else {
+        music.zapped.play()
+        IsQualified = false
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
+})
+function DrawSaga () {
+    color.startFade(color.originalPalette, color.Black)
+    color.pauseUntilFadeDone()
+    scene.setBackgroundImage(img`
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        `)
+    color.startFade(color.Black, color.originalPalette)
+    color.pauseUntilFadeDone()
+    ShowSaga = true
+    effects.starField.startScreenEffect(SagaTimeSpan)
+    storyLines = [
+    "Tale of Province Town",
+    " ",
+    "Once upon a time,",
+    "like really long ago,",
+    "a peaceful race lived",
+    "happily in Province Town",
+    "",
+    "They used the rare mineral",
+    "Plastic to create",
+    "new and powerful items.",
+    "",
+    "One day, Khan the warlord",
+    "came to Province Town and",
+    "took control of the city.",
+    "nice! Ugh! Err!",
+    "",
+    "Your mission is to help",
+    "kill Khan and take control",
+    "of the city back again.",
+    "Good luck!"
+    ]
+    scroll = true
+    sagaImage = image.create(scene.screenWidth(), 10 * storyLines.length)
+    for (let i = 0; i <= storyLines.length - 1; i++) {
+        sagaImage.printCenter(storyLines[i], i * 10, i > 0 ? 7 : 4)
+    }
+    sagaSprite = sprites.create(sagaImage, 0)
+    sagaSprite.top = scene.screenHeight() - 1
+    sagaSprite.setFlag(SpriteFlag.AutoDestroy, true)
+    sagaSprite.vy = -10
+    timer.debounce("Saga", SagaTimeSpan, function () {
+        console.log("Saga finished")
+        ShowSaga = false
+        DrawMenu()
+    })
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
+    CheckQualification(5)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__5__Lost_City()
+    } else {
+        music.zapped.play()
+        IsQualified = false
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
+    CheckQualification(1)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__1__Ruins()
+    } else {
+        music.zapped.play()
+        IsQualified = false
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
+    CheckQualification(7)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__7__Haunted_Mansion()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        IsQualified = false
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
+})
+function BlockMap () {
+    tiles.setCurrentTilemap(tilemap`level8`)
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    CheckQualification(2)
+    if (IsQualified == true) {
+        IsQualified = false
+        Level__2__Underwater_Palace()
+    } else {
+        music.zapped.play()
+        game.splash("You are not powerful enough to do this level", "Do the previous one first!")
+        IsQualified = false
+        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    }
+})
+function Start_Game () {
+    DungeonLevel = 1
+    IsQualified = false
+    info.setScore(0)
+    DrawMenu()
 }
 function Level__8__Shadow_Realm__Boss () {
 	
@@ -452,14 +629,6 @@ function SettingsView () {
     miniMenu.createMenuItem("PlaceHolder")
     )
 }
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(hyper)) {
-        sagaSprite.vy = 0
-        scroll = false
-        lineAdjust = (sagaSprite.top + 1) % 10
-        sagaSprite.top += 10 - lineAdjust
-    }
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
     LevelTheDeathGateHub()
 })
@@ -615,59 +784,30 @@ function LevelTheDeathGateHub () {
 }
 let SettingsMenu: miniMenu.MenuSprite = null
 let NecronWarlord: Sprite = null
-let myMenu: miniMenu.MenuSprite = null
-let MenuOpen = false
 let DungeonLevel = 0
+let sagaSprite: Sprite = null
+let scroll = false
 let Warrior: Sprite = null
 let IsQualified = false
-let hyper = 0
+let myMenu: miniMenu.MenuSprite = null
+let MenuOpen = false
 let PlasticZombie: Sprite = null
+let ShowSaga = false
 let SoundPhase = 0
-let SagaTimeSpan = 32000
-SoundPhase = 1
-let star: Sprite = null
-let scroll = false
-let lineAdjust = 0
-let sagaSprite: Sprite = null
+let SagaTimeSpan = 0
 let sagaImage: Image = null
-effects.starField.startScreenEffect(SagaTimeSpan)
-let storyLines = [
-"Tale of Province Town",
-" ",
-"Once upon a time,",
-"like really long ago,",
-"a peaceful race lived",
-"happily in Province Town",
-"",
-"They used the rare mineral",
-"Plastic to create",
-"new and powerful items.",
-"",
-"One day, Khan the warlord",
-"came to Province Town and",
-"took control of the city.",
-"nice! Ugh! Err!",
-"",
-"Your mission is to help",
-"kill Khan and take control",
-"of the city back again.",
-"Good luck!"
-]
-scroll = true
-sagaImage = image.create(scene.screenWidth(), 10 * storyLines.length)
-for (let i = 0; i <= storyLines.length - 1; i++) {
-    sagaImage.printCenter(storyLines[i], i * 10, i > 0 ? 7 : 4)
-}
-sagaSprite = sprites.create(sagaImage, 0)
-sagaSprite.top = scene.screenHeight() - 1
-sagaSprite.setFlag(SpriteFlag.AutoDestroy, true)
-sagaSprite.vy = -10
-timer.debounce("Saga", SagaTimeSpan, function () {
-    Start_Game()
-})
+let lineAdjust = 0
+let star = null
+let storyLines: string[] = []
+SagaTimeSpan = 34000
+SoundPhase = 1
+ShowSaga = false
+Start_Game()
 game.onUpdate(function () {
-    if (sagaSprite.bottom < 0) {
-        sagaSprite.destroy()
+    if (ShowSaga == true) {
+        if (sagaSprite.bottom < 0) {
+            sagaSprite.destroy()
+        }
     }
 })
 forever(function () {
