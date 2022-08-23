@@ -6,6 +6,7 @@ enum ActionKind {
 namespace SpriteKind {
     export const Star = SpriteKind.create()
     export const Logo = SpriteKind.create()
+    export const Messages = SpriteKind.create()
 }
 function SpawnPlasticZombie (Amount: number, Health: number) {
     for (let index = 0; index <= Amount; index++) {
@@ -240,11 +241,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         music.zapped.play()
         IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+        tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
 controller.combos.attachCombo("lA", function () {
-    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, Warrior, -50, 0)
+    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, -50, 0)
 })
 function DrawSaga () {
     color.startFade(color.originalPalette, color.Black)
@@ -411,6 +412,9 @@ function DrawSaga () {
         DrawMenu()
     })
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Messages, effects.warmRadial, 500)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
     CheckQualification(5)
     if (IsQualified == true) {
@@ -420,7 +424,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, l
         music.zapped.play()
         IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+        tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
@@ -432,7 +436,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, l
         music.zapped.play()
         IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+        tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
@@ -444,7 +448,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, l
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         IsQualified = false
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+        tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
 function BlockMap () {
@@ -459,13 +463,14 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, l
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         IsQualified = false
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+        tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
 function Start_Game () {
     DungeonLevel = 1
     IsQualified = false
     info.setScore(0)
+    info.setLife(5)
     DrawMenu()
 }
 function Level__8__Shadow_Realm__Boss () {
@@ -475,10 +480,10 @@ function LevelHomeTown () {
     SpawnCharecter()
     SoundPhase = 2
     tiles.setCurrentTilemap(tilemap`level1`)
-    tiles.placeOnRandomTile(Warrior, assets.tile`HomeSpawn`)
+    tiles.placeOnRandomTile(PlayerWarrior, assets.tile`HomeSpawn`)
 }
 controller.combos.attachCombo("dA", function () {
-    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, Warrior, 0, 50)
+    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, 50)
 })
 function Level__4__Future_Planet () {
 	
@@ -490,6 +495,12 @@ function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
 }
+statusbars.onZero(StatusBarKind.Health, function (status) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Messages)
+    info.changeLifeBy(-1)
+    Players_Health.value = 100
+    game.splash("You died!", "Press A to continue.")
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
     LevelTheDeathGateHub()
 })
@@ -615,7 +626,7 @@ function CheckQualification (LevelNumber: number) {
     }
 }
 controller.combos.attachCombo("uA", function () {
-    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, Warrior, 0, -50)
+    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, -50)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     CheckQualification(6)
@@ -626,7 +637,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, l
         music.zapped.play()
         IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+        tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
 function Level__3__Jungle () {
@@ -770,7 +781,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
         music.zapped.play()
         IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+        tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
 function Level__6__Mossy_Dungeon () {
@@ -785,14 +796,14 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, 
         music.zapped.play()
         IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+        tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
 controller.combos.attachCombo("rA", function () {
-    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, Warrior, 50, 0)
+    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 50, 0)
 })
 function SpawnCharecter () {
-    Warrior = sprites.create(img`
+    PlayerWarrior = sprites.create(img`
         . . . . . . f f f f . . . . . . 
         . . . . f f f 2 2 f f f . . . . 
         . . . f f f 2 2 2 2 f f f . . . 
@@ -811,7 +822,7 @@ function SpawnCharecter () {
         . . . . . f f . . f f . . . . . 
         `, SpriteKind.Player)
     animation.runImageAnimation(
-    Warrior,
+    PlayerWarrior,
     [img`
         . . . . . . f f f f . . . . . . 
         . . . . f f f 2 2 f f f . . . . 
@@ -884,10 +895,15 @@ function SpawnCharecter () {
     500,
     true
     )
-    controller.moveSprite(Warrior, 100, 100)
-    scene.cameraFollowSprite(Warrior)
-    info.setLife(10)
-    controller.moveSprite(Warrior)
+    Players_Health = statusbars.create(100, 4, StatusBarKind.Health)
+    Players_Health.value = 100
+    Players_Health.setColor(3, 15)
+    Players_Health.setStatusBarFlag(StatusBarFlag.SmoothTransition, false)
+    Players_Health.setLabel("HP", 15)
+    Players_Health.positionDirection(CollisionDirection.Top)
+    controller.moveSprite(PlayerWarrior, 100, 100)
+    scene.cameraFollowSprite(PlayerWarrior)
+    controller.moveSprite(PlayerWarrior)
 }
 function Level__7__Haunted_Mansion () {
 	
@@ -901,7 +917,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
 function Level__1__Ruins () {
     color.startFadeFromCurrent(color.Black)
     color.startFadeFromCurrent(color.originalPalette)
-    tiles.placeOnRandomTile(Warrior, sprites.dungeon.stairEast)
+    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
     tiles.setCurrentTilemap(tilemap`level10`)
     SpawnPlasticZombie(5, 1)
 }
@@ -910,16 +926,21 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, 
     DestroySprites()
     LevelHomeTown()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    Players_Health.value += -5
+    pause(1500)
+})
 function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
-    tiles.placeOnRandomTile(Warrior, sprites.dungeon.floorLight0)
+    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
 }
 let SettingsMenu: miniMenu.MenuSprite = null
 let NecronWarlord: Sprite = null
+let Players_Health: StatusBarSprite = null
 let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
-let Warrior: Sprite = null
+let PlayerWarrior: Sprite = null
 let IsQualified = false
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
@@ -927,11 +948,11 @@ let PlasticZombie: Sprite = null
 let ShowSaga = false
 let SoundPhase = 0
 let SagaTimeSpan = 0
-let projectileSprite: Sprite = null
-let sagaImage: Image = null
-let lineAdjust = 0
-let star = null
 let storyLines: string[] = []
+let star = null
+let lineAdjust = 0
+let sagaImage: Image = null
+let projectileSprite: Sprite = null
 projectileSprite = null
 SagaTimeSpan = 34000
 SoundPhase = 1
