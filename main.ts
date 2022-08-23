@@ -29,6 +29,7 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
             . . . f f . . f f . . . 
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
+        PlasticZombie.follow(PlayerWarrior)
     }
 }
 function DrawMenu () {
@@ -218,6 +219,7 @@ function DrawMenu () {
             myMenu.close()
             if (selectedIndex == 0) {
                 MenuOpen = false
+                SpawnCharecter()
                 LevelHomeTown()
             } else if (selectedIndex == 1) {
                 MenuOpen = false
@@ -477,7 +479,6 @@ function Level__8__Shadow_Realm__Boss () {
 	
 }
 function LevelHomeTown () {
-    SpawnCharecter()
     SoundPhase = 2
     tiles.setCurrentTilemap(tilemap`level1`)
     tiles.placeOnRandomTile(PlayerWarrior, assets.tile`HomeSpawn`)
@@ -793,11 +794,14 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    otherSprite.destroy()
+})
 function Level__1__Ruins () {
     color.startFadeFromCurrent(color.Black)
     color.startFadeFromCurrent(color.originalPalette)
-    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
     tiles.setCurrentTilemap(tilemap`level10`)
+    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
     SpawnPlasticZombie(5, 1)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
@@ -819,19 +823,19 @@ let Players_Health: StatusBarSprite = null
 let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
-let PlayerWarrior: Sprite = null
 let IsQualified = false
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
+let PlayerWarrior: Sprite = null
 let PlasticZombie: Sprite = null
 let ShowSaga = false
 let SoundPhase = 0
 let SagaTimeSpan = 0
-let storyLines: string[] = []
-let star = null
-let lineAdjust = 0
-let sagaImage: Image = null
 let projectileSprite: Sprite = null
+let sagaImage: Image = null
+let lineAdjust = 0
+let star = null
+let storyLines: string[] = []
 projectileSprite = null
 SagaTimeSpan = 34000
 SoundPhase = 1
