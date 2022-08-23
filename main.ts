@@ -29,7 +29,7 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
             . . . f f . . f f . . . 
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
-        PlasticZombie.follow(PlayerWarrior, 75)
+        PlasticZombie.follow(PlayerWarrior)
     }
 }
 function DrawMenu () {
@@ -219,6 +219,7 @@ function DrawMenu () {
             myMenu.close()
             if (selectedIndex == 0) {
                 MenuOpen = false
+                SpawnCharecter()
                 LevelHomeTown()
             } else if (selectedIndex == 1) {
                 MenuOpen = false
@@ -478,7 +479,6 @@ function Level__8__Shadow_Realm__Boss () {
 	
 }
 function LevelHomeTown () {
-    SpawnCharecter()
     SoundPhase = 2
     tiles.setCurrentTilemap(tilemap`level1`)
     tiles.placeOnRandomTile(PlayerWarrior, assets.tile`HomeSpawn`)
