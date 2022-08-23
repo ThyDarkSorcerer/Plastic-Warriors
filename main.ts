@@ -29,7 +29,7 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
             . . . f f . . f f . . . 
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
-        PlasticZombie.follow(PlayerWarrior)
+        PlasticZombie.follow(PlayerWarrior, 75)
     }
 }
 function DrawMenu () {
