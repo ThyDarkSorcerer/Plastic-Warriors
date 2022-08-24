@@ -162,6 +162,14 @@ namespace myTiles {
     export const tile79 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile80 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile82 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile81 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile83 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile84 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -474,26 +482,6 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
-            case "level1":
-            case "level1":return tiles.createTilemap(hex`1100110001010101010101010101010101010101010101020202020203080402020202020101010505020202020714070202020505070701050502020202070a070202020505050701020202020202070a070202020205070701020202020202070a070202020202070701020202020207020a0202020202070707010202020202020c060b020202020202010102131010101006090610101010110201010202020202020d060e020202020202010102070202020702120202020207070701010205050502020202020202070505070101020205050202020202070202020201010102020502020202020202050505020101010202020202020202020205050202010101010102020202020202020202020101010101010101010101010101010101010101`, img`
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. 2 2 . . . . . . . . . . 2 2 . . 
-. 2 2 . . . . . . . . . . 2 2 2 . 
-. . . . . . . . . . . . . . 2 . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . 2 2 2 . . . . . . . . 2 2 . . 
-. . . 2 2 . . . . . . . . . . . . 
-. . . 2 . . . . . . . 2 2 2 . . . 
-. . . . . . . . . . . 2 2 . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.castle.tileGrass2,sprites.castle.tileGrass1,myTiles.tile3,myTiles.tile4,myTiles.tile2,sprites.castle.tilePath5,sprites.castle.tileGrass3,myTiles.tile55,myTiles.tile56,myTiles.tile57,sprites.castle.tilePath3,sprites.castle.tilePath1,sprites.castle.tilePath7,sprites.castle.tilePath9,myTiles.tile58,myTiles.tile63,myTiles.tile64,myTiles.tile65,myTiles.tile66,myTiles.tile67], TileScale.Sixteen);
             case "level10":
             case "level10":return tiles.createTilemap(hex`15001500030202020202020204060205030202020202020204010b08241613202806020202050b08080808081b01010f011d101e012708080808080d03020202040f01010f011d2a1e010202020202020202142522010f01010f011d2a1e011416161320141616231e02050f01010f01151711011d2a2a1e20151717172608241201010f0602040f011d2a101e060202020202041d1e01010e080c010f011517172608080808080c01151c010602020f010f060202020202020202040f060202050708080a010e080808080808080822010e080808290302020f0102020202040202020202020202020204010b080d010b08080c012108080808080808081b01010f0302050f02040f010902020202020202040f01010f010b081913010f011416161616161613011801010f0118011511010f011d2a2a2a2a2a2a1e011f01010f010202020f010f011d2a2a2a2a2a2a1e060201010f0114161612010f011d102a2a2a2a2a1a080c01010f0115171711010f01151717171717171c010f01010f060202020f010f060202020202020202050f01010e080808080d010e080808080808080808080d01060202020202020502020202020202020202020205`, img`
 222222222222222222222
@@ -812,6 +800,26 @@ namespace myTiles {
 .........................
 .........................
 `, [myTiles.transparency16,sprites.castle.tileDarkGrass3,sprites.castle.tileDarkGrass2,sprites.builtin.forestTiles10,myTiles.tile75,myTiles.tile76], TileScale.Sixteen);
+            case "level1":
+            case "level1":return tiles.createTilemap(hex`1100110001010101010101010101010101010101010101020202020203080402020202020101010505020202020713070202020505070701050502020202070a070202020505050701020202020202070a070202020205070701020202020202070a070202020202070701020202020207020a0202020202070707011402020202020c060b020202020202011715120f0f0f0f0609060f0f0f0f100201011602020202020d060e020202020202010102070202020702110202020207070701010205050502020202020202070505070101020205050202020202070202020201010102020502020202020202050505020101010202020202020202020205050202010101010102020202020202020202020101010101010101010101010101010101010101`, img`
+. . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . 
+. 2 2 . . . . . . . . . . 2 2 . . 
+. 2 2 . . . . . . . . . . 2 2 2 . 
+. . . . . . . . . . . . . . 2 . . 
+. . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . 
+. . 2 2 2 . . . . . . . . 2 2 . . 
+. . . 2 2 . . . . . . . . . . . . 
+. . . 2 . . . . . . . 2 2 2 . . . 
+. . . . . . . . . . . 2 2 . . . . 
+. . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . 
+`, [myTiles.transparency16,sprites.castle.tileGrass2,sprites.castle.tileGrass1,myTiles.tile3,myTiles.tile4,myTiles.tile2,sprites.castle.tilePath5,sprites.castle.tileGrass3,myTiles.tile55,myTiles.tile56,myTiles.tile57,sprites.castle.tilePath3,sprites.castle.tilePath1,sprites.castle.tilePath7,sprites.castle.tilePath9,myTiles.tile63,myTiles.tile64,myTiles.tile65,myTiles.tile66,myTiles.tile67,myTiles.tile81,myTiles.tile82,myTiles.tile83,myTiles.tile84], TileScale.Sixteen);
         }
         return null;
     })
@@ -979,6 +987,14 @@ namespace myTiles {
             case "tile79":return tile79;
             case "myTile56":
             case "tile80":return tile80;
+            case "Workbench1":
+            case "tile82":return tile82;
+            case "Workbench0":
+            case "tile81":return tile81;
+            case "Workbench3":
+            case "tile83":return tile83;
+            case "myTile57":
+            case "tile84":return tile84;
         }
         return null;
     })

@@ -7,6 +7,9 @@ namespace SpriteKind {
     export const Star = SpriteKind.create()
     export const Logo = SpriteKind.create()
     export const Messages = SpriteKind.create()
+    export const NPC = SpriteKind.create()
+    export const AOE = SpriteKind.create()
+    export const Sphere_Of_Influence = SpriteKind.create()
 }
 function SpawnPlasticZombie (Amount: number, Health: number) {
     for (let index = 0; index <= Amount; index++) {
@@ -246,6 +249,43 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
+    Notification.notify("Press B to talk.", 1, img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `)
+    if (triggerNPC == true) {
+        story.spriteSayText(NPCJhonny, "Hi!", 15, 4)
+        story.spriteSayText(NPCJhonny, "Khan, the evil warlord has taken", 15, 4)
+        story.spriteSayText(NPCJhonny, "over Province Town!", 15, 4)
+        story.spriteSayText(NPCJhonny, "Go to the cave in the north of spawn to", 15, 4)
+        story.spriteSayText(NPCJhonny, "go into different dungeons and", 15, 4)
+        story.spriteSayText(NPCJhonny, "defeat monsters to get plastic, a", 15, 4)
+        story.spriteSayText(NPCJhonny, "rare mineral! Use it to craft", 15, 4)
+        story.spriteSayText(NPCJhonny, "weapons at the east of the village.", 15, 4)
+        story.spriteSayText(NPCJhonny, "Use the weapons to defeat Khan!", 15, 4)
+        story.spriteSayText(NPCJhonny, "Good luck! You will need it :)", 15, 4)
+        triggerNPC = false
+    }
+    pause(36000)
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    triggerNPC = true
+})
 controller.combos.attachCombo("lA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, -50, 0)
 })
@@ -482,6 +522,7 @@ function LevelHomeTown () {
     SoundPhase = 2
     tiles.setCurrentTilemap(tilemap`level1`)
     tiles.placeOnRandomTile(PlayerWarrior, assets.tile`HomeSpawn`)
+    SpawnNPCJhonny(5, 5)
 }
 controller.combos.attachCombo("dA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, 50)
@@ -490,7 +531,7 @@ function Level__4__Future_Planet () {
 	
 }
 function Level__5__Lost_City () {
-	
+    SpawnNPCJhonny(20, 30)
 }
 function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
@@ -714,6 +755,10 @@ function SpawnCharecter () {
 function Level__7__Haunted_Mansion () {
 	
 }
+function SpawnNPCJhonny (cordsX: number, cordsY: number) {
+    NPCJhonny = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPC)
+    tiles.placeOnTile(NPCJhonny, tiles.getTileLocation(cordsX, cordsX))
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile15`)
 })
@@ -724,8 +769,6 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     otherSprite.destroy()
 })
 function Level__1__Ruins () {
-    color.startFadeFromCurrent(color.Black)
-    color.startFadeFromCurrent(color.originalPalette)
     tiles.setCurrentTilemap(tilemap`level10`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
     SpawnPlasticZombie(5, 1)
@@ -749,6 +792,7 @@ let Players_Health: StatusBarSprite = null
 let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
+let NPCJhonny: Sprite = null
 let IsQualified = false
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
@@ -757,6 +801,8 @@ let PlasticZombie: Sprite = null
 let ShowSaga = false
 let SoundPhase = 0
 let SagaTimeSpan = 0
+let triggerNPC = false
+triggerNPC = false
 let projectileSprite: Sprite = null
 let sagaImage: Image = null
 let lineAdjust = 0
