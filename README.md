@@ -12,7 +12,7 @@ This repository can be added as an **extension** in MakeCode.
 * click on **Extensions** under the gearwheel menu
 * search for **https://thydarksorcerer.github.io/Plastic-Warriors/** and import
 
-## Edit this project ![Build status badge](https://thydarksorcerer.github.io/Plastic-Warriors/workflows/MakeCode/badge.svg)
+## Edit this project ![Build status badge](https://ThyDarkSorcerer.github.io/Plastic-Warriors/workflows/MakeCode/badge.svg)
 
 To edit this repository in MakeCode.
 
