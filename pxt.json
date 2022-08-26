@@ -17,7 +17,8 @@
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.1",
         "arcade-shader": "github:riknoll/arcade-shader#d2a2572906fdb68ff429f337e30606b069e688ea",
         "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
-        "Inventory": "github:UnsignedArduino/Inventory#v1.1.1"
+        "Inventory": "github:UnsignedArduino/Inventory#v1.1.1",
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
     },
     "files": [
         "main.blocks",

@@ -3,13 +3,8 @@ enum ActionKind {
     Idle,
     Jumping
 }
-namespace SpriteKind {
-    export const Star = SpriteKind.create()
-    export const Logo = SpriteKind.create()
-    export const Messages = SpriteKind.create()
-    export const NPC = SpriteKind.create()
-    export const AOE = SpriteKind.create()
-    export const Sphere_Of_Influence = SpriteKind.create()
+namespace StatusBarKind {
+    export const Load = StatusBarKind.create()
 }
 function SpawnPlasticZombie (Amount: number, Health: number) {
     for (let index = 0; index <= Amount; index++) {
@@ -249,22 +244,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
-    if (triggerNPC == true) {
-        story.spriteSayText(NPCJhonny, "Hi!", 15, 4)
-        story.spriteSayText(NPCJhonny, "Khan, the evil warlord has taken", 15, 4)
-        story.spriteSayText(NPCJhonny, "over Province Town!", 15, 4)
-        story.spriteSayText(NPCJhonny, "Go to the cave in the north of spawn to", 15, 4)
-        story.spriteSayText(NPCJhonny, "go into different dungeons and", 15, 4)
-        story.spriteSayText(NPCJhonny, "defeat monsters to get plastic, a", 15, 4)
-        story.spriteSayText(NPCJhonny, "rare mineral! Use it to craft", 15, 4)
-        story.spriteSayText(NPCJhonny, "weapons at the east of the village.", 15, 4)
-        story.spriteSayText(NPCJhonny, "Use the weapons to defeat Khan!", 15, 4)
-        story.spriteSayText(NPCJhonny, "Good luck! You will need it :)", 15, 4)
-        triggerNPC = false
-    }
-    pause(36000)
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     triggerNPC = true
@@ -675,6 +654,401 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+function DrawLoadingScreen () {
+    scene.setBackgroundImage(img`
+        ffffffffffffff4444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccccfffffffffffffffffffffffccccffccccffffffffe4eeeeeeeecfffcce44444444ecffffffffffefffffffffffffff
+        ffffffffffffff4444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeccccccccccffffffffffffffffffffffffccccfffceccfffffff44eeeeeeeecfffccc444ee444ecffffffffff4fffffffffffffff
+        ffffffffffffff4444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccfffffffffffffffffffffffffccccfffeeefffffff45eeeeeeeecfffcce44ecee44ecfffffffffc4fffffffffffffff
+        ffffffffffffff4444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffffffffffffffffffffffcccecffeeecffffff454eeeeeeeecffcce44ecee45ecfffffffffe4fffffffffffffff
+        ffffffffffffff4444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffffffffffffffffffffffffffececcfeeeeffffff4554eeeeeeeefffce44ecee45ecfffffffff4efffffffffffffff
+        ffffffffffffff4444ceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeefffffffffffffffffffffffffeeeeeceeeeffffff45554eeeeeeefffce44ecee45ecffffffffe4ffffffffffffffff
+        ffffffffffffff4444ccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefcceeeeeffffffffffffffffffffffffceeeeeeeeeefffff455554eeeeeecffcc44ecee45ecfffffff44fffffffffffffffff
+        fffffffffffffc444ececccccccfceeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccce4eefffffffffffffffffffccfffeeeeeeeeeeefffff45455eeeeeeeeffcc44ecee44ecffffff44ffffffffffffffffff
+        ffffffffffffff444eeecccccffffeeffeeeeeeeeeeeeeeeeeeeeeeeeeeefccedeefffffffffffffffffffccfff4eeeeeeeeeeeffff45455eeeeeeeeffcc4544e455ecfffffe4fffffffffffffffffff
+        ffffffffffffff444eeeeffffffffcfffeeeeeeeeeeeeeeeeeeeeeeeeeeeecee54eefffffffffffffffffcccffe4eeeeeeeeeeeefff45454eeeeeeeefffc44444444ecffffceffffffffffffffffffff
+        ffffffffffffff444eeeecffeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeecee54eeecffffffffffffcfccccffe44eeeeeeeeeeeeff45454eeeeeeeecffc44444444efffffffffffffffffffffffffff
+        ffffffffffffff444eeeecfceeeffffffeeeeeeeeeeeeeeeeeeeecceeeeeecee544eeecfffffffffffccccccfee444eeeeeeeeeeeff45454eeeeeeeeeffc44444444eccfffffffffffffffffffffffff
+        ffffffffffffff444eeeefeeecffffffe2eeeeeeeeeeeeeeeeeeeeeceeeeecfe544eeeeeffffffeeeffccccfcee444eeeeeeeeeeeee45454eeeeeeeeeffc44444444ecfffffffffffffccfffffffffff
+        ffffffffffffff444eeeeeeeffffffffeeeeeeeeeeeeeeeeeeeeececfeeeccce544eeeeeeeffffeeeeefcccfcee4444eeeeeeeeeeee454554eeeeeeeecff45444444eccfccccccccccccfffffffffffe
+        ffffffffffffff444eeeeeeffffffffceeeeeeeeeeeeeeeeeeeeececfeefccce544eeeeeeecffffeeeeeeecfcee4444eeeeeeeeeeee454555eeeeeeeecff4efffffffcffffceeeeeeefffcffffffffee
+        fffffccfcfffff444eeeeecffffffffeeeeeeeeeeeeeeeeeeeeeececcfeeeece544eeeeeeefecffeeeeeeecfcee44444eeeeeeeeeee4545555eeeeeeecce4ffffffffffffffffcceeeeeeeeeeeeee444
+        fffffcccffffff444eeeecffffffffeeefeeeeeeeeeeeeeeeeeeececcffeeece544eeeeeeeeeeefeeeeeeeefcee44444eeeeeeeeeee45445554eeeeeecee4fcfffffffffffffffffffffffceee444ecc
+        ffffccccfffeef444eeeefffffffffeeeeeeee2eeeeeeeeeeeeeeeeecffeeece544eeeeeeeeeeeeeeeeeeeeffee44444eeeeeeeeeee45445444eeeeeeeeeeffcffffffffcffffffffffffffccc44efff
+        ffffceccfffeee444eeeffffffffff4eeeeeeeeeeeeeeeeeeeeeeeecccffceee444eeeee444eeeeeeeeeeeeeffe44444eeeeeeeeeee454e4444eeeeeeeeeffcffffffffffffffffffffffffff4efffff
+        ffccceecffceee444eecfffffffffe4eeeeeeeeeeeeeeeeeeeeeeeeccccffeee444eeee444444eee4eeeeeeeefc44444ee44eeeeeee45eee444eeeefeeeeffcfffffffffcffffffffffffcff4cffffff
+        ffeeceecffeeee444ecfffffffcfc44eeeeeeeeeeeee22eeeeeeeeeccccffcee444eeee444eeeeee44eeeeeeeff44444ee44eeeeeee44eee444eeeeeeeeecffcffffffffcccccccccccffffecfffffff
+        fceeeeeccfeeee44efffffffffcce44eeeeeeee2e22e22eeee4eeeecccccffce444eeee444eeecee44eeeeeeeef44444ee444eeeeee454e4444eeeeeeeeecffffffffffffffccccccfffffefffffffff
+        feeeeeefffeeee4efffffffffffce44eeeeeee2ee22e2eeeee4eeeecccfcfffe444eeee44ecfffce44eeeeeeeee44444ee444eeeeee44444444eeeeeeeee4ffffffffffffffffccffffff4fcffffffff
+        ceeeeeccffee2e4ffffffffffffee44eeeeeee2eeeeeeeeeee4eeeeeeecccffe444eeee44effffce44eeeeeeeee44444ee444eeeeee44444444eeeeeeeee4fffffffffffffffffffffffe4efffffffff
+        eeeeefceccee2efccfffffffcccee44eeeeeee22222eeeeeee4eeee4eeeeecfc44eeeee44cffffcce4eeeeeeeee44444ee444eeeeee44444444eeeeeeeee4efffffffffffffffffffffff4efffffffff
+        eeeeefeeeeeeecffffffffccccceee4eeeee2e222eeeeeeee44eeee4eeeeecfc44eeeee44effcffcc4eeeeeeeee44444ee444eeeeee44444444eeeeeeeee44cfffffffffffffffffcffffe2cffffffff
+        eeeeefeeeeeeffffffffffcccceee44eeeee2e22eeeeeeeee44eeee44eeeeccc44eeeee44efffffcfeeeeeeeeee44444ee444eeeeee44444444eeeeeeeee44effffffffffffffffffcfffe2effffffff
+        eeeeefeeeeeefffffffffccccceee44eecee2e22eeeeeeefe4eeeee44eeeeecc44eeeeee4efffffffeeeeeeeee444444ee444eeeeee44444444eeeeeeeee444fcfcffffffffffffffffffc4eccffffff
+        eeeeefeeeecffffffffffcccceeee44eecee222eeeeeeeeec4eeeee44eeeeeec44eeeeee4effffcfffeeeeeee4444444ee444eeeeee44444444eeeeeeeee444efcffffffffffffffffffff4ecffcffff
+        eeeeefeeecffffffffffcccfeeeee44eceeeeeeeeeeeeeeeeceeeee444eeeeee44eeeee44effffcccceeeeeeeee44444ee444eeeeee44444444eeeeeeeee444efcfffffffffffffffffccf44ccccffff
+        eeeeefeeffffffffffffcccfeeeee44eee2eeeeeeeeeeeeeefeeeee444eeeeee44eeeee44efffffcccceeeeeeee44444ee444eeeeee44444444eeeeeeeee444ecfcfffffffffffffffcccfeecccfcccc
+        eeeeefecfffffffffcffccceeeeeeeefeeeeeeeeeeeeeeeeeceeeee444eeeeee44eeeee44effffccccceeeeeeee44444ee444eeeeee44444444eeeeeeeee444eecfcffffffffffffcccccccccccccccc
+        eeeeefccffffcccceccffeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeee444eeeeee444efce44ecfffccccceeeeeeee44444ee444eeeeee444ee444eeeeeeeee444eefccffffffffffffffcccccccccccccc
+        eeeeecfcfffcccceeeffceeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeee444eeeeee444ecce44ecfffcccccceeeeeee4ee44ee444eeeeee44eeee44eeeeeeeee444eeefcfffffffffffffccfcccccccccccc
+        eeeecfffffcccffcecfcceeeeeeeeeee2eeeeeeee2222eeeeeeeeee444eeeeee444eeee44eefffccccccceeeeeeece44ee444eeeeee44eeee44eeeeeeeee444ee4fccfffffffffffcccffccccccccccc
+        eeecffffffcccccfffcceee2e4e4eeee2eeeeeeeeeeeeeeee44eeee444eeeeee424eeee44eeccfccccccceeeeee4e444ee444ee44ee444eee44eeeeeeeee444444fccfffffffffffcecffffffccccccc
+        cecffffffcccccccfcceeee2eeeeeee22eeeeeeeeeeeeeece444eee444eeeeee424eeee44eeecccccccfcceeeee44444ee444e444ee44eeee44eeeeeeeee444444efcffffffffffccecfffffffffffff
+        ccffffffccccccccceeeeeeeeeeeee222eeeeeeeeeeeeeeee4444ee444eeeeee424eeee44eeecccccccfccceeee44e44ee444e444ee44eeee44eeeeeeeee4444444ccffffffffffcccffffffffffffff
+        ccffffffccccccceeeeeeecccccceeeeeeeeeeee222eeeeee444444444eeeeee424eeee44eeecccccccccceeeeeeeee4ee44444444e44eeee44eeeeeeeee4444444ccfffffffffccccffccccccccccff
+        cccfffffceeeccceeeeeeccceeeeeeeeeeeeeeeeee444e4444eeee44444ee4ee424eeee4efeeccccccccfeeeeeeeee44ee4444444ee44eee444eeeeeeeee4444444ecffffffffcceecffcccccccccccc
+        ccccffceeeeecceeeeeeeeeeeeeefee24222222444444444444eeee4444444e4444eeee4eeeeecccccccceeeeeeeee44ee4444444ee444e4444eeeeeeeef4444444eccfcffccccccccfccccccccccccc
+        ccccccceeeeeceeeeeeefeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee44444444444eeee4eeceeeecccccceeeeeeeee44e444444444444444444eeeeeeeee4444444eccfcccccccceccfccccccccccccc
+        fffccceeeeeeeeeeeeefceeeee2eeeeeeeeeeeeeeeeeeee44e44444444444444444eeee4eeeeceeeeeeeeeeeeeeeee44e444444444444444444eeeeeeeee444eeecccccccccccccecffccccccccccccc
+        ffffceeeeeeeeeeeeeeceeeee4eeeeeeeeeeefeeeeeeeeefee4444eeeeeeeeee444eeee44eeeceeeeeeeeeeeeee4444444444e4444444444444eeeeeeeeeeecccccccccccccccccecffcfcccccccccfc
+        ffffceeeeeeeeeeeeecfee4eeeeeeeeeeeeee444eeeeeeeee4444eeeeeeeeeeee4eccee44eeefeeeeeeeeeeeeeeee44444444e4444444444444eeeeeeeeccccccccccccccccccceccffccccccccccccc
+        ffffceeeeeeeeeeeeeffee22422244444444444444444444eeeeee4444444444444ececfceeefeeeeeeeeeeeeeeee44444444e4444444444444eeeeeeeccccccccccccccccccccecfffccffffffccccc
+        cccceeeeeeeeeeeeeefcee42222244444444444444444eeeeeee444eeeeeeeeeee4eeeecceeeeeeeeeeeeeeeeee444444444444444444444444eeeeeecccccccccccccccccccfcccfffccfffffffcccc
+        ccceeeeeeeeeeeeeefceeeee4422eeeee44eeeeeeee4444444444eeeeeeeeeeeee4eeeeeceeeeeeeeeeeeeeeeee444444444444444444444444eeeeeecccccccccccccccccccfeccfffcccccccfffffc
+        cccceeeeeeeeeeeeeceeeee2eeeeeeee44eeeeeeeeeeeeeeeeeeeeeeeeeeeeee444eeeeeeeeeeeeeeeeeeeeeee4444444444444444444444444eeeeecccccccccccccccccccefecffffccccccccccccc
+        ffffeeeeeeeeeeeeeeeeeeeeeeeeeeeee44eeeeeeeeeeeeeeeeeeeeeeeeee22444eeeeeeeeeeeeee2222eeeee44444444444444444444444444eeeeeecfccccccccccccccceeeecccffccccccccccccc
+        ffffffeeeeeeeeeeceeeeeeeeeeeeeeeee4eeeeeeeeeeeeeeeeeeeeeeeee22444eeeeeeeeeeeeeeeeee244eee44444444444444444444444444eeeeeecfcccccccccfccccceeefcccffccccccccccccc
+        ffffceeeeeeeeeeeeeeeeeeeeeeeeeeeee44eeeeee2ee22222eeeeeee222444444eeeeeeeeeeee444444444444444444eeeeeeee44444444444ececccccccccccccccfffceeeeceecffccccccccccccc
+        fffcfceeeeeeeeeeeeeeeeeeeeeeeeeee4444eeeee22222222222222e22444444444eeeeeeee444eee2eeeeeeeeee444eccccccccee44444eeccccccccccccccccccccccceeefceecfffcccccccccccc
+        ccccffeeeeeeeeeeeeeeeeeeeeeeeeeee444444ee2222eee22222222444444442444444444442eeeeeeeeeeeeeeeeeeeccceeccccccee44ccccccccccccccccccccccccceeeeceeecffffccecccccccc
+        cceeffcfeeeeeeeeeeeeeeeeeeeeeee44444444444444444444444444444222222224442eeeeeeeeeecccccccceeeeccccccccccceeee4eccccccccccccccccccccfccfceeeeeeecfffffcceeeeeeecc
+        eeeeffffeeeeeeeeeeeeeeeeee44444eee24444444444444444422222222e22222222244eeeeeeeecccccccccccccccccccccceee444444ecfccccccccccccccccccccceeeeeeeecfffffceeeeeeeeee
+        fffeffffeeeeeeeeeeeeeeeeeeee222eee2224444eeeeeeeee2222222222222222222eeccccccceeccccccccccccceeeccccee4eecccccee4444eeeccccceeccccccccceeeeeeeecfffffceeeeeeeeee
+        fffecffffeeeeeeeeeeeeeeeeeee22222222eeeeeecccccccceee4222222222222222eccccccccccccccccccceccccfcebeeeeccccccccccceee44444eeeeecffccccceeeeeeeeecfffffeeeeeeeeeee
+        fffeefffffeeeeeeeeeeeeeeeeeeee22eeeeeeeccccccccceceeeeeeeeeeeeeeeeeeeecccccccccccccccecccccceeeeecccccccccccccccccccccee44444eeccccccceeeeeeeeecfffffeeeeeeeeeee
+        ffeeecffffeeeeeeeeeeeeeeeeee222eeeeecccccccccceee4eeccceeeeeeeeeeecccccccceccceeecceeccfeeeeeccccccccccccccccccccccccccce444ecccccccceeeeeeeeecffffffeeeeeeeeeee
+        feeeeeffffcceeeeeeeeeeeeeeeeeeeeceeeecccceeee4444eeccccecccccccccccccceeeeeececeeeeeeee4444eeeecccccccccceeeeccccccccceee4eccccccccceeeeeeeeeccffffffeeeeeeeeeee
+        eeefeeffcfceeeeeeeeeeeeeeeeeeeeecccccccceeecccccee44eccceeeeeeeeeeeeeeeeeeece44eeeeeeeeccecee44efcccccccceeeecccee44eecccccccccccccceeeeeeeeecfffffffeeeeeeeeeee
+        eeeeeeecceecceee4eeeeeeeeeeeeeeccccccccccccccceccce4444eeeeeeeeeeeeeeeeeeebeeeeeeeecccccccccceeeeeeeeeeee44444eeeeecccccccccccccccceee4eeeeeeffffffffeeeeee44444
+        eeeeeeeeceeceeeee4eeeeeeeeccccccccccceecceeeeeeee44444eeeeeeeeee4eeeeeeeeecccccccccccccccccccccccccccccceeeeeecccceeecccccccccccccceeeeeeeeecffffffffeee44222222
+        eeeeeeeeeeeeeeeee4eecccccccccccccccceeeeee444eeeeccc4eccccccccccccccccccccecccccccccccccccccccccccccccceeeeeeeeeeecceecccccccccccceeeeeeeeeecfffffffc4442224eeee
+        eeeeeeeeeeeeeeeeeeccccccccccccceeeee444eeeccccccecc4cccccccccccccccccccccccccccccccccccccccccccccccccceeeeeeeeccccceeccccccccccccceeeeeeeeeecfffffffc2224eefffcc
+        eee4eeeeeeeeeeeeefccccccccccc4444eecccccccccecccefecccccccccccccccccccccccccccccccccccccceeeeeecccffccceeeeeeeecceccccccccccccccfeeeeee44eecffcffcffe4eefffccccc
+        442eeeeeeeeeeeeeefcccceccce4eecccccccccccccccccccbccccccccccccccccccccccccccccccccccccccce44444444444444eeeeeecccccccccccccceeeeeeeeee4eeeecffffffffcffccccccccc
+        4eeeeeeeeeeeeeeeeffccccce4eeccccccccccccccccceeeeecccccccccccccccccccccccccccccccccccccecc4ecccccccceee4444444eeeeeeeeeeeeee4eecceee44eeeecffffffffffffffffccccc
+        eeeeeeeeeeeeeeeeeccfcceeeeccccccccccccccccccece44ccccccccccccccccccccccccccccccccccccccccce4ccccecccccccee4ee4444cccccccccccceeeeee44eeeeecfcfffffffffffeffccccc
+        eeeeeeeeeeeeeeeeefcccce4eccccccccccccccccccce44eccccccccccccccccccccccccccccccccccccccccccc4ceccccccccccccceece44cccccccccccccceeee4eeeeeecfeecfffffcccccccccccc
+        eeeeeeeeeeee44e44fcccce4cccccccccccccccecce44ecccccccccccccccccccccccccccccccccccccccccccfe4ececccccccccccccccb444ecccccccccccccee44eee4eecfeefffffffffffccccccc
+        eeeeeeeeeeee44eeeecccce4fcccccccccccccfffe4cffccccccccccccccccccccccccccceeeecccccccccccedbecceccccccccccccccecee444444ecccce444ee4eeeeeeeffeeefffffffffffffffff
+        eeeeeeeeeeeeeeccffcccce4fcfffeeeeeeeeeeeeeee444444eccccccccccccccccccccceeeeeeecccccccefdececccccccccccccccccccceeeee44444444444e44eeeeeeecfeeeeccffffffffffffff
+        eeeeeeeeeeccfccffccccce4ccffeeeeecccccccccce44e4e44eccccccccccccccccccceeeeeeeeccceeeeebeecceccecccccccccccccceeececccc44444444eeeeeeeeeccffeeeecccfffffffffffff
+        eeeeeeeeffffffffcccccce4ccfccecccccceeeeeee4eccccc4eeeeeeeccceecccccccceeeeeeeee455eeeeeeeeccccccccecceeeecceeeeeeceee4444444eeeeeeeeccccccfeeeefeffcfffffffffff
+        eeeeeccccccccccccccccce4ccfcfecceeeeeeecccee44eee4444eeeeccceeccccccccee444444455545555444444eeeeeeccccccecceeeee4444444444eeeeeeeeeeccccccffffffeeccfffffffffff
+        eccccccccccccccccfcccccecccffeceeecccccecccccee44444444eee444444444444444444444bbeeeeee444444455555555455444444ee4eeeeeeeceeefceeeeeeccccccffffffe44efffffffffff
+        cccccccccccccccccccccccecccfceccccccccccccccccee44444444444e4eeeeeeeeeeeeecccccceeececcccccccccceeeee44444eeecccccccccccceeeeeeeeeeeeccccccffffccffe4444eefffffe
+        ccccccccccccfcccfccccccccccccefccccccccccccccccce444444eeccccccccccccccccccccccccccccccccccccccccccccee44444eecccccccccceeeeeeeeeeeecccccccfffffffffceee44eeeeee
+        ccccccccccccccccccccccccccccfefccccccccccccccccce444444cceccccccccccccccccccccccccccccccccccccccccccccce444444eeecccccceeeeeeeeeeeeccccccccffffffffffffffeeeeeee
+        cccccccccccccceecccccccccccfc4ffccccccccccccccccce44444ecccccccccccccccccccccccccccccccccccccccccccccccce4444444eeeccceeeeeeeeeeeeccccccccffffffffffffffffffffee
+        ccccccccccf4444efcccccccccccc4ffcccccccccccccccccc444444eeceeecccccccccccccccccccccccccccccccccccccccccee44444444ecccceeeeeeeeeeeeccccccffffffffffffffffffffffff
+        cccccccceeeefcfffccccccccce44ecccfcccccccccccccccf4444e4444eccceccccccccccccccccccccccccccccccccccccfce4444444444ecccceeeeeeeeeeecccccccffffffffffffffffffffffff
+        ccccccccccccccccccccccceeeeeccccfccccccccccccccce444eccceee444eccccecccccccccccccccccccccfffceee4444444444444444cccccccceeeeecceeeccccffffffffffffffffffffffffff
+        cccccccccccccccccffffceeeccccccccccccccccccccce444eccccccccce4444ecfcccceeecccccccccceee444444444444eeeeeee4444eeecccccffceeeeeecccccfffffffffffffffffffffffffff
+        ccccfcccccccccccccccffeeeccccccccccccffcccfcce44ecccccccccccccee4444ecfccceeeeee4444444444444eeccccccccccccee444eeececcffffcceeccfffffffffffffffffffffffffffffff
+        ffffcccccccccccccccccceeccccccccccccccccccccee44eccccccccccccccccee44444444444444444eeeeeeccccccccccccccccccccee44eeeeeefcfffcecffffffffffffffffffffffffffffffff
+        cfffccccccccccccccccccfeeccccccccccccccfccfce44eccccccccccccccccccccee4444eeeeeeecceeeeeeeeecccccccccccccccccccce4444444fffffffeecffffffffffffffffffffffffffffff
+        ccccfccccccccccffccccccccccccccccccccccccccfe44ecccccccccccccccccccccce4eeeeecccccceeeeeeeecccccccccccccccccccccee444444fffffffccceeecffffffffffffffffffffffffff
+        eeeefffffccccccccccccccffccccccccceecceccccee44fccccccccccccccccccccccc4eecccccccccccccccccccccccccccccccccccccccc444444fffffffffffccccccfffffffffffffffffffffff
+        eee4efffffffffccccccccffffcccccccceeeeeee44444efccccfccccccccccccccccce42ecccccccccccccccccccccccccccccccccccccccce44444cffffffffffffffcccffffffffffffffffffffff
+        e442eccfffffffffffffffffffffceeeeeeeee4eeeccceffffccccccccccccccccccfce44eeccccccccccccccccccccccccccccccccccccecce44444efffffffffffffffffccffffffffffffffffffff
+        444eecccffffffffffffffffffffccee4444222eeeecccccccccccccccccccccccccfe4444ceeccccccccccccccccccccccccccccccccccccfe24444effffffffffffffffffffccccfffffffffffffff
+        444eeeccccccccccccccccffffccccccccceeeeecceeeecccccccccccccccffcccce442244444eccccccccccccccccccccccccccccccccffce444444eccffffffffffffffffffffffcffffffffffffff
+        44eeeecccccccccccccccccffccccccccccccccccccccccccccfcccccccccfcccee44444444444444ecffccffcccccccccccccccccccccce44444444ecccffffffffffffffffffffffffcfffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444ecccfffffffffffffffffffffffffccfffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444ecccffffffffffffffffffffffffffcccccfffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eccccfffffffffffffffffffffffffffffccffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eccccffffffffffffffffffffffffffffffccccc
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eccccfffffffffffffffffffffffffffffffffcf
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eccccfffffffffffffffffffffffffffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eccccffffffffffffffffffffffffffffffffffc
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eccccfffffffffffffffffffffffffffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eccccfffffffffffffffffffffffffffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eeccccffffffffffffffffffffffffffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eeccccffffffffffffffffffffffffffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eeecccffffffffffffffffffffffffffffffffff
+        4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eeeccffffffffffffffffffffffffffffffffff
+        44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eeecffffffffffffffffffffffffffffffffff
+        44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eeecffffffffffffffffffffffffffffffffff
+        44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eeecffffffffffffffffffffffffffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eecffffffffffffffffffffffffffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eecffffffffffffffffffffffffffffffffff
+        444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444eecffffffffffffffffffffffffffffffffff
+        4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444ecffffffffffffffffffffffffffffffffff
+        4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444ecffffffffffffffffffffffffffffffffff
+        4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444ecffffffffffffffffffffffffffffffffff
+        4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444ecffffffffffffffffffffffffffffffffff
+        4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444ecffffffffffffffffffffffffffffffffff
+        `)
+    LoadingSprite = statusbars.create(20, 4, StatusBarKind.Load)
+    LoadingSprite.max = 5000
+    LoadingSprite.value = 0
+    LoadingSprite.setColor(2, 8)
+    LoadingSprite.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
+    LoadingSprite.positionDirection(CollisionDirection.Bottom)
+    LoadingTextSprite = textsprite.create("Loading", 15, 1)
+    LoadingTextSprite.setPosition(79, 83)
+    LoadingAnimation = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 2 . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    animation.runImageAnimation(
+    LoadingAnimation,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 2 2 . . . . . . . 
+        . . . . . . . 2 2 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 2 2 2 2 . . . . . . 
+        . . . . . . 2 2 2 2 . . . . . . 
+        . . . . . . 2 2 2 2 . . . . . . 
+        . . . . . . 2 2 2 2 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . 2 2 2 2 2 2 . . . . . 
+        . . . . . 2 2 2 2 2 2 . . . . . 
+        . . . . . 2 2 . . 2 2 . . . . . 
+        . . . . . 2 2 . . 2 2 . . . . . 
+        . . . . . 2 2 2 2 2 2 . . . . . 
+        . . . . . 2 2 2 2 2 2 . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 2 2 2 2 . . . . 
+        . . . . 2 2 2 2 2 2 2 2 . . . . 
+        . . . . 2 2 . . . . 2 2 . . . . 
+        . . . . 2 2 . . . . 2 2 . . . . 
+        . . . . 2 2 . . . . 2 2 . . . . 
+        . . . . 2 2 . . . . 2 2 . . . . 
+        . . . . 2 2 2 2 2 2 2 2 . . . . 
+        . . . . 2 2 2 2 2 2 2 2 . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        . . . 2 2 . . . . . 2 2 . . . . 
+        . . . 2 2 . . . . . 2 2 . . . . 
+        . . . 2 2 . . . . . 2 2 . . . . 
+        . . . 2 2 . . . . . 2 2 . . . . 
+        . . . 2 2 . . . . . 2 2 . . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
+        . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
+        . . 2 2 . . . . . . . 2 2 . . . 
+        . . 2 2 . . . . . . . 2 2 . . . 
+        . . 2 2 . . . . . . . 2 2 . . . 
+        . . 2 2 . . . . . . . 2 2 . . . 
+        . . 2 2 . . . . . . . 2 2 . . . 
+        . . 2 2 . . . . . . . 2 2 . . . 
+        . . 2 2 . . . . . . . 2 2 . . . 
+        . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
+        . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 . . . . . . . . . . . . 2 2 
+        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+        2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 . . . . . . . . . . 2 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
+        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
+        . . 2 2 . . . . . . . . 2 2 . . 
+        . . 2 2 . . . . . . . . 2 2 . . 
+        . . 2 2 . . . . . . . . 2 2 . . 
+        . . 2 2 . . . . . . . . 2 2 . . 
+        . . 2 2 . . . . . . . . 2 2 . . 
+        . . 2 2 . . . . . . . . 2 2 . . 
+        . . 2 2 . . . . . . . . 2 2 . . 
+        . . 2 2 . . . . . . . . 2 2 . . 
+        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
+        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . 2 2 2 2 2 2 2 2 2 2 . . . 
+        . . . 2 2 2 2 2 2 2 2 2 2 . . . 
+        . . . 2 2 . . . . . . 2 2 . . . 
+        . . . 2 2 . . . . . . 2 2 . . . 
+        . . . 2 2 . . . . . . 2 2 . . . 
+        . . . 2 2 . . . . . . 2 2 . . . 
+        . . . 2 2 . . . . . . 2 2 . . . 
+        . . . 2 2 . . . . . . 2 2 . . . 
+        . . . 2 2 2 2 2 2 2 2 2 2 . . . 
+        . . . 2 2 2 2 2 2 2 2 2 2 . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 2 2 2 2 . . . . 
+        . . . . 2 2 2 2 2 2 2 2 . . . . 
+        . . . . 2 2 . . . . 2 2 . . . . 
+        . . . . 2 2 . . . . 2 2 . . . . 
+        . . . . 2 2 . . . . 2 2 . . . . 
+        . . . . 2 2 . . . . 2 2 . . . . 
+        . . . . 2 2 2 2 2 2 2 2 . . . . 
+        . . . . 2 2 2 2 2 2 2 2 . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . 2 2 2 2 2 2 . . . . . 
+        . . . . . 2 2 2 2 2 2 . . . . . 
+        . . . . . 2 2 . . 2 2 . . . . . 
+        . . . . . 2 2 . . 2 2 . . . . . 
+        . . . . . 2 2 2 2 2 2 . . . . . 
+        . . . . . 2 2 2 2 2 2 . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 2 2 2 2 . . . . . . 
+        . . . . . . 2 2 2 2 . . . . . . 
+        . . . . . . 2 2 2 2 . . . . . . 
+        . . . . . . 2 2 2 2 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `],
+    100,
+    true
+    )
+    IsLoadingScreenVisible = true
+}
 function Level__3__Jungle () {
     tiles.setCurrentTilemap(tilemap`level33`)
 }
@@ -751,6 +1125,22 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, 
 })
 controller.combos.attachCombo("rA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 50, 0)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
+    if (triggerNPC == true) {
+        story.spriteSayText(NPCJhonny, "Hi!", 15, 4)
+        story.spriteSayText(NPCJhonny, "Khan, the evil warlord has taken", 15, 4)
+        story.spriteSayText(NPCJhonny, "over Province Town!", 15, 4)
+        story.spriteSayText(NPCJhonny, "Go to the cave in the north of spawn to", 15, 4)
+        story.spriteSayText(NPCJhonny, "go into different dungeons and", 15, 4)
+        story.spriteSayText(NPCJhonny, "defeat monsters to get plastic, a", 15, 4)
+        story.spriteSayText(NPCJhonny, "rare mineral! Use it to craft", 15, 4)
+        story.spriteSayText(NPCJhonny, "weapons at the east of the village.", 15, 4)
+        story.spriteSayText(NPCJhonny, "Use the weapons to defeat Khan!", 15, 4)
+        story.spriteSayText(NPCJhonny, "Good luck! You will need it :)", 15, 4)
+        triggerNPC = false
+    }
+    pause(36000)
 })
 function SpawnCharecter () {
     PlayerWarrior = sprites.create(img`
@@ -829,14 +1219,17 @@ function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
 }
+let NPCJhonny: Sprite = null
 let SettingsMenu: miniMenu.MenuSprite = null
+let LoadingAnimation: Sprite = null
+let LoadingTextSprite: TextSprite = null
+let LoadingSprite: StatusBarSprite = null
 let NecronWarlord: Sprite = null
 let Players_Health: StatusBarSprite = null
 let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
 let toolbar: Inventory.Toolbar = null
-let NPCJhonny: Sprite = null
 let IsQualified = false
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
@@ -846,17 +1239,31 @@ let ShowSaga = false
 let SoundPhase = 0
 let SagaTimeSpan = 0
 let triggerNPC = false
-let projectileSprite: Sprite = null
-let sagaImage: Image = null
-let lineAdjust = 0
-let star = null
+let IsLoadingScreenVisible = false
 let storyLines: string[] = []
+let star = null
+let lineAdjust = 0
+let sagaImage: Image = null
+let projectileSprite: Sprite = null
+IsLoadingScreenVisible = false
+namespace SpriteKind {
+    export const Star = SpriteKind.create()
+    export const Logo = SpriteKind.create()
+    export const Messages = SpriteKind.create()
+    export const NPC = SpriteKind.create()
+    export const AOE = SpriteKind.create()
+    export const Sphere_Of_Influence = SpriteKind.create()
+    export const Load2 = StatusBarKind.create()
+}
 triggerNPC = false
 projectileSprite = null
 SagaTimeSpan = 34000
 SoundPhase = 1
 ShowSaga = false
-Start_Game()
+DrawLoadingScreen()
+timer.debounce("Loading", 5000, function () {
+    Start_Game()
+})
 game.onUpdate(function () {
     if (ShowSaga == true) {
         if (sagaSprite.bottom < 0) {
@@ -865,12 +1272,27 @@ game.onUpdate(function () {
     }
 })
 forever(function () {
-    if (SoundPhase == 1) {
-        Music.CatQuestVo1(songs.Ocean)
-    } else if (SoundPhase == 2) {
-        Music.CatQuestVo1(songs.Seaside_town)
-    } else if (SoundPhase == 3) {
-        Music.CatQuestVo1(songs.Tavern)
+    if (IsLoadingScreenVisible == true) {
+        while (LoadingSprite.value != 5000) {
+            pause(randint(50, 100))
+            LoadingSprite.value += 100
+            LoadingSprite.attachToSprite(LoadingAnimation)
+        }
+        LoadingAnimation.destroy(effects.ashes, 500)
+        LoadingTextSprite.destroy(effects.disintegrate, 500)
+        IsLoadingScreenVisible = false
+    }
+})
+forever(function () {
+    if (IsLoadingScreenVisible == true) {
+        pause(200)
+        LoadingTextSprite.setText("Loading.")
+        pause(200)
+        LoadingTextSprite.setText("Loading..")
+        pause(200)
+        LoadingTextSprite.setText("Loading...")
+        pause(200)
+        LoadingTextSprite.setText("Loading")
     }
 })
 forever(function () {
@@ -1170,4 +1592,13 @@ forever(function () {
     500,
     characterAnimations.rule(Predicate.MovingRight)
     )
+})
+forever(function () {
+    if (SoundPhase == 1) {
+        Music.CatQuestVo1(songs.Ocean)
+    } else if (SoundPhase == 2) {
+        Music.CatQuestVo1(songs.Seaside_town)
+    } else if (SoundPhase == 3) {
+        Music.CatQuestVo1(songs.Tavern)
+    }
 })
