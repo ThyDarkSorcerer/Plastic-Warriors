@@ -10,14 +10,14 @@
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#10013ca1dcba54156faf7f4fefff9bc8db24ff26",
         "Songs": "github:LucasMayhew/RPGMuisic#f26c7df84609da0be7af7e16d2a64dcd095c1716",
         "pxt-countup": "github:shakao/pxt-countup#v0.0.2",
-        "Achievements": "github:UnsignedArduino/Achievements#a578c77dd75467b9b0b5238a9a31c5fdc427cb9d",
         "arcade-sprite-events": "github:riknoll/arcade-sprite-events#dc93eec8412053ebbd2b8f01cf5b6ae285d28900",
         "pxt-rtttl": "github:pelikhan/pxt-rtttl#v0.0.12",
         "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
         "pxt-button-combos": "github:jwunderl/pxt-button-combos#v0.0.24",
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.1",
         "arcade-shader": "github:riknoll/arcade-shader#d2a2572906fdb68ff429f337e30606b069e688ea",
-        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3"
+        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
+        "Inventory": "github:UnsignedArduino/Inventory#v1.1.1"
     },
     "files": [
         "main.blocks",
