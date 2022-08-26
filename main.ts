@@ -32,7 +32,7 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
             . . . f f . . f f . . . 
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
-        PlasticZombie.follow(PlayerWarrior)
+        PlasticZombie.follow(PlayerWarrior, 50)
     }
 }
 function DrawMenu () {
@@ -250,24 +250,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
-    Notification.notify("Press B to talk.", 1, img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
     if (triggerNPC == true) {
         story.spriteSayText(NPCJhonny, "Hi!", 15, 4)
         story.spriteSayText(NPCJhonny, "Khan, the evil warlord has taken", 15, 4)
@@ -536,6 +518,7 @@ function Level__5__Lost_City () {
 function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    sprites.destroyAllSpritesOfKind(SpriteKind.NPC)
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Messages)
@@ -759,6 +742,9 @@ function SpawnNPCJhonny (cordsX: number, cordsY: number) {
     NPCJhonny = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPC)
     tiles.placeOnTile(NPCJhonny, tiles.getTileLocation(cordsX, cordsX))
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
+    LevelHomeTown()
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile15`)
 })
@@ -783,6 +769,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     pause(1500)
 })
 function LevelTheDeathGateHub () {
+    DestroySprites()
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
 }
