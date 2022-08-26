@@ -222,6 +222,7 @@ function DrawMenu () {
             myMenu.close()
             if (selectedIndex == 0) {
                 MenuOpen = false
+                DrawToolbar()
                 SpawnCharecter()
                 LevelHomeTown()
             } else if (selectedIndex == 1) {
@@ -267,7 +268,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSpri
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     triggerNPC = true
+    pause(2000)
+    triggerNPC = false
 })
+function DrawToolbar () {
+    toolbar = Inventory.create_toolbar([], 4)
+    toolbar.left = 4
+    toolbar.bottom = scene.screenHeight() - 4
+    toolbar.z = 100
+    toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
+}
 controller.combos.attachCombo("lA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, -50, 0)
 })
@@ -670,7 +680,43 @@ function Level__3__Jungle () {
 }
 function SettingsView () {
     SettingsMenu = miniMenu.createMenu(
-    miniMenu.createMenuItem("PlaceHolder")
+    miniMenu.createMenuItem(" ", img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `),
+    miniMenu.createMenuItem("", img`
+        ..............................e22222e........
+        e222222222e...................2222222........
+        22222222222e..................2255522ec......
+        22555455552222222222...2222222225552222222...
+        225554555552222222222e22222222225552222222e..
+        2255522255542455555422245455522255524555222c.
+        225552225554255555554245545555225552555422acc
+        225554555552222224555255542555425554554222acc
+        22555455555224444455525554222222555455222aac.
+        22555222555445555455525554222222555454522aac.
+        225552225554555424555255542455425554455422cc.
+        225554555552455554555245545555225554455522ec.
+        2255545555222555445552245455522255522555422c.
+        2222222222222222222222222222222222222222222cc
+        22222222222c222222222222222222222222222222aac
+        .......................cc......ccaaaaaaaaaacc
+        ................................cccccccccccc.
+        `)
     )
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
@@ -734,6 +780,16 @@ function SpawnCharecter () {
     controller.moveSprite(PlayerWarrior, 100, 100)
     scene.cameraFollowSprite(PlayerWarrior)
     controller.moveSprite(PlayerWarrior)
+    spriteutils.setLifeImage(img`
+        . . . . . . . 
+        . . e 4 e . . 
+        . . e 2 e . . 
+        e . e e e . e 
+        e e e 4 e e e 
+        . e 4 2 4 e . 
+        . . e 4 e . . 
+        . . . e . . . 
+        `)
 }
 function Level__7__Haunted_Mansion () {
 	
@@ -779,6 +835,7 @@ let Players_Health: StatusBarSprite = null
 let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
+let toolbar: Inventory.Toolbar = null
 let NPCJhonny: Sprite = null
 let IsQualified = false
 let myMenu: miniMenu.MenuSprite = null
@@ -789,12 +846,12 @@ let ShowSaga = false
 let SoundPhase = 0
 let SagaTimeSpan = 0
 let triggerNPC = false
-triggerNPC = false
 let projectileSprite: Sprite = null
 let sagaImage: Image = null
 let lineAdjust = 0
 let star = null
 let storyLines: string[] = []
+triggerNPC = false
 projectileSprite = null
 SagaTimeSpan = 34000
 SoundPhase = 1
@@ -805,6 +862,15 @@ game.onUpdate(function () {
         if (sagaSprite.bottom < 0) {
             sagaSprite.destroy()
         }
+    }
+})
+forever(function () {
+    if (SoundPhase == 1) {
+        Music.CatQuestVo1(songs.Ocean)
+    } else if (SoundPhase == 2) {
+        Music.CatQuestVo1(songs.Seaside_town)
+    } else if (SoundPhase == 3) {
+        Music.CatQuestVo1(songs.Tavern)
     }
 })
 forever(function () {
@@ -1104,13 +1170,4 @@ forever(function () {
     500,
     characterAnimations.rule(Predicate.MovingRight)
     )
-})
-forever(function () {
-    if (SoundPhase == 1) {
-        Music.CatQuestVo1(songs.Ocean)
-    } else if (SoundPhase == 2) {
-        Music.CatQuestVo1(songs.Seaside_town)
-    } else if (SoundPhase == 3) {
-        Music.CatQuestVo1(songs.Tavern)
-    }
 })
