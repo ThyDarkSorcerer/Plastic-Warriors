@@ -528,10 +528,11 @@ controller.combos.attachCombo("dA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, 50)
 })
 function Level__4__Future_Planet () {
-	
+    tiles.setCurrentTilemap(tilemap`level34`)
 }
 function Level__5__Lost_City () {
     SpawnNPCJhonny(20, 30)
+    tiles.setCurrentTilemap(tilemap`level36`)
 }
 function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
