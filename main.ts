@@ -3,11 +3,14 @@ enum ActionKind {
     Idle,
     Jumping
 }
+namespace SpriteKind {
+    export const NPCJhonny = SpriteKind.create()
+}
 namespace StatusBarKind {
     export const Load = StatusBarKind.create()
 }
 function SpawnPlasticZombie (Amount: number, Health: number) {
-    for (let index = 0; index <= Amount; index++) {
+    for (let index2 = 0; index2 <= Amount; index2++) {
         PlasticZombie = sprites.create(img`
             . . . . f f f f . . . . 
             . . f f e e e e f f . . 
@@ -31,120 +34,6 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
     }
 }
 function DrawMenu () {
-    scene.setBackgroundImage(img`
-        eeeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbddbbbbbbbbbbddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        eeeeeeebbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbddbbdbbbbbbdbbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        eeeeebeeebbbbbbbbbeeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddbbddbbbbbddddbbbbbbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        eeeebeeeebbbbbbbbeeeebebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbddbbbbbbddbbbbbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        eeeeeebebebbbbeeeeebebeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeebbbbbbbebbddbdddbbdbddbbbbbbbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        eebeeeebbbbbbbebeeeeebbeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeeebebbbbbbbbdbdddddddddddddddbbbbbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bebbbeeebebbbbbbebbeeeebeebbebbebbbbbbbbbbbbbbbbbbbbbbbbbbeebbbeebebbbbbddddddddddddbddbdddddddbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        beebbeeeeeebbbbbbbbeeebbbebbeebeebbbbbbbbbbbbbbbbbbbbbbbbbeebbbeeeeebbbbbbbddddddddddddddddddddbddbddbbbbbbe44444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        beebbbeeeeeeebbbbeeeeeeebbbbbeeeebbbbbbebbebbbbbbbbbbbbbbbbeebbbbeebbeeebebbbbbbbbbddddddddddbddddddbbbbbbeee4e4444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbebebeeeeeeebbbbeeeeeebbbbbbebeebebbbbbbbebeebbbbbbbbbbbbbbbbbbeeebbbeeebbbbbbdbddddddddddddbddddddbddbb4eeee444444bbb444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbeeeebebbbbbeeeeeeeebebbeeeeeeebebbeebebbebbbbbbbbbbbbbbbbbbbeebbebbbbbbbbbbbdbdddddddddbbbdbbddddddb4eeeee44e44be444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbeebbbeebbbebbbeeeeeeeebbeeeebbbbbbeeeebbbbbbbbbbbbbbbbbbbbbbbebbbbbbbebbbbbbbbdbbbdddddbbeeeeebddddddeeeeeeeeeeeeeee4444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbeebebeeeeeeeebbbeeeeeebeeeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbbbdbbbeeeeeeeeeedddddeeeeeeeeeeeeeee4444ebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbbebebeeeeeebbbebbbbeeeeeebbeeebbbbbebeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbeeeeeeeeeeeeddd4eeeeeeeeeeeeeee4e4444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbebbeeeeeeeebbbbbbbbebebbebbeeebbbbeeeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbbeeeeeeeeeeeeedd4eeeeeeeeeeeee4e4e4444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbebbbeebbbbbbbbbbbbebbbbbbebbeebbbbebeebebbbbbbbbbbbbbbbbbbbbbbecbbbbbbdbbbeeeeeeeeeeeeedd4eeeeeeeeeeee4e4e44444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbebbebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbebeeeebebbbbbbbbbbbbbbbbbbbbfebbbbbbbeeeeeeeeeeeeeeeeb4444eeeeeeee44e44444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeebbbebbbbbbbbbbbbbbbbbbcfbbbbbbbeeeeeeeeeeeeeeeee44444454eeeeeee44444445bddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbbbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeeebeebebbbbbbbbbbbbb444bbbbbbbbeeeeeeeeeeeeeeeeeee4444445eeeeee444444445dddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbbbcdbbbebbbeeeebbebebbbb444eeebbbbbbeeeeeeeeeeeeeeeeeeeee444454eeeee4444444455dddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbbbbbbbbbebbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbffcbbbbbbbeebbeeeeeeeee4444fe4454bbeeeeeeeeeeeeeeeeeeeee444454eeee44444444445ddddddbddbbbdbddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        bbbbbbbebbbbbbbebfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbecfcebbbebbbeeeeeeeeeeeeeceee4fc44554beeeeeeeeeeeeeeeeee44e44444444ee4e444444444dddddddddbbbbbbbbbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddbbbbbbbbbbbbbbbb
-        bbbbebeebbbbbbbbbebbbbbbbbbbbbbbbeeeeeeeebbbbbbcfeeeeeeeeebeeeeeeeeeefeefeee44444454beeeeeeeeeeeeeeeee444e444445554eee4444444444dddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbbbbbbbbbbbbbbbbbbddbbdbbd
-        ebbbbeeeeeebebbecbebbbbbbbbbbbbeeeeeeeee4eeccceeffeeeeeeeeeeeeeeeefeefeeceeeeee44444beeeeeeeeeeeeeeeeee444444444544ee44444444554d444bbdddbddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbd5bdd
-        ebbbbeeebeebeeeefeebbebbbbbbbbeeeeeee4eeeeeebbbffeeeeeeeeeeeeeeffcceeefeceeeeee444444bbeeeeeeeeeeee44ee4444444445444e4444444554444444bddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbbbbbbbbbbbbbbbbbbbbbbbbdd
-        beeeebbeeeeeeebccbeeeebbbbbbbeeeeeeeeeeeee44ebbefeefeeeeeeffecceeecceffffcfeeff4444454beeeeeeeeeeeee444ee44444445554444444455544444e4bddddddddddbbbbbbbbbbbbbbdbbbbbbddbd4dd5bbbbbbbbbbbbbbbdbbbbbbbbbb
-        eeeeeeeeeeeeeccfeebeeeebbbbebeeeeeeeeeeeeeee4bbeeceeeeffee444eecffcfffffffceeffe4444444eeeeeeeeeeeee444ee4444444545544444554444ee4eee44ddddddddbbdbbbbbbbbbbbdbbbdddbbbbbbbbbbdddbbbbbbbbbbdddddddbbbbb
-        eeeeeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeeeeeeeffffffeeeeeeeeee44effffffffffffffffcfeee444444eeeeeeeeeeeeee44ee444444454554ee4445444eeeeee44445dddddbddbbbbbbbdddddddbbddbbbbbbbbbbbd55d4bbd5dbbbbbddbbbddddd
-        eeeeeeeeeeefeefeeeeeceeeeeeeeeeeeeeeee444fffffffffeeeeeeefffffffffffffffcfffffeeeee444eeeeeeeeeeeeeee4444444444455444eeee44444eeeeee4444454dddbdddbdbbbbbddbbddbbbdbddbddbdddd4bbbdbbbbbdbbbbd5bbbbbb54
-        eeeeeeeeeeefefeeeefeeeeeeeeeeeeeeeeee4e4effcffffffffffffffffffffffffcceeecffffcfeef44eeeeeeeeeeeeeeee44eee4444444454eeeee44444e44eeee444444ddddddbbddbbdbdbbbbbbdbddbbbbbbbbbbbbbbbbbbbbbbbbdbbddbddbbd
-        eeeeeeeeeeefffccfeeefeeeeeeeeeeeeeee44e4ffffffffffffffffffffffffffccccccccccfffceffeeeeeeeeeeeeeeeeeeeeee444e4444444eeeee44444444eeee4e444444ddbbbbddbbdbbbbbbbdddbddbddbbbbbbbbbbbddbbbbbbbbbbbbbbbbbb
-        eeeeeeeeeeeffeeeeeeeeeeeeeeeeeeeeeeeeeeeffffcfffffffffffffffffffcccecefffecffffffcefffefefeeeeeeeeeeeeeee44ee444444eeeeee444444e444ee4eee44444ddbbbbdbbbdbbbbbdddddddddbbddbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-        eeeeeeeeeeeffeeeeeeeeeeeeeeeeeeeeeeeee444fffecfffffffffffffccccccceeeefffeefe4effffccfcfcffeeeeeeeeeeeeee4eee444444eeeeee44eeeeee44e444444444bbbbbbbbbbbdbbbbbdddddddddbbbbbbbbbbbbdbbbbbbbbbbbbbbbbbbb
-        eeeeeeeeeeeffeeee44444444eeeeeeeeeeeeee44fffeffffffffffffffcccceffe4effffecf4f4ecfcfffefffceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4eeee4eee4444ee4444bbbbbbbbbbbdbbbbbddddddddddbbbbbbbbbbdbbbbbbbbbbbbbbbbbbb
-        eeeeeeeeeeeffeee444444554eeeeeeeeeeeeee4ceffeffffffffffffceeeeeeff4eecccfe44444eeccfffffeeceeeeeeeeeeeeeeeeeeeeeeeeeee4ee44ee44ee4444d4eee444bbbbbbbbbbbbbbbbbdddddbbdddbbbbbbbbbb4455444bbbbbbbbbbbbbb
-        eeeeeeeeeeeffcee444444455eeeeeeeeeeeee4e4fffcffffffffffffffeccccff4f4efff44f4fceeeffffffffffeeeeeeeeeeeeeeeeeeeeeeeeee44ee4e444444444d44e44444bbbbbbbbbbbbbbbbddddbddbdddddbbbbbb444455444bbbbbbbbb44bb
-        eeeeeeeeeeefceeeee444444eeeeeeeeeeeeee4ceffffffffffffffffceeeecfffeefeece4cf4eee44ffffffffffffcceeeeeeeeeeeeeeeee4444444444444444444dd4ee44444bbbbbbbdddbbbbbbddddddddddddddbbb444444444554bbbbbbeeeee4
-        eeeeeeeeeeefceee4444444eeeeeeeeeeeee4ee44fffcfffffffffffffeccccfffeeefeeefff4eeee4ecffeffefeefeeeeeeeeeeeeeee4444444444444444ddbbb44db4444b444bbbbbddddddddbbbbddddbbddbbddddbd4444444444444bb4eeeee4ee
-        eeeeeeeeeeefceeee444444eeeeeeeeeeeeeeee4efffffffffffffffffeecccfffeeccffcecfecceeefffffeeefeefeeeeeeeeeeeeee44e44444444444444ddddddddb4444444bbbbbddddddddddbbbbbddbbbbbbdddbdd44444444444444eeeeeeee4e
-        eeeeeeeeeeefeee44444444eeeeeeeeeeeeeefeeefffffffffffffffeeeecfffffeccffffcefeecceffeefceeefeeceeee4e4eeee44444444444444445455dddddddddb444b4bbbbbbdddddddbbddbbbbbbbbbbbbbbbbdd444444444444444eeeeeeeee
-        eeeeeeeeeeefeeeee444444eeeeeeeeeeeeeceecfffffffffffffccffccccfbeeebeeeebbeeeeeeecfffcfeeeceeeceee4e444eee444444444444444445554ddddddddbbbbbbbbbbbbbddddddddddbbbdbbdddbbbbbbbbd444eee4e4444444eeeeeeeee
-        eee4eeeeeeefeeee44e4444eeeeeeeeeeeefeeffffffffffffcfffccccfccfbccecccecccecbecbbbeffcfeeefee444ee44444444444444444444444555545dddddddddbbbbddbbbbbbdddddddddddbbbbd44bbbbbbbbeeeeeee4e44444444eeeeeeeee
-        eee444eeeeefeeeeeeee4444eeeeeeeeeeceeefeefffffffffffeecfefecefececcecceeccccccecbcfffeccceeeeeee4e4444ee444444444444444454554dddddddddddddbddddbbbddddddddddddddb4e444554bbbbeeeeeeeeeee4444444eeeeeeee
-        ee4444eeeeefeeee4e4e44444eeeeeeeefeeeefeefffffffffffeccfececcffcecceccecceeeecccbefcfffcffeeeeeeeee444ee4444444444444444455544ddddddddddddbddddbbbbddddbdddbbdddde44455454bbeeeeeeeeeeeeee44444eeeeeeee
-        eeee444eeeefeee4e4e4e4444eeeeeeeeeeeeefeefffffffffffeeeeeeeeeceeeeeeeeeececeeeeceefeefffffceeeeee4ee4eeee444444444445455555444ddddddddddddddddddddddddddbdbbb44eee444455445eeeeeeeeeeeeeee44e444eeeeeee
-        eee4e4eeeeefeeee4eee4444444eeefeffffffffffffffffffffeeeeeeeeefffffeebebeeeeeeeeeecffeeffffffeeffee44444eee4444444444444544545ddddddddddddddddddddddddbdddbbb44eee4444444444eeeeeeeeeeeeee44e44444eeeeee
-        eeeeeeeeeeefeeeeeee44eeeeeeeeeeeffffffffffffffffffffffceeeeeeeeeecccccccfffffffccefcccffffffffffeeeee4eeee44e4444444444455444dddddddddddddddddddddddddbddd444ee44e444444444eeeeeeeeeeeeeee4eee4eeeeeeee
-        eeeeeeeeeeefeeeeeee4eefeeeefeeefffffffffffffffffffefefceeeeeeeeeeeeecffcccccfccfffffceffcffceeeeeeeee44eeeee4444444444454444d44ddddddddddddddddbdddddddeeeeeeee4444444444444eeeeeeeeeeeee4ee444eeeeeeee
-        eeeeeeeeeeefeeeeecfeefccfffeeeefffffffffffffffffeffffffffffffffffffffecceeeeeeeeebdbebbbbceeeeeeeeee4eee4444444444444444444444d44ddddbddb44b4bbddbbdd4eee4444eeeeeeee44444444eeeeeeeeeeeeeeeeeeeeeee4ee
-        fffffffffcffcebeffceeffccccfcffcffffffffffffffffcffbfeceeeeeeeeffffff4eeeeecee444eceeeebbfeeeeeeeeeeeeee4444e4444444444444444dbddddbddbbb44e44bdbbbbbeeeee444eeeeee4444444444eeeeeeeeeeeeeeeeeeeeee4eee
-        ffffffffffffcefffffffffcffffffffcccccccccccccfffffcccefffeeeccffffe4eccfffffefffe4efceecceeeeeeeeeeeeeeee44eee44444444444444eee444bb4db44eeee44bdb44beeee4444eeeeeeee44444444eeeeeeeeeeeeeeeeeeeeeeeeee
-        ffffffffffffcfffffffffffffffffffffffcfffffffffffffcccefffffeeffffeeefeccffffceeffeeee4ebbeeeeeeeeeeeeeeeeee4eee444444444444eee44444bbb44eee4e4e444eeeeeeee444eeeeee44444444444eeeeeeeeeeeeeeeeeeeeeeeee
-        ececcfffceefcfeeeefffffffeeeefffffffffffffffffffffceeefffffedffceeffceccefceeeeffffe4ffffeeeeef4eeeeeeeeeeeeee4eeeee444444eeeee4ee4e444eeeee4e4eeeeeeeeeee4e444eeeee4444ee4e444eeeeeeeeeeeeeeeeeeeeeeee
-        eeecefffeeeffeeeeeeeeeeffeeeeffffffffffffffffffffffeffcccffebffeefcfffecefcfcfee4ffeccffceeeeefeeeeeeeeeeeeeee4e4ee4444444eeeeeeee444eeee4eeeeeeeeeeeeeeeeeee4e4eeeeeee4eeeeeeeee44eeeeeeeeeeeeeeeeeeee
-        eeeceffceeeffeeeeeeeeeeffeeeeffffffffffffffffffffffeeffffffebfcffcccffeffffeefffeeefeeeeefeeeeeeeeeeeeeeeeeeeee44eee4ee44eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4eeeeeeeeeeeeeeeeeeeee
-        eeeeeffeeefcfeeeeeeeeffffffffffffffffffffffffffcffeeeffffffeefeefffffffeffffeccffefffeefcceeeeeeeeeeeeeeeeeeeeeeeeeeeee44eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-        eeeceffeeffffeeeeeeecfffffffffffffffffffffffffccfffecffffffeeeefffcfffffefffefffefefffeefceeeeeeeeeeeeeeeeeeeeeeeeeeeeee44eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-        ceeecffeefffeeeeeeeefffffffffffffffffffffffffffffffcccfffffeeeeeffffffffeffceffeeffffffecccceeeeeeeeeeeeeeeeeeeeeeeeeeeeee4eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-        eeeecffefffcceececcffffffffffffffffffffffffffffcfffeeffffeeebeffcceffffffefceffefffffff4efceceeeeeeeeeeeeeeeeeeeeeeeeeeee4eeeeeecceeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-        cfcceffffffcffffcccceeeeeeeffffffffffffffffffffffffebefffcfecccfceeceffffffffffffffffff4eecceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecceeeeeeeeeeeeeeeeecceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-        ccfcfffffffffcceeeeceeebeecffffffffffffffffffffffffeeffffffefccffffceecffffffecffefffffcefcccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeccceeeeeeeceeeeceeeccceeceeeeeeeeeeeeeeeeeeecceecceeeeeeeeeeeeeeeeeeee
-        fffccfffffcffccffcffffe4eccffffffffffffffffffffffffeeffffffefceffffffccfffffecfffcefcccfcccccceeceeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeccccceceeeccceceeeccceeeeecccceeeeeeeeeeeceeceeeceeeeeeeeeeeeeeeeeeeee
-        ffffffcffffffffccfccfce4eecffffffffffffffffffffffffecffffffecfefffffffffffffcfffcfceffffcccccceeececeecceeeeeeeeeeeeeeecccecceeeeeecccccecccccccccccccccccceeee44eeeececceccccee4e4eeeeeeeeeeeeeeeeeeee
-        fffffffffffffffffffffffeffefcfffeee4ccfffffffffffffeefffffffcfeffffffffffffcffffc4e4ffffeeccccececcccccceeeeeeeeeeeeececccccceeceeeccccccccccccccccceeeeecceeeeee44cccceeccceee4eeeeeeeeeeeeeeeeeeeeeee
-        fffffffffffffffffffffffeffcfffffeeeee4fffffffffcffeeeffffffcffcffffcccfffffefcfffcceffffe4ffccccccccccccccceceeeeeeeeeeeeeeceeecccccccceeeecceeeceeeeeecceeeeeeee4eecccceeeeeeeeeeeee4eeeeeeee4e4444eee
-        fffffffffffffffffffffffcffcfffffeceee4fffffffffffffeeffffffcfefffeeccfffffffcfcfffceffffeefffcccccccccccceccecceeeeeeeceeeeeceeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeccccceeeeeeeeeee444eeeeee4444eeeecc
-        fffffffffffffffffffffffcffcfffffeceee4fffcfffffffffeeffffffcfceecfffffffffffcfffffffffffeecffffccccccccecccccccccccceccccccceeeeeeeeeceeeeeeeeeeeccecceeeeeeeeeeeeeeeccccccceeeee44eeee44444444eeeeeecc
-        fffffffffffffffffffffffeffcfffffecb4eeffffffffffffcccffffffccffffffffffffffffccffccfffffeeccfffcceccccceeeccccccceccccccccccccceeeeeeccceeeeccccccccecceeeeeeeeceeeeeccccceeeeeeeeeeee44444eeeeeeecccce
-        fffffffffffffffcccfcffffffeffffeee4eee4ffffccfffffeeecfffffeecffffffffcfffccfffccffeeffccfcfefffccceeeeeeeeeeeeeeeeececccccccccccccccccccccffcccccccccceecceccccceceecccceeeeeeeeeeeeeeeeeeeeeeccceeeec
-        fffffffffffffffffffcceefffcffffece4deeeffffccfffffefcffffffefcfffffffcffffffcccccffffeeccfecffffceeeeeeecccccecccccccccccccceeeeeeccccccccffecccccccccccccccccccceeeeccccceeeeeeeeeeeeeeeeeeeeeeeeecccc
-        ffffffcffffffffffffffebffffcfffecee4eeefffffffffffccffffcfcccffffffffffffcfeececefffffffceeffecffeeeeeeeeeeecccececccccceeeccceeeeeeeeeeeffef4eccccccceeeccccccccccccccccccceeceeeeeeeeeecccccccececccc
-        ffffffffffffffcffffffe4ecffcfffeeeee4eefffffffffffcffcffffccfffffffffffffffeeeecefffffcccffffecffefeeeeeeeeeeeeeeeefeeeeeeeeeeeeeeeeecfcccfffeeeeeeeeeceeccceeeeeeeeeeeeeeeceeeeeeeeeeeeeeccccccccccccc
-        fffffffffffffffcffffe4eeeffffffeeeeeeeffffcfffffffffffffffecfcfffffffffffffeeccccffffccfeffeccfffeefeceeeeeefeeeeeefeeeeeeeeeeeeecceeefffbffffeeccccccccceeeeeeeeefeecccccceeeeeecefccccccccccccfcccfcc
-        fffffcffffffffffcffeceeeeffffffeeeeeeefffffffceeee4eccffffceccfccffffffffffeceeeecfffceecfffffffffffefefeeecfeeeccffcccfccceeccccccffeccecffceeceeeeccccccccccfccefccececceefcccccffffccccffcccffcccfff
-        fffcccffffffcccefffcceeeeeffcffeeeeccefffffcffbceeff4ffffcceecfffffffffffffbeecccffccefcefffffffffffffeffccfffcccccffccffcfccccceeeffebcefffcee4fcccccccfcccccfffffcccccfffffcccfffffffffffffcfffffffff
-        fffcfcfffffffffffcccfceeeeccfffffffcfcffffffffeffcefffcfffeebffffffffffffffeecceccffcffeecfffffffcecffffcffffffccccffccffffccccccfcffeecffcfcfeeecffffffffffffffffffffffffffffffe4efffcfcffffffffffffff
-        ffffccccccccccecfcffcfccc44efffffcfffcffffcfeeefffeeeeefffceeffffffffffffffcceeccefcfffeeffffffffeeecffffffffffffcfffcfffffcfcfcfffefffffcffcefccceffffffffffffffffffffcfffffffffffffffffffffffffffffff
-        ffffcfcffffffffffecffffceeeeccfccfffffffffccceeeecfceeefffceefffffffcffffffccccceefffffccffffffffceecffffffffffffffffffffffffffffffefcfffffffffffceeeffffffffffffffcfcfffffffcfffffffffffffffffffffffff
-        fffffcffffffffffcfffcfffcfffccfeecffffffffffffceeccefffffffeefffffffffffcffeeceecccfffffcfeffffffcccffffffffffffcffcfffffffffffffffefcffffffffffcefffcfffffffffffffffffffffffffffffffffffffffffffffffff
-        ffffffffffffffffcfffcfffcffffeeffeffffffffcccffffceffffcfcfeeffffffffffffffceccccccfffceeefccfffcccefffffffffffffffffffffffffffffffcfffffffffffffffffefffffffffffffffffffffffffffffffffffffffffffffffff
-        ffffcfcffffcffffcffcccffcffffcefcefffffffffffcffffcfffcffcfeefcccffffffffffeeeeeeceffffcceffffffcffcffffffffffffffeffffffcffffffffffcccffffffffffffccefffffffffffffffffffffffffffffffffffffffffffffffff
-        fffffcccfffffffcfffceffefffeffcfcccecffffffffcfccfccffcffcfceceffffffffffebccccccccfffefcefcefcccee4eeeccccceeeeeeeeeeeeceeeceeccffffffffffffffffcfffcfffffffffffffffffffffffffffffffffffffffffffffffff
-        ffffffcffffffffccfcfffc4ffffffffeecccffffffffffffffffffffffffffccffffffcfeefffffffffffcceeee4eeeeeebeecebffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-        fcffffffffcccfffceebecceffeefeffcefeeefffffffcccceeee444eeffefcecffffffffeeffffffcfccfccfffccccffeffccffffffffffeeefffffcecffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-        fffffffffcffcccceeeccfceefceefcfffefceeecffeeeeeeeecfccceeeefffebcfffffffccfffffffffcfcccffffcfffcfccfecfcffffffffffffffffffffffffcffffffffffffffffcfffffffffffffffffffffffffffffffffcfffffffffffffffff
-        fffffcffffcffffffffceeceeeeeeeeeefcffceeceeeecccceffcceeccceeccfcfcfffffffffeefffffffffffffffcccecffcceeeeefffffffffffffffffffffffffffffffffffffeffffcfffffffffffffffffffffffffffffffffffffffffffffffff
-        fffffffffffffffffcfecccfcceceeceeeeeececceeeecffffceceecfcecceeeeeffffffffffccffffffffcfffffccceeeeeeeeceeecfffe44eecfcce4eccfcfffffffffffffffffffffffcceeeeeeeeeeeeeeeeeeeee4e444e44eeeeeeeeee4e444444
-        fffffffffcffffcffffceccf4fffffeeeeeeeeeeceeeefeffccffffffffffeeb4eefcffffffffcffffffffffffffffcffcceecccfceecffffeccfccfccccffffffffffffffffffffecfffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-        fffffffffffccffffcccceeeffffffcffcecceeeeeeeeeecccccffffffffffccceeeecffcfffcfffcffffffffffffceecceceecceecccccffcccceccceccccccfffffffffffffffcecffffccccccceeeeeececceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-        ffffffffffffffffffffcfffffffceeefeeeccceceeee4eeeeeeeccccccffffffffeebfffcffecceeefffffffffffffcffffffccfffcfffffffcccccccccccccffffffffffffffffffcfcfccccccccccccecceeeeeeeeeeeeeeeeeeeeeeeecccceeeeee
-        fffffffffcfffffffffccfffcceefffccfceeeeefecceeee44eeeeeeccceeefffffcceccccceeeeeecfffffffffffffffffffffffffffffffceccccccccccccccffffffffffffccccccccccccccccceeeeecccccccccccccccccccccceeeeeeeeeeeeee
-        ffffffffffffffffffffccfceeccefffcfcccffcceeeeeeeeeeefeeeeeeeeceebfffffeeeeeececceeeeeeeeeefffffffffffffffffffcfffcffffffffccfffffcfffffffffffffffffffcccccccccccccccccccccccccccceeeeeeeeeceeeeeeeeeeee
-        fffffffffffffffffffffcffccccffffccceeeeeeeeee44eeceeeceeeeeceeeeeecffcceeccfffccccececeeeeeefffffffffffffffffffffcccffffffffffffffffffffffffffffffffffffffffffffffccccccccccccccccccffccccccccccccccccc
-        fffffffffffffffffffffffffffffceeeeeeeceeeeeeeffccecccecccffefffceeffcfffffffffcfcccffffcecceeecffcffffcfffffffffffccfcffcfffffffffffffffffffffffffffffffffffffffffffffffffffcccccccccccffcccccccfffffff
-        ffffffffffffffffffffffffccccceeeeeeeeeecccffffffcfcccccccffecfeceeceeccccfffffffffffffffcffccccccfcffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcccccccccccccccccccccccccccccccccceecccc
-        fffffffffffffffffffffffcecceeeeeeeeeeccfffffffffffffcffffcccfccccccffffcfffffffffffffffcffffffffccccefcfffffffffffffffffffffffffffffffffffffffffffffffffcfffffffffffffcccccccccccccccccffffcccccceeeecc
-        ffffffffffffffffffcffcccccccccffcfcffffffffffffffffffffffccfffffceeeececcfffffffffffffffffffffffffccccccccfffffffffffffffffffcffffffffffffffffffffffeffffffffffffffffffffffffccccccccccfcfffffccccccccc
-        ffffffffffffffffffccffffceeeeffffffffffffffffffffffffffffffffffffffeeeeeccffffffffcffffffffffffffffffffffffffffffffcffffffffffcffffffffffffffffffffeffffffffffffffffffffcffffcfcffcffffffffcffffffffcff
-        fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffccfeceeccccccffffffffffffffffffffffffffffffffcccccccfffffffffffffffffffffcfffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-        ffffffffffffffffffffcfffffcccffcfffffffffffffffffffffffffffcccffcffcfcfeeeecffffffffffffffffffffffffffffffffffcffffffffcccccccffffffffefcfffcfffffefbffffffffffffffffffffffffffcfffffffffffffffffffffff
-        ffffffffffffffffffffccccccfccefffffffffffffffffffffffffffffcccffcfffcffcfcccccccffffffffffffffffffffffffffffccccfefccccffffffccfffffcfeeccfffffffcfffffffffffffffffffffffffffffffffffffffffffffffffffff
-        fffffffffffffffffffffccfffffcfffffffffffcffffffffffffffffffccffccffffffcffccfccfffffffffffffffffffffffcfcccecfcfecccecccfcfeeeeccceeeecce44e4ecccecfcfffffffffffffffeffffffffffffffffffffffffffffffffff
-        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcccffffffccfffccccccccfccccffffffffffffccffffffcccccfcececcfffffffcfcccccffcceceeeeeeeeeeecccffcffffffffffecfffffffffffffffffffffffffffffffff
-        ffffffffffffffffffffffffffcfffffffffffffffffffffffffffffcfffcccfffffffcfffffffffcccccffccfffffffffcfffccfcffffffcccfffccfffffffcfccfceeeeee4ececeecceffffeccfffffffffffffffffffffffffffffffffffffffffff
-        ffffffffffffffffffffffcccffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcffffffffffccfffffccfffffffffffffcccccfffffceeceeececcceefcfffccccfffcceeeccfffffcffeffffffffffcffffffffffffffffffff
-        fffffffffffffffffffffffffffffffffffffffcfffffffccfcffffffffffffcfffccfffffffffcfccffcfffffffcffffccccfccffffffffffcffccffccfcfcccfcecfcecccccccfcfffcccfffeeeeeeececeeccffffffffefcffffffffffffffffffff
-        fffffffffffffffffffffffffffffffffffffffffffffffffffcccfffffcfcfffffffffffffffffffffffffffffffffffffffffcfffffffffffccfffccfcffcccfcfcfcccfcccccccccfcffffcccceeeeeceeeeecfffffccccccccfcfffffffffcfffff
-        ffffffffffffffffffffffffffffffffffffffffffffffffffffcffcfffffcfffffccfffcfffffffffffffffffffcfffffffffffcffcffcfffcfcffffffecffcceccffffffcfcccffffcfecfffcccceeecceeccccccffffcccfcccffcffffcccccffcff
-        fffffffffffffffffffffffcecfffffffffffffffffffffffffffffffffffffcffffffffffffffffffffffffffffffffffffffffffffffffffcccffffcfcfcfffcffcffffffcfffffcfffffcffcfcccccceccccfcffccfcfffcccfffefcccefcffccfcf
-        fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfcffffffffffffffffffffffffffffffffffffffffffffffffffcceefcceffccfeffcfffffffffffffffffffffcccfccfccfcfcffffffcffffffcfffccfcccffccffcffc
-        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcffcffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcfccfffffcfffffffffffffffffffffffffcefffffcff
-        fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccfffffffffffffffffffffffffffffffffffffffff
-        `)
     if (!(MenuOpen)) {
         MenuOpen = true
         myMenu = miniMenu.createMenu(
@@ -219,6 +108,239 @@ function DrawMenu () {
                 MenuOpen = false
                 DrawToolbar()
                 SpawnCharecter()
+                make_toolbar()
+                all_items = [
+                img`
+                    . . . . c c c b b b b b . . . . 
+                    . . c c b 4 4 4 4 4 4 b b b . . 
+                    . c c 4 4 4 4 4 5 4 4 4 4 b c . 
+                    . e 4 4 4 4 4 4 4 4 4 5 4 4 e . 
+                    e b 4 5 4 4 5 4 4 4 4 4 4 4 b c 
+                    e b 4 4 4 4 4 4 4 4 4 4 5 4 4 e 
+                    e b b 4 4 4 4 4 4 4 4 4 4 4 b e 
+                    . e b 4 4 4 4 4 5 4 4 4 4 b e . 
+                    8 7 e e b 4 4 4 4 4 4 b e e 6 8 
+                    8 7 2 e e e e e e e e e e 2 7 8 
+                    e 6 6 2 2 2 2 2 2 2 2 2 2 6 c e 
+                    e c 6 7 6 6 7 7 7 6 6 7 6 c c e 
+                    e b e 8 8 c c 8 8 c c c 8 e b e 
+                    e e b e c c e e e e e c e b e e 
+                    . e e b b 4 4 4 4 4 4 4 4 e e . 
+                    . . . c c c c c e e e e e . . . 
+                    `,
+                img`
+                    . . . . . . . e c 7 . . . . . . 
+                    . . . . e e e c 7 7 e e . . . . 
+                    . . c e e e e c 7 e 2 2 e e . . 
+                    . c e e e e e c 6 e e 2 2 2 e . 
+                    . c e e e 2 e c c 2 4 5 4 2 e . 
+                    c e e e 2 2 2 2 2 2 4 5 5 2 2 e 
+                    c e e 2 2 2 2 2 2 2 2 4 4 2 2 e 
+                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+                    c e e 2 2 2 2 2 2 2 2 2 2 4 2 e 
+                    . e e e 2 2 2 2 2 2 2 2 2 4 e . 
+                    . 2 e e 2 2 2 2 2 2 2 2 4 2 e . 
+                    . . 2 e e 2 2 2 2 2 4 4 2 e . . 
+                    . . . 2 2 e e 4 4 4 2 e e . . . 
+                    . . . . . 2 2 e e e e . . . . . 
+                    `,
+                img`
+                    4 4 4 . . 4 4 4 4 4 . . . . . . 
+                    4 5 5 4 4 5 5 5 5 5 4 4 . . . . 
+                    b 4 5 5 1 5 1 1 1 5 5 5 4 . . . 
+                    . b 5 5 5 5 1 1 5 5 1 1 5 4 . . 
+                    . b d 5 5 5 5 5 5 5 5 1 1 5 4 . 
+                    b 4 5 5 5 5 5 5 5 5 5 5 1 5 4 . 
+                    c d 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+                    c d 4 5 5 5 5 5 5 5 5 5 5 1 5 4 
+                    c 4 5 5 5 d 5 5 5 5 5 5 5 5 5 4 
+                    c 4 d 5 4 5 d 5 5 5 5 5 5 5 5 4 
+                    . c 4 5 5 5 5 d d d 5 5 5 5 5 b 
+                    . c 4 d 5 4 5 d 4 4 d 5 5 5 4 c 
+                    . . c 4 4 d 4 4 4 4 4 d d 5 d c 
+                    . . . c 4 4 4 4 4 4 4 4 5 5 5 4 
+                    . . . . c c b 4 4 4 b b 4 5 4 4 
+                    . . . . . . c c c c c c b b 4 . 
+                    `,
+                img`
+                    . . 2 2 b b b b b . . . . . . . 
+                    . 2 b 4 4 4 4 4 4 b . . . . . . 
+                    2 2 4 4 4 4 d d 4 4 b . . . . . 
+                    2 b 4 4 4 4 4 4 d 4 b . . . . . 
+                    2 b 4 4 4 4 4 4 4 d 4 b . . . . 
+                    2 b 4 4 4 4 4 4 4 4 4 b . . . . 
+                    2 b 4 4 4 4 4 4 4 4 4 e . . . . 
+                    2 2 b 4 4 4 4 4 4 4 b e . . . . 
+                    . 2 b b b 4 4 4 b b b e . . . . 
+                    . . e b b b b b b b e e . . . . 
+                    . . . e e b 4 4 b e e e b . . . 
+                    . . . . . e e e e e e b d b b . 
+                    . . . . . . . . . . . b 1 1 1 b 
+                    . . . . . . . . . . . c 1 d d b 
+                    . . . . . . . . . . . c 1 b c . 
+                    . . . . . . . . . . . . c c . . 
+                    `,
+                img`
+                    . . . . . . 2 2 2 2 . . . . . . 
+                    . . . . 2 2 3 3 3 3 2 e . . . . 
+                    . . . 2 3 d 1 1 d d 3 2 e . . . 
+                    . . 2 3 1 d 3 3 3 d d 3 e . . . 
+                    . 2 3 1 3 3 3 3 3 d 1 3 b e . . 
+                    . 2 1 d 3 3 3 3 d 3 3 1 3 b b . 
+                    2 3 1 d 3 3 1 1 3 3 3 1 3 4 b b 
+                    2 d 3 3 d 1 3 1 3 3 3 1 3 4 4 b 
+                    2 d 3 3 3 1 3 1 3 3 3 1 b 4 4 e 
+                    2 d 3 3 3 1 1 3 3 3 3 1 b 4 4 e 
+                    e d 3 3 3 3 d 3 3 3 d d b 4 4 e 
+                    e d d 3 3 3 d 3 3 3 1 3 b 4 b e 
+                    e 3 d 3 3 1 d d 3 d 1 b b e e . 
+                    . e 3 1 1 d d 1 1 1 b b e e e . 
+                    . . e 3 3 3 3 3 3 b e e e e . . 
+                    . . . e e e e e e e e e e . . . 
+                    `,
+                img`
+                    . . . . . . b b b b . . . . . . 
+                    . . . . . . b 4 4 4 b . . . . . 
+                    . . . . . . b b 4 4 4 b . . . . 
+                    . . . . . b 4 b b b 4 4 b . . . 
+                    . . . . b d 5 5 5 4 b 4 4 b . . 
+                    . . . . b 3 2 3 5 5 4 e 4 4 b . 
+                    . . . b d 2 2 2 5 7 5 4 e 4 4 e 
+                    . . . b 5 3 2 3 5 5 5 5 e e e e 
+                    . . b d 7 5 5 5 3 2 3 5 5 e e e 
+                    . . b 5 5 5 5 5 2 2 2 5 5 d e e 
+                    . b 3 2 3 5 7 5 3 2 3 5 d d e 4 
+                    . b 2 2 2 5 5 5 5 5 5 d d e 4 . 
+                    b d 3 2 d 5 5 5 d d d 4 4 . . . 
+                    b 5 5 5 5 d d 4 4 4 4 . . . . . 
+                    4 d d d 4 4 4 . . . . . . . . . 
+                    4 4 4 4 . . . . . . . . . . . . 
+                    `,
+                img`
+                    . . . . . . b b b b a a . . . . 
+                    . . . . b b d d d 3 3 3 a a . . 
+                    . . . b d d d 3 3 3 3 3 3 a a . 
+                    . . b d d 3 3 3 3 3 3 3 3 3 a . 
+                    . b 3 d 3 3 3 3 3 b 3 3 3 3 a b 
+                    . b 3 3 3 3 3 a a 3 3 3 3 3 a b 
+                    b 3 3 3 3 3 a a 3 3 3 3 d a 4 b 
+                    b 3 3 3 3 b a 3 3 3 3 3 d a 4 b 
+                    b 3 3 3 3 3 3 3 3 3 3 d a 4 4 e 
+                    a 3 3 3 3 3 3 3 3 3 d a 4 4 4 e 
+                    a 3 3 3 3 3 3 3 d d a 4 4 4 e . 
+                    a a 3 3 3 d d d a a 4 4 4 e e . 
+                    . e a a a a a a 4 4 4 4 e e . . 
+                    . . e e b b 4 4 4 4 b e e . . . 
+                    . . . e e e e e e e e . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `,
+                img`
+                    . . . . . . . . . . b b b . . . 
+                    . . . . . . . . b e e 3 3 b . . 
+                    . . . . . . b b e 3 2 e 3 a . . 
+                    . . . . b b 3 3 e 2 2 e 3 3 a . 
+                    . . b b 3 3 3 3 3 e e 3 3 3 a . 
+                    b b 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+                    b 3 3 3 d d d d 3 3 3 3 3 d d a 
+                    b b b b b b b 3 d d d d d d 3 a 
+                    b d 5 5 5 5 d b b b a a a a a a 
+                    b 3 d d 5 5 5 5 5 5 5 d d d d a 
+                    b 3 3 3 3 3 3 d 5 5 5 d d d d a 
+                    b 3 d 5 5 5 3 3 3 3 3 3 b b b a 
+                    b b b 3 d 5 5 5 5 5 5 5 d d b a 
+                    . . . b b b 3 d 5 5 5 5 d d 3 a 
+                    . . . . . . b b b b 3 d d d b a 
+                    . . . . . . . . . . b b b a a . 
+                    `,
+                img`
+                    . . . . . 3 3 b 3 3 d d 3 3 . . 
+                    . . . . 3 1 1 d 3 d 1 1 1 1 3 . 
+                    . . . 3 d 1 1 1 d 1 1 1 d 3 1 3 
+                    . . 3 d d 1 1 1 d d 1 1 1 3 3 3 
+                    . 3 1 1 d 1 1 1 1 d d 1 1 b . . 
+                    . 3 1 1 1 d 1 1 1 1 1 d 1 1 3 . 
+                    . b d 1 1 1 d 1 1 1 1 1 1 1 3 . 
+                    . 4 b 1 1 1 1 d d 1 1 1 1 d 3 . 
+                    . 4 4 d 1 1 1 1 1 1 d d d b b . 
+                    . 4 d b d 1 1 1 1 1 1 1 1 3 . . 
+                    4 d d 5 b d 1 1 1 1 1 1 1 3 . . 
+                    4 5 d 5 5 b b d 1 1 1 1 d 3 . . 
+                    4 5 5 d 5 5 d b b b d d 3 . . . 
+                    4 5 5 5 d d d d 4 4 b 3 . . . . 
+                    . 4 5 5 5 4 4 4 . . . . . . . . 
+                    . . 4 4 4 . . . . . . . . . . . 
+                    `,
+                img`
+                    . . . . . . . 6 . . . . . . . . 
+                    . . . . . . 8 6 6 . . . 6 8 . . 
+                    . . . e e e 8 8 6 6 . 6 7 8 . . 
+                    . . e 2 2 2 2 e 8 6 6 7 6 . . . 
+                    . e 2 2 4 4 2 7 7 7 7 7 8 6 . . 
+                    . e 2 4 4 2 6 7 7 7 6 7 6 8 8 . 
+                    e 2 4 5 2 2 6 7 7 6 2 7 7 6 . . 
+                    e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 . 
+                    e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 . 
+                    e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 . 
+                    e 2 4 2 2 2 2 2 2 2 2 2 e c 6 . 
+                    e 2 2 2 2 2 2 2 4 e 2 e e c . . 
+                    e e 2 e 2 2 4 2 2 e e e c . . . 
+                    e e e e 2 e 2 2 e e e c . . . . 
+                    e e e 2 e e c e c c c . . . . . 
+                    . c c c c c c c . . . . . . . . 
+                    `,
+                img`
+                    . . . . . . . . . . . 6 6 6 6 6 
+                    . . . . . . . . . 6 6 7 7 7 7 8 
+                    . . . . . . 8 8 8 7 7 8 8 6 8 8 
+                    . . e e e e c 6 6 8 8 . 8 7 8 . 
+                    . e 2 5 4 2 e c 8 . . . 6 7 8 . 
+                    e 2 4 2 2 2 2 2 c . . . 6 7 8 . 
+                    e 2 2 2 2 2 2 2 c . . . 8 6 8 . 
+                    e 2 e e 2 2 2 2 e e e e c 6 8 . 
+                    c 2 e e 2 2 2 2 e 2 5 4 2 c 8 . 
+                    . c 2 e e e 2 e 2 4 2 2 2 2 c . 
+                    . . c 2 2 2 e e 2 2 2 2 2 2 2 e 
+                    . . . e c c e c 2 2 2 2 2 2 2 e 
+                    . . . . . . . c 2 e e 2 2 e 2 c 
+                    . . . . . . . c e e e e e e 2 c 
+                    . . . . . . . . c e 2 2 2 2 c . 
+                    . . . . . . . . . c c c c c . . 
+                    `,
+                img`
+                    . . . . . . . e e e e . . . . . 
+                    . . . . . e e 4 5 5 5 e e . . . 
+                    . . . . e 4 5 6 2 2 7 6 6 e . . 
+                    . . . e 5 6 6 7 2 2 6 4 4 4 e . 
+                    . . e 5 2 2 7 6 6 4 5 5 5 5 4 . 
+                    . e 5 6 2 2 8 8 5 5 5 5 5 4 5 4 
+                    . e 5 6 7 7 8 5 4 5 4 5 5 5 5 4 
+                    e 4 5 8 6 6 5 5 5 5 5 5 4 5 5 4 
+                    e 5 c e 8 5 5 5 4 5 5 5 5 5 5 4 
+                    e 5 c c e 5 4 5 5 5 4 5 5 5 e . 
+                    e 5 c c 5 5 5 5 5 5 5 5 4 e . . 
+                    e 5 e c 5 4 5 4 5 5 5 e e . . . 
+                    e 5 e e 5 5 5 5 5 4 e . . . . . 
+                    4 5 4 e 5 5 5 5 e e . . . . . . 
+                    . 4 5 4 5 5 4 e . . . . . . . . 
+                    . . 4 4 e e e . . . . . . . . . 
+                    `
+                ]
+                all_labels = [
+                "Burger",
+                "Apple",
+                "Lemon",
+                "Drumstick",
+                "Ham",
+                "Pizza",
+                "Donut",
+                "Cake",
+                "Ice cream",
+                "Strawberry",
+                "Cherries",
+                "Taco"
+                ]
                 LevelHomeTown()
             } else if (selectedIndex == 1) {
                 MenuOpen = false
@@ -246,9 +368,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    triggerNPC = true
-    pause(2000)
-    triggerNPC = false
+    handle_b_key_in_inventory_toolbar()
 })
 function DrawToolbar () {
     toolbar = Inventory.create_toolbar([], 4)
@@ -425,9 +545,6 @@ function DrawSaga () {
         DrawMenu()
     })
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    sprites.destroyAllSpritesOfKind(SpriteKind.Messages, effects.warmRadial, 500)
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
     CheckQualification(5)
     if (IsQualified == true) {
@@ -486,6 +603,22 @@ function Start_Game () {
     info.setLife(5)
     DrawMenu()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPCJhonny, function (sprite, otherSprite) {
+    if (triggerNPC == true) {
+        story.spriteSayText(NPCJhonny2, "Hi!", 15, 4)
+        story.spriteSayText(NPCJhonny2, "Khan, the evil warlord has taken", 15, 4)
+        story.spriteSayText(NPCJhonny2, "over Province Town!", 15, 4)
+        story.spriteSayText(NPCJhonny2, "Go to the cave in the north of spawn to", 15, 4)
+        story.spriteSayText(NPCJhonny2, "go into different dungeons and", 15, 4)
+        story.spriteSayText(NPCJhonny2, "defeat monsters to get plastic, a", 15, 4)
+        story.spriteSayText(NPCJhonny2, "rare mineral! Use it to craft", 15, 4)
+        story.spriteSayText(NPCJhonny2, "weapons at the east of the village.", 15, 4)
+        story.spriteSayText(NPCJhonny2, "Use the weapons to defeat Khan!", 15, 4)
+        story.spriteSayText(NPCJhonny2, "Good luck! You will need it :)", 15, 4)
+        triggerNPC = false
+        pause(36000)
+    }
+})
 function Level__8__Shadow_Realm__Boss () {
 	
 }
@@ -505,9 +638,9 @@ function Level__5__Lost_City () {
     SpawnNPCJhonny(20, 30)
 }
 function DestroySprites () {
-    sprites.destroyAllSpritesOfKind(SpriteKind.Logo)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Text)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
-    sprites.destroyAllSpritesOfKind(SpriteKind.NPC)
+    sprites.destroyAllSpritesOfKind(SpriteKind.NPCJhonny)
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Messages)
@@ -518,6 +651,16 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
     LevelTheDeathGateHub()
 })
+function move_down_in_inventory_toolbar () {
+    toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, toolbar.get_number(ToolbarNumberAttribute.MaxItems) - 1)
+}
+function enable_movement (en: boolean) {
+    if (en) {
+        controller.moveSprite(PlayerWarrior)
+    } else {
+        controller.moveSprite(PlayerWarrior, 0, 0)
+    }
+}
 function Level__2__Underwater_Palace () {
     tiles.setCurrentTilemap(tilemap`DungeonLevel2`)
 }
@@ -642,6 +785,11 @@ function CheckQualification (LevelNumber: number) {
 controller.combos.attachCombo("uA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, -50)
 })
+function give_item (idx: number) {
+    the_item = sprites.create(all_items[idx], SpriteKind.Food)
+    the_item.setPosition(PlayerWarrior.x, PlayerWarrior.y)
+    the_item.lifespan = 5000
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     CheckQualification(6)
     if (IsQualified == true) {
@@ -1079,6 +1227,11 @@ function SettingsView () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
     LevelTheDeathGateHub()
 })
+function move_left_in_inventory_toolbar () {
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
+        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, -1)
+    }
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
     CheckQualification(3)
     if (IsQualified == true) {
@@ -1091,8 +1244,20 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+function move_right_in_inventory_toolbar () {
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) < toolbar.get_number(ToolbarNumberAttribute.MaxItems) - 1) {
+        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
+    }
+}
 function Level__6__Mossy_Dungeon () {
 	
+}
+function move_up_in_inventory_toolbar () {
+    toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
+}
+function make_toolbar () {
+    last_toolbar_select = 0
+    DrawToolbar()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, location) {
     CheckQualification(8)
@@ -1108,22 +1273,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, 
 })
 controller.combos.attachCombo("rA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 50, 0)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
-    if (triggerNPC == true) {
-        story.spriteSayText(NPCJhonny, "Hi!", 15, 4)
-        story.spriteSayText(NPCJhonny, "Khan, the evil warlord has taken", 15, 4)
-        story.spriteSayText(NPCJhonny, "over Province Town!", 15, 4)
-        story.spriteSayText(NPCJhonny, "Go to the cave in the north of spawn to", 15, 4)
-        story.spriteSayText(NPCJhonny, "go into different dungeons and", 15, 4)
-        story.spriteSayText(NPCJhonny, "defeat monsters to get plastic, a", 15, 4)
-        story.spriteSayText(NPCJhonny, "rare mineral! Use it to craft", 15, 4)
-        story.spriteSayText(NPCJhonny, "weapons at the east of the village.", 15, 4)
-        story.spriteSayText(NPCJhonny, "Use the weapons to defeat Khan!", 15, 4)
-        story.spriteSayText(NPCJhonny, "Good luck! You will need it :)", 15, 4)
-        triggerNPC = false
-    }
-    pause(36000)
 })
 function SpawnCharecter () {
     PlayerWarrior = sprites.create(img`
@@ -1167,9 +1316,29 @@ function SpawnCharecter () {
 function Level__7__Haunted_Mansion () {
 	
 }
+function add_item (item_in_list: Inventory.Item[]) {
+    for (let item of toolbar.get_items()) {
+        if (item.get_image().equals(item_in_list[0].get_image())) {
+            if (item.get_text(ItemTextAttribute.Tooltip) == "") {
+                item.set_text(ItemTextAttribute.Tooltip, "2")
+            } else {
+                item.set_text(ItemTextAttribute.Tooltip, convertToText(parseFloat(item.get_text(ItemTextAttribute.Tooltip)) + 1))
+            }
+            toolbar.update()
+            return true
+        }
+    }
+    if (toolbar.get_items().length < toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
+        toolbar.get_items().push(item_in_list[0])
+        item_in_list[0].set_text(ItemTextAttribute.Tooltip, "")
+toolbar.update()
+        return true
+    }
+    return false
+}
 function SpawnNPCJhonny (cordsX: number, cordsY: number) {
-    NPCJhonny = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPC)
-    tiles.placeOnTile(NPCJhonny, tiles.getTileLocation(cordsX, cordsX))
+    NPCJhonny2 = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPCJhonny)
+    tiles.placeOnTile(NPCJhonny2, tiles.getTileLocation(cordsX, cordsX))
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
     LevelHomeTown()
@@ -1177,6 +1346,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile15`)
 })
+function handle_b_key_in_inventory_toolbar () {
+    toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) == toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
+        toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
+    }
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
@@ -1202,18 +1377,22 @@ function LevelTheDeathGateHub () {
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
 }
-let NPCJhonny: Sprite = null
+let last_toolbar_select = 0
 let SettingsMenu: miniMenu.MenuSprite = null
 let LoadingAnimation: Sprite = null
 let LoadingTextSprite: TextSprite = null
 let LoadingSprite: StatusBarSprite = null
+let the_item: Sprite = null
 let NecronWarlord: Sprite = null
 let Players_Health: StatusBarSprite = null
+let NPCJhonny2: Sprite = null
 let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
 let toolbar: Inventory.Toolbar = null
 let IsQualified = false
+let all_labels: string[] = []
+let all_items: Image[] = []
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
 let PlayerWarrior: Sprite = null
@@ -1221,13 +1400,14 @@ let PlasticZombie: Sprite = null
 let SoundPhase = 0
 let ShowSaga = false
 let SagaTimeSpan = 0
-let triggerNPC = false
 let IsLoadingScreenVisible = false
-let projectileSprite: Sprite = null
-let sagaImage: Image = null
-let lineAdjust = 0
-let star = null
 let storyLines: string[] = []
+let star = null
+let lineAdjust = 0
+let sagaImage: Image = null
+let projectileSprite: Sprite = null
+let triggerNPC = false
+let item2 = null
 IsLoadingScreenVisible = false
 namespace SpriteKind {
     export const Star = SpriteKind.create()
