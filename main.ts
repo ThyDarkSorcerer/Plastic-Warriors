@@ -1316,7 +1316,7 @@ function SpawnCharecter () {
 function Level__7__Haunted_Mansion () {
 	
 }
-function add_item (item_in_list: Inventory.Item[]) {
+function add_item (item_in_list: any[]) {
     for (let item of toolbar.get_items()) {
         if (item.get_image().equals(item_in_list[0].get_image())) {
             if (item.get_text(ItemTextAttribute.Tooltip) == "") {
