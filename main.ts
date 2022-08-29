@@ -110,24 +110,7 @@ function DrawMenu () {
                 SpawnCharecter()
                 make_toolbar()
                 all_items = [
-                img`
-                    . . . . c c c b b b b b . . . . 
-                    . . c c b 4 4 4 4 4 4 b b b . . 
-                    . c c 4 4 4 4 4 5 4 4 4 4 b c . 
-                    . e 4 4 4 4 4 4 4 4 4 5 4 4 e . 
-                    e b 4 5 4 4 5 4 4 4 4 4 4 4 b c 
-                    e b 4 4 4 4 4 4 4 4 4 4 5 4 4 e 
-                    e b b 4 4 4 4 4 4 4 4 4 4 4 b e 
-                    . e b 4 4 4 4 4 5 4 4 4 4 b e . 
-                    8 7 e e b 4 4 4 4 4 4 b e e 6 8 
-                    8 7 2 e e e e e e e e e e 2 7 8 
-                    e 6 6 2 2 2 2 2 2 2 2 2 2 6 c e 
-                    e c 6 7 6 6 7 7 7 6 6 7 6 c c e 
-                    e b e 8 8 c c 8 8 c c c 8 e b e 
-                    e e b e c c e e e e e c e b e e 
-                    . e e b b 4 4 4 4 4 4 4 4 e e . 
-                    . . . c c c c c e e e e e . . . 
-                    `,
+                assets.image`myImage0`,
                 img`
                     . . . . . . . e c 7 . . . . . . 
                     . . . . e e e c 7 7 e e . . . . 
@@ -181,167 +164,16 @@ function DrawMenu () {
                     . . . . . . . . . . . c 1 d d b 
                     . . . . . . . . . . . c 1 b c . 
                     . . . . . . . . . . . . c c . . 
-                    `,
-                img`
-                    . . . . . . 2 2 2 2 . . . . . . 
-                    . . . . 2 2 3 3 3 3 2 e . . . . 
-                    . . . 2 3 d 1 1 d d 3 2 e . . . 
-                    . . 2 3 1 d 3 3 3 d d 3 e . . . 
-                    . 2 3 1 3 3 3 3 3 d 1 3 b e . . 
-                    . 2 1 d 3 3 3 3 d 3 3 1 3 b b . 
-                    2 3 1 d 3 3 1 1 3 3 3 1 3 4 b b 
-                    2 d 3 3 d 1 3 1 3 3 3 1 3 4 4 b 
-                    2 d 3 3 3 1 3 1 3 3 3 1 b 4 4 e 
-                    2 d 3 3 3 1 1 3 3 3 3 1 b 4 4 e 
-                    e d 3 3 3 3 d 3 3 3 d d b 4 4 e 
-                    e d d 3 3 3 d 3 3 3 1 3 b 4 b e 
-                    e 3 d 3 3 1 d d 3 d 1 b b e e . 
-                    . e 3 1 1 d d 1 1 1 b b e e e . 
-                    . . e 3 3 3 3 3 3 b e e e e . . 
-                    . . . e e e e e e e e e e . . . 
-                    `,
-                img`
-                    . . . . . . b b b b . . . . . . 
-                    . . . . . . b 4 4 4 b . . . . . 
-                    . . . . . . b b 4 4 4 b . . . . 
-                    . . . . . b 4 b b b 4 4 b . . . 
-                    . . . . b d 5 5 5 4 b 4 4 b . . 
-                    . . . . b 3 2 3 5 5 4 e 4 4 b . 
-                    . . . b d 2 2 2 5 7 5 4 e 4 4 e 
-                    . . . b 5 3 2 3 5 5 5 5 e e e e 
-                    . . b d 7 5 5 5 3 2 3 5 5 e e e 
-                    . . b 5 5 5 5 5 2 2 2 5 5 d e e 
-                    . b 3 2 3 5 7 5 3 2 3 5 d d e 4 
-                    . b 2 2 2 5 5 5 5 5 5 d d e 4 . 
-                    b d 3 2 d 5 5 5 d d d 4 4 . . . 
-                    b 5 5 5 5 d d 4 4 4 4 . . . . . 
-                    4 d d d 4 4 4 . . . . . . . . . 
-                    4 4 4 4 . . . . . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . b b b b a a . . . . 
-                    . . . . b b d d d 3 3 3 a a . . 
-                    . . . b d d d 3 3 3 3 3 3 a a . 
-                    . . b d d 3 3 3 3 3 3 3 3 3 a . 
-                    . b 3 d 3 3 3 3 3 b 3 3 3 3 a b 
-                    . b 3 3 3 3 3 a a 3 3 3 3 3 a b 
-                    b 3 3 3 3 3 a a 3 3 3 3 d a 4 b 
-                    b 3 3 3 3 b a 3 3 3 3 3 d a 4 b 
-                    b 3 3 3 3 3 3 3 3 3 3 d a 4 4 e 
-                    a 3 3 3 3 3 3 3 3 3 d a 4 4 4 e 
-                    a 3 3 3 3 3 3 3 d d a 4 4 4 e . 
-                    a a 3 3 3 d d d a a 4 4 4 e e . 
-                    . e a a a a a a 4 4 4 4 e e . . 
-                    . . e e b b 4 4 4 4 b e e . . . 
-                    . . . e e e e e e e e . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . . . . . b b b . . . 
-                    . . . . . . . . b e e 3 3 b . . 
-                    . . . . . . b b e 3 2 e 3 a . . 
-                    . . . . b b 3 3 e 2 2 e 3 3 a . 
-                    . . b b 3 3 3 3 3 e e 3 3 3 a . 
-                    b b 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
-                    b 3 3 3 d d d d 3 3 3 3 3 d d a 
-                    b b b b b b b 3 d d d d d d 3 a 
-                    b d 5 5 5 5 d b b b a a a a a a 
-                    b 3 d d 5 5 5 5 5 5 5 d d d d a 
-                    b 3 3 3 3 3 3 d 5 5 5 d d d d a 
-                    b 3 d 5 5 5 3 3 3 3 3 3 b b b a 
-                    b b b 3 d 5 5 5 5 5 5 5 d d b a 
-                    . . . b b b 3 d 5 5 5 5 d d 3 a 
-                    . . . . . . b b b b 3 d d d b a 
-                    . . . . . . . . . . b b b a a . 
-                    `,
-                img`
-                    . . . . . 3 3 b 3 3 d d 3 3 . . 
-                    . . . . 3 1 1 d 3 d 1 1 1 1 3 . 
-                    . . . 3 d 1 1 1 d 1 1 1 d 3 1 3 
-                    . . 3 d d 1 1 1 d d 1 1 1 3 3 3 
-                    . 3 1 1 d 1 1 1 1 d d 1 1 b . . 
-                    . 3 1 1 1 d 1 1 1 1 1 d 1 1 3 . 
-                    . b d 1 1 1 d 1 1 1 1 1 1 1 3 . 
-                    . 4 b 1 1 1 1 d d 1 1 1 1 d 3 . 
-                    . 4 4 d 1 1 1 1 1 1 d d d b b . 
-                    . 4 d b d 1 1 1 1 1 1 1 1 3 . . 
-                    4 d d 5 b d 1 1 1 1 1 1 1 3 . . 
-                    4 5 d 5 5 b b d 1 1 1 1 d 3 . . 
-                    4 5 5 d 5 5 d b b b d d 3 . . . 
-                    4 5 5 5 d d d d 4 4 b 3 . . . . 
-                    . 4 5 5 5 4 4 4 . . . . . . . . 
-                    . . 4 4 4 . . . . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . . 6 . . . . . . . . 
-                    . . . . . . 8 6 6 . . . 6 8 . . 
-                    . . . e e e 8 8 6 6 . 6 7 8 . . 
-                    . . e 2 2 2 2 e 8 6 6 7 6 . . . 
-                    . e 2 2 4 4 2 7 7 7 7 7 8 6 . . 
-                    . e 2 4 4 2 6 7 7 7 6 7 6 8 8 . 
-                    e 2 4 5 2 2 6 7 7 6 2 7 7 6 . . 
-                    e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 . 
-                    e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 . 
-                    e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 . 
-                    e 2 4 2 2 2 2 2 2 2 2 2 e c 6 . 
-                    e 2 2 2 2 2 2 2 4 e 2 e e c . . 
-                    e e 2 e 2 2 4 2 2 e e e c . . . 
-                    e e e e 2 e 2 2 e e e c . . . . 
-                    e e e 2 e e c e c c c . . . . . 
-                    . c c c c c c c . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . . . . . . 6 6 6 6 6 
-                    . . . . . . . . . 6 6 7 7 7 7 8 
-                    . . . . . . 8 8 8 7 7 8 8 6 8 8 
-                    . . e e e e c 6 6 8 8 . 8 7 8 . 
-                    . e 2 5 4 2 e c 8 . . . 6 7 8 . 
-                    e 2 4 2 2 2 2 2 c . . . 6 7 8 . 
-                    e 2 2 2 2 2 2 2 c . . . 8 6 8 . 
-                    e 2 e e 2 2 2 2 e e e e c 6 8 . 
-                    c 2 e e 2 2 2 2 e 2 5 4 2 c 8 . 
-                    . c 2 e e e 2 e 2 4 2 2 2 2 c . 
-                    . . c 2 2 2 e e 2 2 2 2 2 2 2 e 
-                    . . . e c c e c 2 2 2 2 2 2 2 e 
-                    . . . . . . . c 2 e e 2 2 e 2 c 
-                    . . . . . . . c e e e e e e 2 c 
-                    . . . . . . . . c e 2 2 2 2 c . 
-                    . . . . . . . . . c c c c c . . 
-                    `,
-                img`
-                    . . . . . . . e e e e . . . . . 
-                    . . . . . e e 4 5 5 5 e e . . . 
-                    . . . . e 4 5 6 2 2 7 6 6 e . . 
-                    . . . e 5 6 6 7 2 2 6 4 4 4 e . 
-                    . . e 5 2 2 7 6 6 4 5 5 5 5 4 . 
-                    . e 5 6 2 2 8 8 5 5 5 5 5 4 5 4 
-                    . e 5 6 7 7 8 5 4 5 4 5 5 5 5 4 
-                    e 4 5 8 6 6 5 5 5 5 5 5 4 5 5 4 
-                    e 5 c e 8 5 5 5 4 5 5 5 5 5 5 4 
-                    e 5 c c e 5 4 5 5 5 4 5 5 5 e . 
-                    e 5 c c 5 5 5 5 5 5 5 5 4 e . . 
-                    e 5 e c 5 4 5 4 5 5 5 e e . . . 
-                    e 5 e e 5 5 5 5 5 4 e . . . . . 
-                    4 5 4 e 5 5 5 5 e e . . . . . . 
-                    . 4 5 4 5 5 4 e . . . . . . . . 
-                    . . 4 4 e e e . . . . . . . . . 
                     `
                 ]
                 all_labels = [
-                "Burger",
+                "Bow Of The Universe",
                 "Apple",
                 "Lemon",
-                "Drumstick",
-                "Ham",
-                "Pizza",
-                "Donut",
-                "Cake",
-                "Ice cream",
-                "Strawberry",
-                "Cherries",
-                "Taco"
+                "Drumstick"
                 ]
-                LevelHomeTown()
+                add_item([Inventory.create_item(all_labels[0], all_items[0])])
+LevelHomeTown()
             } else if (selectedIndex == 1) {
                 MenuOpen = false
                 SettingsView()
@@ -369,6 +201,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     handle_b_key_in_inventory_toolbar()
+    if (IsOverlapingNPCJhonny == true) {
+        triggerNPC = true
+        pause(2000)
+        triggerNPC = false
+    }
 })
 function DrawToolbar () {
     toolbar = Inventory.create_toolbar([], 4)
@@ -618,6 +455,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPCJhonny, function (sprite, oth
         triggerNPC = false
         pause(36000)
     }
+    if (IsOverlapingNPCJhonny == false) {
+        IsOverlapingNPCJhonny = true
+        pause(2000)
+        IsOverlapingNPCJhonny = false
+    }
 })
 function Level__8__Shadow_Realm__Boss () {
 	
@@ -785,11 +627,6 @@ function CheckQualification (LevelNumber: number) {
 controller.combos.attachCombo("uA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, -50)
 })
-function give_item (idx: number) {
-    the_item = sprites.create(all_items[idx], SpriteKind.Food)
-    the_item.setPosition(PlayerWarrior.x, PlayerWarrior.y)
-    the_item.lifespan = 5000
-}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     CheckQualification(6)
     if (IsQualified == true) {
@@ -1252,9 +1089,6 @@ function move_right_in_inventory_toolbar () {
 function Level__6__Mossy_Dungeon () {
 	
 }
-function move_up_in_inventory_toolbar () {
-    toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
-}
 function make_toolbar () {
     last_toolbar_select = 0
     DrawToolbar()
@@ -1316,26 +1150,6 @@ function SpawnCharecter () {
 function Level__7__Haunted_Mansion () {
 	
 }
-function add_item (item_in_list: any[]) {
-    for (let item of toolbar.get_items()) {
-        if (item.get_image().equals(item_in_list[0].get_image())) {
-            if (item.get_text(ItemTextAttribute.Tooltip) == "") {
-                item.set_text(ItemTextAttribute.Tooltip, "2")
-            } else {
-                item.set_text(ItemTextAttribute.Tooltip, convertToText(parseFloat(item.get_text(ItemTextAttribute.Tooltip)) + 1))
-            }
-            toolbar.update()
-            return true
-        }
-    }
-    if (toolbar.get_items().length < toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
-        toolbar.get_items().push(item_in_list[0])
-        item_in_list[0].set_text(ItemTextAttribute.Tooltip, "")
-toolbar.update()
-        return true
-    }
-    return false
-}
 function SpawnNPCJhonny (cordsX: number, cordsY: number) {
     NPCJhonny2 = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPCJhonny)
     tiles.placeOnTile(NPCJhonny2, tiles.getTileLocation(cordsX, cordsX))
@@ -1382,17 +1196,13 @@ let SettingsMenu: miniMenu.MenuSprite = null
 let LoadingAnimation: Sprite = null
 let LoadingTextSprite: TextSprite = null
 let LoadingSprite: StatusBarSprite = null
-let the_item: Sprite = null
 let NecronWarlord: Sprite = null
 let Players_Health: StatusBarSprite = null
 let NPCJhonny2: Sprite = null
 let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
-let toolbar: Inventory.Toolbar = null
 let IsQualified = false
-let all_labels: string[] = []
-let all_items: Image[] = []
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
 let PlayerWarrior: Sprite = null
@@ -1400,15 +1210,40 @@ let PlasticZombie: Sprite = null
 let SoundPhase = 0
 let ShowSaga = false
 let SagaTimeSpan = 0
+let triggerNPC = false
+let IsOverlapingNPCJhonny = false
 let IsLoadingScreenVisible = false
+let toolbar: Inventory.Toolbar = null
 let storyLines: string[] = []
 let star = null
 let lineAdjust = 0
 let sagaImage: Image = null
 let projectileSprite: Sprite = null
-let triggerNPC = false
 let item2 = null
+let all_items: Image[] = []
+let all_labels: string[] = []
+function add_item(item_in_list: any[]) {
+    for (let item of toolbar.get_items()) {
+        if (item.get_image().equals(item_in_list[0].get_image())) {
+            if (item.get_text(ItemTextAttribute.Tooltip) == "") {
+                item.set_text(ItemTextAttribute.Tooltip, "2")
+            } else {
+                item.set_text(ItemTextAttribute.Tooltip, convertToText(parseFloat(item.get_text(ItemTextAttribute.Tooltip)) + 1))
+            }
+            toolbar.update()
+            return true
+        }
+    }
+    if (toolbar.get_items().length < toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
+        toolbar.get_items().push(item_in_list[0])
+        item_in_list[0].set_text(ItemTextAttribute.Tooltip, "")
+        toolbar.update()
+        return true
+    }
+    return false
+}
 IsLoadingScreenVisible = false
+IsOverlapingNPCJhonny = false
 namespace SpriteKind {
     export const Star = SpriteKind.create()
     export const Logo = SpriteKind.create()
