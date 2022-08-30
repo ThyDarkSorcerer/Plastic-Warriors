@@ -112,22 +112,22 @@ function DrawMenu () {
                 all_items = [
                 assets.image`myImage0`,
                 img`
-                    . . . . . . . e c 7 . . . . . . 
-                    . . . . e e e c 7 7 e e . . . . 
-                    . . c e e e e c 7 e 2 2 e e . . 
-                    . c e e e e e c 6 e e 2 2 2 e . 
-                    . c e e e 2 e c c 2 4 5 4 2 e . 
-                    c e e e 2 2 2 2 2 2 4 5 5 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 4 4 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 2 2 4 2 e 
-                    . e e e 2 2 2 2 2 2 2 2 2 4 e . 
-                    . 2 e e 2 2 2 2 2 2 2 2 4 2 e . 
-                    . . 2 e e 2 2 2 2 2 4 4 2 e . . 
-                    . . . 2 2 e e 4 4 4 2 e e . . . 
-                    . . . . . 2 2 e e e e . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . 4 e . . 
+                    . . . . . . . . . . . 4 2 2 . . 
+                    . . . . . . . . . . 4 e 2 . . . 
+                    . . . . . . . . . 4 2 2 . . . . 
+                    . . . . . . . . 4 e 2 . . . . . 
+                    . . . . . . e 4 2 2 . . . . 2 . 
+                    . e e . 4 4 4 e 2 . . . . . . . 
+                    . . e 4 . 4 2 2 e . . 2 . . . . 
+                    . . 2 e 4 4 2 2 . . . . . . . . 
+                    . . . 2 c 4 . 2 . . . . . . . . 
+                    . . . 4 2 e 4 . . . . . . . . . 
+                    . . 4 . . 2 e e . . . . 2 . . . 
+                    . . . . . . . e . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
                     `,
                 img`
                     4 4 4 . . 4 4 4 4 4 . . . . . . 
@@ -168,7 +168,7 @@ function DrawMenu () {
                 ]
                 all_labels = [
                 "Bow Of The Universe",
-                "Apple",
+                "Sword Of Life",
                 "Lemon",
                 "Drumstick"
                 ]
@@ -200,7 +200,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    handle_b_key_in_inventory_toolbar()
+    handle_b_key_in_toolbar()
     if (IsOverlapingNPCJhonny == true) {
         triggerNPC = true
         pause(2000)
@@ -442,16 +442,16 @@ function Start_Game () {
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPCJhonny, function (sprite, otherSprite) {
     if (triggerNPC == true) {
-        story.spriteSayText(NPCJhonny2, "Hi!", 15, 4)
-        story.spriteSayText(NPCJhonny2, "Khan, the evil warlord has taken", 15, 4)
-        story.spriteSayText(NPCJhonny2, "over Province Town!", 15, 4)
-        story.spriteSayText(NPCJhonny2, "Go to the cave in the north of spawn to", 15, 4)
-        story.spriteSayText(NPCJhonny2, "go into different dungeons and", 15, 4)
-        story.spriteSayText(NPCJhonny2, "defeat monsters to get plastic, a", 15, 4)
-        story.spriteSayText(NPCJhonny2, "rare mineral! Use it to craft", 15, 4)
-        story.spriteSayText(NPCJhonny2, "weapons at the east of the village.", 15, 4)
-        story.spriteSayText(NPCJhonny2, "Use the weapons to defeat Khan!", 15, 4)
-        story.spriteSayText(NPCJhonny2, "Good luck! You will need it :)", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "Hi!", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "Khan, the evil warlord has taken", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "over Province Town!", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "Go to the cave in the north of spawn to", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "go into different dungeons and", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "defeat monsters to get plastic, a", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "rare mineral! Use it to craft", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "weapons at the east of the village.", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "Use the weapons to defeat Khan!", 15, 4)
+        story.spriteSayText(NPCJhonnyCitizen, "Good luck! You will need it :)", 15, 4)
         triggerNPC = false
         pause(36000)
     }
@@ -473,6 +473,17 @@ function LevelHomeTown () {
 controller.combos.attachCombo("dA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, 50)
 })
+function handle_b_key_in_toolbar () {
+    toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) == toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
+        toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
+    }
+}
+function move_left_in_toolbar () {
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
+        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, -1)
+    }
+}
 function Level__4__Future_Planet () {
 	
 }
@@ -1064,9 +1075,9 @@ function SettingsView () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
     LevelTheDeathGateHub()
 })
-function move_left_in_inventory_toolbar () {
-    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
-        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, -1)
+function move_right_in_toolbar () {
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) < toolbar.get_number(ToolbarNumberAttribute.MaxItems) - 1) {
+        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
     }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
@@ -1081,11 +1092,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
-function move_right_in_inventory_toolbar () {
-    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) < toolbar.get_number(ToolbarNumberAttribute.MaxItems) - 1) {
-        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
-    }
-}
 function Level__6__Mossy_Dungeon () {
 	
 }
@@ -1151,8 +1157,8 @@ function Level__7__Haunted_Mansion () {
 	
 }
 function SpawnNPCJhonny (cordsX: number, cordsY: number) {
-    NPCJhonny2 = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPCJhonny)
-    tiles.placeOnTile(NPCJhonny2, tiles.getTileLocation(cordsX, cordsX))
+    NPCJhonnyCitizen = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPCJhonny)
+    tiles.placeOnTile(NPCJhonnyCitizen, tiles.getTileLocation(cordsX, cordsX))
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
     LevelHomeTown()
@@ -1160,12 +1166,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile15`)
 })
-function handle_b_key_in_inventory_toolbar () {
-    toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
-    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) == toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
-        toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
-    }
-}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
@@ -1198,7 +1198,7 @@ let LoadingTextSprite: TextSprite = null
 let LoadingSprite: StatusBarSprite = null
 let NecronWarlord: Sprite = null
 let Players_Health: StatusBarSprite = null
-let NPCJhonny2: Sprite = null
+let NPCJhonnyCitizen: Sprite = null
 let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
@@ -1255,7 +1255,7 @@ namespace SpriteKind {
 }
 let DeathMessages = [
 "*Rage Incoming*",
-"b",
+"You died! Oh wait, you already know that!",
 "c",
 "",
 ""
