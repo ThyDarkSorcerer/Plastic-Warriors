@@ -130,22 +130,22 @@ function DrawMenu () {
                     . . . . . . . . . . . . . . . . 
                     `,
                 img`
-                    4 4 4 . . 4 4 4 4 4 . . . . . . 
-                    4 5 5 4 4 5 5 5 5 5 4 4 . . . . 
-                    b 4 5 5 1 5 1 1 1 5 5 5 4 . . . 
-                    . b 5 5 5 5 1 1 5 5 1 1 5 4 . . 
-                    . b d 5 5 5 5 5 5 5 5 1 1 5 4 . 
-                    b 4 5 5 5 5 5 5 5 5 5 5 1 5 4 . 
-                    c d 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-                    c d 4 5 5 5 5 5 5 5 5 5 5 1 5 4 
-                    c 4 5 5 5 d 5 5 5 5 5 5 5 5 5 4 
-                    c 4 d 5 4 5 d 5 5 5 5 5 5 5 5 4 
-                    . c 4 5 5 5 5 d d d 5 5 5 5 5 b 
-                    . c 4 d 5 4 5 d 4 4 d 5 5 5 4 c 
-                    . . c 4 4 d 4 4 4 4 4 d d 5 d c 
-                    . . . c 4 4 4 4 4 4 4 4 5 5 5 4 
-                    . . . . c c b 4 4 4 b b 4 5 4 4 
-                    . . . . . . c c c c c c b b 4 . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . 6 d d 6 . . . . . . 
+                    . . . e . . . e e . . . e . . . 
+                    . . . 2 e e e e e e e e 2 . . . 
+                    . e . 4 . e c e e 8 e . 4 . e . 
+                    . 2 e . e e e e e e e e . e 2 . 
+                    . . 2 e 2 . 2 e e 2 . 2 e 2 . . 
+                    . . . 2 . . . d d . . . 2 . . . 
+                    . . . . . . . e e . . . . . . . 
+                    . . . . . . . e e . . . . . . . 
+                    . . . . . . . e e . . . . . . . 
+                    . . . . . . . d d . . . . . . . 
+                    . . . . . . . e e . . . . . . . 
+                    . . . . . . . e e . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
                     `,
                 img`
                     . . 2 2 b b b b b . . . . . . . 
@@ -169,7 +169,7 @@ function DrawMenu () {
                 all_labels = [
                 "Bow Of The Universe",
                 "Sword Of Life",
-                "Lemon",
+                "Soul-Forged Hammer",
                 "Drumstick"
                 ]
                 add_item([Inventory.create_item(all_labels[0], all_items[0])])
