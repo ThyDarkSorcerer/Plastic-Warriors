@@ -5,6 +5,7 @@ enum ActionKind {
 }
 namespace SpriteKind {
     export const NPCJhonny = SpriteKind.create()
+    export const Icon = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const Load = StatusBarKind.create()
@@ -114,11 +115,11 @@ function DrawMenu () {
                 img`
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . 4 e . . 
+                    . . . . . . . . . . . . 4 a . . 
                     . . . . . . . . . . . 4 2 2 . . 
-                    . . . . . . . . . . 4 e 2 . . . 
+                    . . . . . . . . . . 4 8 2 . . . 
                     . . . . . . . . . 4 2 2 . . . . 
-                    . . . . . . . . 4 e 2 . . . . . 
+                    . . . . . . . . 4 c 2 . . . . . 
                     . . . . . . e 4 2 2 . . . . 2 . 
                     . e e . 4 4 4 e 2 . . . . . . . 
                     . . e 4 . 4 2 2 e . . 2 . . . . 
@@ -148,32 +149,47 @@ function DrawMenu () {
                     . . . . . . . . . . . . . . . . 
                     `,
                 img`
-                    . . 2 2 b b b b b . . . . . . . 
-                    . 2 b 4 4 4 4 4 4 b . . . . . . 
-                    2 2 4 4 4 4 d d 4 4 b . . . . . 
-                    2 b 4 4 4 4 4 4 d 4 b . . . . . 
-                    2 b 4 4 4 4 4 4 4 d 4 b . . . . 
-                    2 b 4 4 4 4 4 4 4 4 4 b . . . . 
-                    2 b 4 4 4 4 4 4 4 4 4 e . . . . 
-                    2 2 b 4 4 4 4 4 4 4 b e . . . . 
-                    . 2 b b b 4 4 4 b b b e . . . . 
-                    . . e b b b b b b b e e . . . . 
-                    . . . e e b 4 4 b e e e b . . . 
-                    . . . . . e e e e e e b d b b . 
-                    . . . . . . . . . . . b 1 1 1 b 
-                    . . . . . . . . . . . c 1 d d b 
-                    . . . . . . . . . . . c 1 b c . 
-                    . . . . . . . . . . . . c c . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . c c e . c . . 
+                    . . . . . . . b c c . e e . . . 
+                    . . . . . . . . . c e 2 e e . . 
+                    . . . . . c . . c e e e . c . . 
+                    . . . . . . c c . 2 e c c 8 . . 
+                    . . . . . 8 . e e . c . 8 . . . 
+                    . . . . . . . e e c . . a . . . 
+                    . . . . . e e . . 8 . . . . . . 
+                    . . . . e 2 e . 8 . 8 . . . . . 
+                    . . e . e e . . . . . . . . . . 
+                    . . . e . . . . . . . . . . . . 
+                    . e e . e . . . . . . . . . . . 
+                    . . e . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
                     `
                 ]
                 all_labels = [
                 "Bow Of The Universe",
                 "Sword Of Life",
                 "Soul-Forged Hammer",
-                "Drumstick"
+                "Celeste, Staff of Chaos"
                 ]
                 add_item([Inventory.create_item(all_labels[0], all_items[0])])
-LevelHomeTown()
+PlasticBottleIcon = sprites.create(img`
+                    d 1 1 1 1 1 1 1 1 d 
+                    d 1 1 1 1 1 1 1 1 d 
+                    d 1 1 1 1 1 c e 1 d 
+                    d 1 1 1 c c 8 a 1 d 
+                    d 1 1 c c 8 a 1 1 d 
+                    d 1 c c 8 a b 1 1 d 
+                    d 1 c 8 a b 1 1 1 d 
+                    d 1 8 a b 1 1 1 1 d 
+                    d 1 1 1 1 1 1 1 1 d 
+                    d 1 1 1 1 1 1 1 1 d 
+                    d d d d d d d d d d 
+                    `, SpriteKind.Icon)
+                PlasticBottleIcon.setPosition(144, 6)
+                PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
+                LevelHomeTown()
             } else if (selectedIndex == 1) {
                 MenuOpen = false
                 SettingsView()
@@ -515,7 +531,7 @@ function enable_movement (en: boolean) {
     }
 }
 function Level__2__Underwater_Palace () {
-    tiles.setCurrentTilemap(tilemap`DungeonLevel2`)
+    tiles.setCurrentTilemap(tilemap`Tilemap_Level 2 - Underwater Palace`)
 }
 function SpawnWarlord () {
     game.showLongText("You have made it to the end. Now you shall have the honour of getting killed by me. ", DialogLayout.Bottom)
@@ -1029,7 +1045,7 @@ function DrawLoadingScreen () {
     IsLoadingScreenVisible = true
 }
 function Level__3__Jungle () {
-    tiles.setCurrentTilemap(tilemap`level33`)
+    tiles.setCurrentTilemap(tilemap`Tilemap_Level-3 - The Jungle`)
 }
 function SettingsView () {
     SettingsMenu = miniMenu.createMenu(
@@ -1161,6 +1177,8 @@ function SpawnNPCJhonny (cordsX: number, cordsY: number) {
     tiles.placeOnTile(NPCJhonnyCitizen, tiles.getTileLocation(cordsX, cordsX))
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
+    DungeonLevel += 1
+    DestroySprites()
     LevelHomeTown()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
@@ -1203,6 +1221,7 @@ let DungeonLevel = 0
 let sagaSprite: Sprite = null
 let scroll = false
 let IsQualified = false
+let PlasticBottleIcon: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
 let PlayerWarrior: Sprite = null
