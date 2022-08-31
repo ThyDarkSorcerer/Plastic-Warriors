@@ -6,6 +6,18 @@ enum ActionKind {
 namespace SpriteKind {
     export const NPCJhonny = SpriteKind.create()
     export const Icon = SpriteKind.create()
+    export const Particle = SpriteKind.create()
+    export const Save = SpriteKind.create()
+    export const LevelPicker = SpriteKind.create()
+    export const LevelTile = SpriteKind.create()
+    export const trash = SpriteKind.create()
+    export const Boss = SpriteKind.create()
+    export const Nothering = SpriteKind.create()
+    export const BossWild = SpriteKind.create()
+    export const push = SpriteKind.create()
+    export const pushall = SpriteKind.create()
+    export const PlayerShot = SpriteKind.create()
+    export const Monster = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const Load = StatusBarKind.create()
@@ -29,7 +41,7 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
             3 3 f 6 6 6 6 6 6 f 3 3 
             . . . f f f f f f . . . 
             . . . f f . . f f . . . 
-            `, SpriteKind.Enemy)
+            `, SpriteKind.Monster)
         tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
         PlasticZombie.follow(PlayerWarrior, 50)
     }
@@ -187,9 +199,10 @@ PlasticBottleIcon = sprites.create(img`
                     d 1 1 1 1 1 1 1 1 d 
                     d d d d d d d d d d 
                     `, SpriteKind.Icon)
-                PlasticBottleIcon.setPosition(144, 6)
+                PlasticBottleIcon.setPosition(146, 6)
                 PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
                 LevelHomeTown()
+                HasGameStarted = true
             } else if (selectedIndex == 1) {
                 MenuOpen = false
                 SettingsView()
@@ -199,6 +212,13 @@ PlasticBottleIcon = sprites.create(img`
             }
         })
     }
+}
+function moveSpriteInTime (sprite: Sprite, x: number, y: number, t: number) {
+    globalX = x
+    globalY = y
+    dx = x - sprite.x
+    dy = y - sprite.y
+    sprite.setVelocity(dx / t, dy / t)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
     LevelTheDeathGateHub()
@@ -215,6 +235,21 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.PlayerShot, function (sprite, otherSprite) {
+    if (started) {
+        info.changeScoreBy(20)
+        bossLife += -1
+        music.playTone(208, music.beat(BeatFraction.Eighth))
+        lifeBarPic.fillRect(bossLife * 2, 0, 96 - bossLife * 2, 5, 15)
+        lifeBar.setImage(lifeBarPic)
+        if (bossLife <= 0) {
+            game.over(true)
+        } else if (bossLife % 12 == 0) {
+            preSetBossPosition(80, 30)
+        }
+    }
+    otherSprite.destroy()
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     handle_b_key_in_toolbar()
     if (IsOverlapingNPCJhonny == true) {
@@ -230,8 +265,15 @@ function DrawToolbar () {
     toolbar.z = 100
     toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
 }
+function spell1 () {
+    enemyShootAimingPlayer(boss, 90, 5)
+}
+function moveSpriteRandom (sprite: Sprite, yLowerBound: number, outerBound: number, v: number) {
+    moveSprite(sprite, randint(outerBound, scene.screenWidth() - outerBound), randint(outerBound, yLowerBound), v)
+}
 controller.combos.attachCombo("lA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, -50, 0)
+    projectileSprite.setKind(SpriteKind.PlayerShot)
 })
 function DrawSaga () {
     color.startFade(color.originalPalette, color.Black)
@@ -422,6 +464,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+function nonSpell1 () {
+    for (let index22 = 0; index22 <= MAX - 1; index22++) {
+        shootBulletFromSprite(boss, 60, 360 / MAX * index22 + offset)
+    }
+    offset += 13
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
     CheckQualification(7)
     if (IsQualified == true) {
@@ -458,16 +506,16 @@ function Start_Game () {
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPCJhonny, function (sprite, otherSprite) {
     if (triggerNPC == true) {
-        story.spriteSayText(NPCJhonnyCitizen, "Hi!", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "Khan, the evil warlord has taken", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "over Province Town!", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "Go to the cave in the north of spawn to", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "go into different dungeons and", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "defeat monsters to get plastic, a", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "rare mineral! Use it to craft", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "weapons at the east of the village.", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "Use the weapons to defeat Khan!", 15, 4)
-        story.spriteSayText(NPCJhonnyCitizen, "Good luck! You will need it :)", 15, 4)
+        enable_movement(false)
+        story.printCharacterText("Hi!", "Jhonny")
+        story.printCharacterText("Khan, the evil warlord has taken over Province Town!", "Jhonny")
+        story.printCharacterText("You must help us to destroy him!", "Jhonny")
+        story.printCharacterText("Go to the cave in the north of spawn to go into different", "Jhonny")
+        story.printCharacterText("dungeons and defeat monsters to get plastic, a rare mineral!", "Jhonny")
+        story.printCharacterText("Use it to craft weapons at the east of the village.", "Jhonny")
+        story.printCharacterText("Use the weapons to defeat Khan!", "Jhonny")
+        story.printCharacterText("Good luck! You will need it :)", "Jhonny")
+        enable_movement(true)
         triggerNPC = false
         pause(36000)
     }
@@ -488,7 +536,14 @@ function LevelHomeTown () {
 }
 controller.combos.attachCombo("dA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, 50)
+    projectileSprite.setKind(SpriteKind.PlayerShot)
 })
+function spell2 () {
+    for (let index = 0; index <= 4; index++) {
+        shootBulletFromSprite(boss, 60, offset + index * 30)
+    }
+    offset += 23
+}
 function handle_b_key_in_toolbar () {
     toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
     if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) == toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
@@ -500,6 +555,10 @@ function move_left_in_toolbar () {
         toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, -1)
     }
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Monster, function (sprite, otherSprite) {
+    Players_Health.value += -5
+    pause(1500)
+})
 function Level__4__Future_Planet () {
 	
 }
@@ -530,15 +589,18 @@ function enable_movement (en: boolean) {
         controller.moveSprite(PlayerWarrior, 0, 0)
     }
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    scene.cameraShake(3, 200)
+    music.playTone(139, music.beat(BeatFraction.Eighth))
+    otherSprite.destroy()
+})
 function Level__2__Underwater_Palace () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level 2 - Underwater Palace`)
 }
 function SpawnWarlord () {
     game.showLongText("You have made it to the end. Now you shall have the honour of getting killed by me. ", DialogLayout.Bottom)
-    NecronWarlord = sprites.create(assets.image`NecronWarlord`, SpriteKind.Enemy)
-    animation.runImageAnimation(
-    NecronWarlord,
-    [img`
+    boss = sprites.create(img`
         ........................
         ........................
         ........................
@@ -563,85 +625,15 @@ function SpawnWarlord () {
         ........................
         ........................
         ........................
-        `,img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11111111f.......
-        ......fd11111111df......
-        ......fd11111111df......
-        ......fddd1111dddf......
-        ......fbdbfddfbdbf......
-        ......fcdcf11fcdcf......
-        .......fb111111ffff.....
-        ......fffcdb1bc111cf....
-        ....fc111cbfbf1b1b1f....
-        ....f1b1b1ffffbfbfbf....
-        ....fbfbfffffff.........
-        .........fffff..........
-        ..........fff...........
-        ........................
-        ........................
-        ........................
-        ........................
-        `,img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11111111f.......
-        ......fd11111111df......
-        ......fd11111111df......
-        ......fddd1111dddf......
-        ......fbdbfddfbdbf......
-        ......fcdcf11fcdcf......
-        .......fb111111bf.......
-        ......fffcdb1bdffff.....
-        ....fc111cbfbfc111cf....
-        ....f1b1b1ffff1b1b1f....
-        ....fbfbffffffbfbfbf....
-        .........ffffff.........
-        ...........fff..........
-        ........................
-        ........................
-        ........................
-        ........................
-        `,img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11111111f.......
-        ......fd11111111df......
-        ......fd11111111df......
-        ......fddd1111dddf......
-        ......fbdbfddfbdbf......
-        ......fcdcf11fcdcf......
-        .....ffff111111bf.......
-        ....fc111cdb1bdfff......
-        ....f1b1bcbfbfc111cf....
-        ....fbfbfbffff1b1b1f....
-        .........fffffffbfbf....
-        ..........fffff.........
-        ...........fff..........
-        ........................
-        ........................
-        ........................
-        ........................
-        `],
-    500,
-    true
-    )
+        `, SpriteKind.Enemy)
+    boss.setPosition(-16, -16)
+    lifeBarPic = image.create(96, 5)
+    lifeBar = statusbars.create(80, 5, StatusBarKind.Health)
+    lifeBar.setFlag(SpriteFlag.Ghost, true)
+    offset = 0
+    MAX = 10
+    bossCanMove = true
+    preSetBossPosition(80, 30)
     music.playMelody(music.convertRTTTLToMelody("mkombat:d=4,o=5,b=70:16a#,16a#,16c#6,16a#,16d#6,16a#,16f6,16d#6,16c#6,16c#6,16f6,16c#6,16g#6,16c#6,16f6,16c#6,16g#,16g#,16c6,16g#,16c#6,16g#,16d#6,16c#6,16f#,16f#,16a#,16f#,16c#6,16f#,16c#6,16c6"), 120)
 }
 function CheckQualification (LevelNumber: number) {
@@ -653,6 +645,7 @@ function CheckQualification (LevelNumber: number) {
 }
 controller.combos.attachCombo("uA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, -50)
+    projectileSprite.setKind(SpriteKind.PlayerShot)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     CheckQualification(6)
@@ -1108,8 +1101,26 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+function preSetBossPosition (x: number, y: number) {
+    started = false
+    ready = false
+    offset = 0
+    moveSpriteInTime(boss, x, y, 1)
+}
+controller.B.onEvent(ControllerButtonEvent.Released, function () {
+    controller.moveSprite(PlayerWarrior)
+})
 function Level__6__Mossy_Dungeon () {
 	
+}
+function moveSpriteRandomFixedTime (sprite: Sprite, yLowerBound: number, outerBound: number, t: number) {
+    moveSpriteInTime(sprite, randint(outerBound, scene.screenWidth() - outerBound), randint(outerBound, yLowerBound), t)
+}
+function nonSpell2 () {
+    for (let index3 = 0; index3 <= MAX - 1; index3++) {
+        shootBulletFromSprite(boss, 60, 360 / MAX * index3 + offset)
+        shootBulletFromSprite(boss, 100, 360 / MAX * (index3 + 0.5) + offset)
+    }
 }
 function make_toolbar () {
     last_toolbar_select = 0
@@ -1129,6 +1140,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, 
 })
 controller.combos.attachCombo("rA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 50, 0)
+    projectileSprite.setKind(SpriteKind.PlayerShot)
 })
 function SpawnCharecter () {
     PlayerWarrior = sprites.create(img`
@@ -1169,8 +1181,85 @@ function SpawnCharecter () {
         . . . e . . . 
         `)
 }
+function shootBulletFromSprite (sourceSprite: Sprite, speed: number, angle: number) {
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, sourceSprite, speed * Math.cos(angle / 57.3), speed * Math.sin(angle / 57.3))
+    projectile.setFlag(SpriteFlag.AutoDestroy, true)
+    if (sourceSprite.kind() == SpriteKind.Player) {
+        projectile.setKind(SpriteKind.PlayerShot)
+        projectile.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . 5 4 4 5 . . . . . . 
+            . . . . . 5 4 2 2 4 5 . . . . . 
+            . . . . . 5 4 2 2 4 5 . . . . . 
+            . . . . . . 5 4 4 5 . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    } else {
+        projectile.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 9 9 . . . . . . . 
+            . . . . . . 9 6 6 9 . . . . . . 
+            . . . . . 9 6 8 8 6 9 . . . . . 
+            . . . . . 9 6 8 8 6 9 . . . . . 
+            . . . . . . 9 6 6 9 . . . . . . 
+            . . . . . . . 9 9 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    }
+}
+function moveSprite (sprite: Sprite, x: number, y: number, v: number) {
+    globalX = x
+    globalY = y
+    dx = x - sprite.x
+    dy = y - sprite.y
+    speed = Math.sqrt(dx * dx + dy * dy)
+    if (speed != 0) {
+        sprite.setVelocity(dx / speed * v, dy / speed * v)
+    }
+}
 function Level__7__Haunted_Mansion () {
 	
+}
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Monster, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.ashes, 500)
+})
+function enemyShootAimingPlayer (sprite: Sprite, speed: number, spread: number) {
+    shootBulletFromSprite(sprite, speed, Math.atan2(PlayerWarrior.y - sprite.y, PlayerWarrior.x - sprite.x) * 57.3 + randint(0 - spread, spread))
 }
 function SpawnNPCJhonny (cordsX: number, cordsY: number) {
     NPCJhonnyCitizen = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPCJhonny)
@@ -1187,9 +1276,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    otherSprite.destroy()
-})
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level10`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
@@ -1200,47 +1286,61 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, 
     DestroySprites()
     LevelHomeTown()
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    Players_Health.value += -5
-    pause(1500)
-})
 function LevelTheDeathGateHub () {
     DestroySprites()
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
 }
+let NPCJhonnyCitizen: Sprite = null
+let speed = 0
+let projectile: Sprite = null
 let last_toolbar_select = 0
+let ready = false
 let SettingsMenu: miniMenu.MenuSprite = null
 let LoadingAnimation: Sprite = null
 let LoadingTextSprite: TextSprite = null
 let LoadingSprite: StatusBarSprite = null
-let NecronWarlord: Sprite = null
+let bossCanMove = false
 let Players_Health: StatusBarSprite = null
-let NPCJhonnyCitizen: Sprite = null
 let DungeonLevel = 0
+let offset = 0
+let MAX = 0
 let sagaSprite: Sprite = null
 let scroll = false
+let boss: Sprite = null
+let lifeBar: StatusBarSprite = null
+let lifeBarPic: Image = null
+let started = false
 let IsQualified = false
+let dy = 0
+let dx = 0
+let globalY = 0
+let globalX = 0
 let PlasticBottleIcon: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
 let PlayerWarrior: Sprite = null
 let PlasticZombie: Sprite = null
+let HasGameStarted = false
 let SoundPhase = 0
 let ShowSaga = false
 let SagaTimeSpan = 0
 let triggerNPC = false
+let bossLife = 0
 let IsOverlapingNPCJhonny = false
 let IsLoadingScreenVisible = false
-let toolbar: Inventory.Toolbar = null
-let storyLines: string[] = []
-let star = null
-let lineAdjust = 0
-let sagaImage: Image = null
-let projectileSprite: Sprite = null
-let item2 = null
-let all_items: Image[] = []
+let bossProgress = 0
+let lifeBarProgress = 0
 let all_labels: string[] = []
+let all_items: Image[] = []
+let item2 = null
+let projectileSprite: Sprite = null
+let sagaImage: Image = null
+let lineAdjust = 0
+let star = null
+let storyLines: string[] = []
+let toolbar: Inventory.Toolbar = null
+let NecronWarlord = null
 function add_item(item_in_list: any[]) {
     for (let item of toolbar.get_items()) {
         if (item.get_image().equals(item_in_list[0].get_image())) {
@@ -1276,35 +1376,24 @@ let DeathMessages = [
 "*Rage Incoming*",
 "You died! Oh wait, you already know that!",
 "c",
-"",
-""
+"d",
+"e"
 ]
+bossLife = 48
 triggerNPC = false
-projectileSprite = null
 SagaTimeSpan = 34000
 ShowSaga = false
 DrawLoadingScreen()
 timer.debounce("Loading", 5000, function () {
     Start_Game()
     SoundPhase = 1
+    HasGameStarted = true
 })
 game.onUpdate(function () {
     if (ShowSaga == true) {
         if (sagaSprite.bottom < 0) {
             sagaSprite.destroy()
         }
-    }
-})
-forever(function () {
-    if (IsLoadingScreenVisible == true) {
-        while (LoadingSprite.value != 5000) {
-            pause(randint(50, 100))
-            LoadingSprite.value += 100
-            LoadingSprite.attachToSprite(LoadingAnimation)
-        }
-        LoadingAnimation.destroy(effects.ashes, 500)
-        LoadingTextSprite.destroy(effects.disintegrate, 500)
-        IsLoadingScreenVisible = false
     }
 })
 forever(function () {
@@ -1624,5 +1713,17 @@ forever(function () {
         Music.CatQuestVo1(songs.Seaside_town)
     } else if (SoundPhase == 3) {
         Music.CatQuestVo1(songs.Tavern)
+    }
+})
+forever(function () {
+    if (IsLoadingScreenVisible == true) {
+        while (LoadingSprite.value != 5000) {
+            pause(randint(50, 100))
+            LoadingSprite.value += 100
+            LoadingSprite.attachToSprite(LoadingAnimation)
+        }
+        LoadingAnimation.destroy(effects.ashes, 500)
+        LoadingTextSprite.destroy(effects.disintegrate, 500)
+        IsLoadingScreenVisible = false
     }
 })

@@ -222,26 +222,6 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
-            case "DeathGateHub":
-            case "level3":return tiles.createTilemap(hex`11001100080b0b0b0b0b0b0b0b0b0b0b0b0b0b0b06090e051a05031303030314030315050e0a090303030e0e030e0503050e0e0505030a090e030e010f01010101010f010305030a090505010f020202020202020f0103050a09030e0f0202111010041102020f03030a09030301021104101004101102010e050a090503010210101010101010020103050a09030e010210041016101004020103030a09050e010210101010101010020103030a090303010211100410100411020105030a0905030f0202110404101102020f05050a09030e010f020202020202020f0103030a09030303010f01010101010f01050e030a0903030e030e030e030e0305030305030a091203170e03180303031903031b0e120a070d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0c`, img`
-2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 . . . . . . . . . . . . . . . 2 
-2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-`, [myTiles.transparency16,sprites.dungeon.floorDark2,sprites.dungeon.floorLight2,sprites.dungeon.floorDark0,sprites.dungeon.floorLightMoss,sprites.dungeon.floorDark1,sprites.dungeon.purpleOuterNorthEast,sprites.dungeon.purpleOuterSouthEast,sprites.dungeon.purpleOuterNorthWest,sprites.dungeon.purpleOuterWest0,sprites.dungeon.purpleOuterEast1,sprites.dungeon.purpleOuterNorth0,sprites.dungeon.purpleOuterSouthWest,sprites.dungeon.purpleOuterSouth1,sprites.dungeon.floorDark4,sprites.dungeon.floorDarkDiamond,sprites.dungeon.floorLight4,sprites.dungeon.floorLight5,sprites.dungeon.floorDark3,myTiles.tile5,myTiles.tile7,myTiles.tile8,sprites.dungeon.floorLight0,myTiles.tile1,myTiles.tile9,myTiles.tile10,myTiles.tile6,myTiles.tile11], TileScale.Sixteen);
             case "level4":
             case "level4":return tiles.createTilemap(hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, img`
 . . . . . . . . . . . . . . . . 
@@ -1021,6 +1001,26 @@ namespace myTiles {
 .........................
 .........................
 `, [myTiles.transparency16,sprites.castle.tileDarkGrass3,sprites.castle.tileDarkGrass2,sprites.builtin.forestTiles10,myTiles.tile75,myTiles.tile76,sprites.dungeon.stairNorth], TileScale.Sixteen);
+            case "DeathGateHub":
+            case "level3":return tiles.createTilemap(hex`11001100080b0b0b0b0b0b0b0b0b0b0b0b0b0b0b06090e051a05031303030314030315050e0a090303030e0e030e0503050e0e0505030a090e030e010f01010101010f010305030a090505010f020202020202020f0103050a09030e0f0202111010041102020f03030a09030301021104101004101102010e050a090503010210101010101010020103050a09030e010210041016101004020103030a09050e010210101010101010020103030a090303010211100410100411020105030a0905030f0202110404101102020f05050a09030e010f020202020202020f0103030a09030303010f01010101010f01050e030a0903030e030e030e030e0305030305030a091203170e03180303031903031b0e120a070d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0c`, img`
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . . 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+`, [myTiles.transparency16,sprites.dungeon.floorDark2,sprites.dungeon.floorLight2,sprites.dungeon.floorDark0,sprites.dungeon.floorLightMoss,sprites.dungeon.floorDark1,sprites.dungeon.purpleOuterNorthEast,sprites.dungeon.purpleOuterSouthEast,sprites.dungeon.purpleOuterNorthWest,sprites.dungeon.purpleOuterWest0,sprites.dungeon.purpleOuterEast1,sprites.dungeon.purpleOuterNorth0,sprites.dungeon.purpleOuterSouthWest,sprites.dungeon.purpleOuterSouth1,sprites.dungeon.floorDark4,sprites.dungeon.floorDarkDiamond,sprites.dungeon.floorLight4,sprites.dungeon.floorLight5,sprites.dungeon.floorDark3,myTiles.tile5,myTiles.tile7,myTiles.tile8,sprites.dungeon.floorLight0,myTiles.tile1,myTiles.tile9,myTiles.tile10,myTiles.tile6,myTiles.tile11], TileScale.Sixteen);
         }
         return null;
     })
