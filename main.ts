@@ -42,9 +42,13 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
             . . . f f f f f f . . . 
             . . . f f . . f f . . . 
             `, SpriteKind.Monster)
-        tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
+        Monsters_Health = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
+        Monsters_Health.value = Health
+        Monsters_Health.attachToSprite(PlasticZombie)
         PlasticZombie.follow(PlayerWarrior, 50)
+        tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
     }
+    PlasticZombie.follow(PlayerWarrior, 50)
 }
 function DrawMenu () {
     if (!(MenuOpen)) {
@@ -114,104 +118,121 @@ function DrawMenu () {
             ..........................................................ccccc......................................
             `)
         )
+        myMenu.setFrame(img`
+            d d d d d d d d d d d d d d d 
+            d d d d d d d d d d d d d d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d d d d d d d d d d d d d d 
+            d d d d d d d d d d d d d d d 
+            `)
         myMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.BackgroundColor, 0)
-        myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
-            myMenu.close()
-            if (selectedIndex == 0) {
-                MenuOpen = false
-                DrawToolbar()
-                SpawnCharecter()
-                make_toolbar()
-                all_items = [
-                assets.image`myImage0`,
-                img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . 4 a . . 
-                    . . . . . . . . . . . 4 2 2 . . 
-                    . . . . . . . . . . 4 8 2 . . . 
-                    . . . . . . . . . 4 2 2 . . . . 
-                    . . . . . . . . 4 c 2 . . . . . 
-                    . . . . . . e 4 2 2 . . . . 2 . 
-                    . e e . 4 4 4 e 2 . . . . . . . 
-                    . . e 4 . 4 2 2 e . . 2 . . . . 
-                    . . 2 e 4 4 2 2 . . . . . . . . 
-                    . . . 2 c 4 . 2 . . . . . . . . 
-                    . . . 4 2 e 4 . . . . . . . . . 
-                    . . 4 . . 2 e e . . . . 2 . . . 
-                    . . . . . . . e . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . 6 d d 6 . . . . . . 
-                    . . . e . . . e e . . . e . . . 
-                    . . . 2 e e e e e e e e 2 . . . 
-                    . e . 4 . e c e e 8 e . 4 . e . 
-                    . 2 e . e e e e e e e e . e 2 . 
-                    . . 2 e 2 . 2 e e 2 . 2 e 2 . . 
-                    . . . 2 . . . d d . . . 2 . . . 
-                    . . . . . . . e e . . . . . . . 
-                    . . . . . . . e e . . . . . . . 
-                    . . . . . . . e e . . . . . . . 
-                    . . . . . . . d d . . . . . . . 
-                    . . . . . . . e e . . . . . . . 
-                    . . . . . . . e e . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . c c e . c . . 
-                    . . . . . . . b c c . e e . . . 
-                    . . . . . . . . . c e 2 e e . . 
-                    . . . . . c . . c e e e . c . . 
-                    . . . . . . c c . 2 e c c 8 . . 
-                    . . . . . 8 . e e . c . 8 . . . 
-                    . . . . . . . e e c . . a . . . 
-                    . . . . . e e . . 8 . . . . . . 
-                    . . . . e 2 e . 8 . 8 . . . . . 
-                    . . e . e e . . . . . . . . . . 
-                    . . . e . . . . . . . . . . . . 
-                    . e e . e . . . . . . . . . . . 
-                    . . e . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `
-                ]
-                all_labels = [
-                "Bow Of The Universe",
-                "Sword Of Life",
-                "Soul-Forged Hammer",
-                "Celeste, Staff of Chaos"
-                ]
-                add_item([Inventory.create_item(all_labels[0], all_items[0])])
-PlasticBottleIcon = sprites.create(img`
-                    d 1 1 1 1 1 1 1 1 d 
-                    d 1 1 1 1 1 1 1 1 d 
-                    d 1 1 1 1 1 c e 1 d 
-                    d 1 1 1 c c 8 a 1 d 
-                    d 1 1 c c 8 a 1 1 d 
-                    d 1 c c 8 a b 1 1 d 
-                    d 1 c 8 a b 1 1 1 d 
-                    d 1 8 a b 1 1 1 1 d 
-                    d 1 1 1 1 1 1 1 1 d 
-                    d 1 1 1 1 1 1 1 1 d 
-                    d d d d d d d d d d 
-                    `, SpriteKind.Icon)
-                PlasticBottleIcon.setPosition(146, 6)
-                PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
-                LevelHomeTown()
-                HasGameStarted = true
-            } else if (selectedIndex == 1) {
-                MenuOpen = false
-                SettingsView()
-            } else if (selectedIndex == 2) {
-                MenuOpen = false
-                DrawSaga()
-            }
-        })
     }
+    myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
+        myMenu.close()
+        if (selectedIndex == 0) {
+            MenuOpen = false
+            DrawToolbar()
+            SpawnCharecter()
+            make_toolbar()
+            all_items = [
+            assets.image`myImage0`,
+            img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . 4 a . . 
+                . . . . . . . . . . . 4 2 2 . . 
+                . . . . . . . . . . 4 8 2 . . . 
+                . . . . . . . . . 4 2 2 . . . . 
+                . . . . . . . . 4 c 2 . . . . . 
+                . . . . . . e 4 2 2 . . . . 2 . 
+                . e e . 4 4 4 e 2 . . . . . . . 
+                . . e 4 . 4 2 2 e . . 2 . . . . 
+                . . 2 e 4 4 2 2 . . . . . . . . 
+                . . . 2 c 4 . 2 . . . . . . . . 
+                . . . 4 2 e 4 . . . . . . . . . 
+                . . 4 . . 2 e e . . . . 2 . . . 
+                . . . . . . . e . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `,
+            img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . 6 d d 6 . . . . . . 
+                . . . e . . . e e . . . e . . . 
+                . . . 2 e e e e e e e e 2 . . . 
+                . e . 4 . e c e e 8 e . 4 . e . 
+                . 2 e . e e e e e e e e . e 2 . 
+                . . 2 e 2 . 2 e e 2 . 2 e 2 . . 
+                . . . 2 . . . d d . . . 2 . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `,
+            img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . c c e . c . . 
+                . . . . . . . b c c . e e . . . 
+                . . . . . . . . . c e 2 e e . . 
+                . . . . . c . . c e e e . c . . 
+                . . . . . . c c . 2 e c c 8 . . 
+                . . . . . 8 . e e . c . 8 . . . 
+                . . . . . . . e e c . . a . . . 
+                . . . . . e e . . 8 . . . . . . 
+                . . . . e 2 e . 8 . 8 . . . . . 
+                . . e . e e . . . . . . . . . . 
+                . . . e . . . . . . . . . . . . 
+                . e e . e . . . . . . . . . . . 
+                . . e . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `
+            ]
+            all_labels = [
+            "Bow Of The Universe",
+            "Sword Of Life",
+            "Soul-Forged Hammer",
+            "Celeste, Staff of Chaos"
+            ]
+            add_item([Inventory.create_item(all_labels[0], all_items[0])])
+PlasticBottleIcon = sprites.create(img`
+                d 1 1 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 c e 1 d 
+                d 1 1 1 c c 8 a 1 d 
+                d 1 1 c c 8 a 1 1 d 
+                d 1 c c 8 a b 1 1 d 
+                d 1 c 8 a b 1 1 1 d 
+                d 1 8 a b 1 1 1 1 d 
+                d 1 1 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 1 1 d 
+                d d d d d d d d d d 
+                `, SpriteKind.Icon)
+            PlasticBottleIcon.setPosition(146, 6)
+            PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
+            LevelHomeTown()
+            HasGameStarted = true
+        } else if (selectedIndex == 1) {
+            MenuOpen = false
+            SettingsView()
+        } else if (selectedIndex == 2) {
+            MenuOpen = false
+            DrawSaga()
+        }
+    })
 }
 function moveSpriteInTime (sprite: Sprite, x: number, y: number, t: number) {
     globalX = x
@@ -464,6 +485,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+sprites.onOverlap(SpriteKind.Monster, SpriteKind.PlayerShot, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.ashes, 500)
+    Monsters_Health.value += -1
+    sprite.destroy()
+})
 function nonSpell1 () {
     for (let index22 = 0; index22 <= MAX - 1; index22++) {
         shootBulletFromSprite(boss, 60, 360 / MAX * index22 + offset)
@@ -550,6 +576,9 @@ function handle_b_key_in_toolbar () {
         toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
     }
 }
+statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
+    PlasticZombie.destroy(effects.ashes, 500)
+})
 function move_left_in_toolbar () {
     if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
         toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, -1)
@@ -569,6 +598,7 @@ function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Text)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.NPCJhonny)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Monster)
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Messages)
@@ -1080,6 +1110,23 @@ function SettingsView () {
         ................................cccccccccccc.
         `)
     )
+    SettingsMenu.setFrame(img`
+        d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d 
+        `)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
     LevelTheDeathGateHub()
@@ -1255,9 +1302,6 @@ function moveSprite (sprite: Sprite, x: number, y: number, v: number) {
 function Level__7__Haunted_Mansion () {
 	
 }
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Monster, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.ashes, 500)
-})
 function enemyShootAimingPlayer (sprite: Sprite, speed: number, spread: number) {
     shootBulletFromSprite(sprite, speed, Math.atan2(PlayerWarrior.y - sprite.y, PlayerWarrior.x - sprite.x) * 57.3 + randint(0 - spread, spread))
 }
@@ -1307,6 +1351,7 @@ let offset = 0
 let MAX = 0
 let sagaSprite: Sprite = null
 let scroll = false
+let projectileSprite: Sprite = null
 let boss: Sprite = null
 let lifeBar: StatusBarSprite = null
 let lifeBarPic: Image = null
@@ -1320,6 +1365,7 @@ let PlasticBottleIcon: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
 let PlayerWarrior: Sprite = null
+let Monsters_Health: StatusBarSprite = null
 let PlasticZombie: Sprite = null
 let HasGameStarted = false
 let SoundPhase = 0
@@ -1329,18 +1375,17 @@ let triggerNPC = false
 let bossLife = 0
 let IsOverlapingNPCJhonny = false
 let IsLoadingScreenVisible = false
-let bossProgress = 0
-let lifeBarProgress = 0
-let all_labels: string[] = []
-let all_items: Image[] = []
-let item2 = null
-let projectileSprite: Sprite = null
-let sagaImage: Image = null
-let lineAdjust = 0
-let star = null
-let storyLines: string[] = []
-let toolbar: Inventory.Toolbar = null
 let NecronWarlord = null
+let toolbar: Inventory.Toolbar = null
+let storyLines: string[] = []
+let star = null
+let lineAdjust = 0
+let sagaImage: Image = null
+let item2 = null
+let all_items: Image[] = []
+let all_labels: string[] = []
+let lifeBarProgress = 0
+let bossProgress = 0
 function add_item(item_in_list: any[]) {
     for (let item of toolbar.get_items()) {
         if (item.get_image().equals(item_in_list[0].get_image())) {
