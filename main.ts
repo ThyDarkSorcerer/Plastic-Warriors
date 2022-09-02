@@ -552,7 +552,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPCJhonny, function (sprite, oth
     }
 })
 function Level__8__Shadow_Realm__Boss () {
-	
+    tiles.setCurrentTilemap(tilemap`level43`)
 }
 function LevelHomeTown () {
     SoundPhase = 2
