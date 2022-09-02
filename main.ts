@@ -589,7 +589,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Monster, function (sprite, other
     pause(1500)
 })
 function Level__4__Future_Planet () {
-	
+    tiles.setCurrentTilemap(tilemap`level44`)
 }
 function Level__5__Lost_City () {
     SpawnNPCJhonny(20, 30)
