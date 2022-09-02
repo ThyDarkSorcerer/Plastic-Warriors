@@ -5,6 +5,19 @@ enum ActionKind {
 }
 namespace SpriteKind {
     export const NPCJhonny = SpriteKind.create()
+    export const Icon = SpriteKind.create()
+    export const Particle = SpriteKind.create()
+    export const Save = SpriteKind.create()
+    export const LevelPicker = SpriteKind.create()
+    export const LevelTile = SpriteKind.create()
+    export const trash = SpriteKind.create()
+    export const Boss = SpriteKind.create()
+    export const Nothering = SpriteKind.create()
+    export const BossWild = SpriteKind.create()
+    export const push = SpriteKind.create()
+    export const pushall = SpriteKind.create()
+    export const PlayerShot = SpriteKind.create()
+    export const Monster = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const Load = StatusBarKind.create()
@@ -28,10 +41,14 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
             3 3 f 6 6 6 6 6 6 f 3 3 
             . . . f f f f f f . . . 
             . . . f f . . f f . . . 
-            `, SpriteKind.Enemy)
-        tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
+            `, SpriteKind.Monster)
+        Monsters_Health = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
+        Monsters_Health.value = Health
+        Monsters_Health.attachToSprite(PlasticZombie)
         PlasticZombie.follow(PlayerWarrior, 50)
+        tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
     }
+    PlasticZombie.follow(PlayerWarrior, 50)
 }
 function DrawMenu () {
     if (!(MenuOpen)) {
@@ -101,256 +118,128 @@ function DrawMenu () {
             ..........................................................ccccc......................................
             `)
         )
+        myMenu.setFrame(img`
+            d d d d d d d d d d d d d d d 
+            d d d d d d d d d d d d d d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+            d d d d d d d d d d d d d d d 
+            d d d d d d d d d d d d d d d 
+            `)
         myMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.BackgroundColor, 0)
-        myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
-            myMenu.close()
-            if (selectedIndex == 0) {
-                MenuOpen = false
-                DrawToolbar()
-                SpawnCharecter()
-                make_toolbar()
-                all_items = [
-                img`
-                    . . . . c c c b b b b b . . . . 
-                    . . c c b 4 4 4 4 4 4 b b b . . 
-                    . c c 4 4 4 4 4 5 4 4 4 4 b c . 
-                    . e 4 4 4 4 4 4 4 4 4 5 4 4 e . 
-                    e b 4 5 4 4 5 4 4 4 4 4 4 4 b c 
-                    e b 4 4 4 4 4 4 4 4 4 4 5 4 4 e 
-                    e b b 4 4 4 4 4 4 4 4 4 4 4 b e 
-                    . e b 4 4 4 4 4 5 4 4 4 4 b e . 
-                    8 7 e e b 4 4 4 4 4 4 b e e 6 8 
-                    8 7 2 e e e e e e e e e e 2 7 8 
-                    e 6 6 2 2 2 2 2 2 2 2 2 2 6 c e 
-                    e c 6 7 6 6 7 7 7 6 6 7 6 c c e 
-                    e b e 8 8 c c 8 8 c c c 8 e b e 
-                    e e b e c c e e e e e c e b e e 
-                    . e e b b 4 4 4 4 4 4 4 4 e e . 
-                    . . . c c c c c e e e e e . . . 
-                    `,
-                img`
-                    . . . . . . . e c 7 . . . . . . 
-                    . . . . e e e c 7 7 e e . . . . 
-                    . . c e e e e c 7 e 2 2 e e . . 
-                    . c e e e e e c 6 e e 2 2 2 e . 
-                    . c e e e 2 e c c 2 4 5 4 2 e . 
-                    c e e e 2 2 2 2 2 2 4 5 5 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 4 4 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
-                    c e e 2 2 2 2 2 2 2 2 2 2 4 2 e 
-                    . e e e 2 2 2 2 2 2 2 2 2 4 e . 
-                    . 2 e e 2 2 2 2 2 2 2 2 4 2 e . 
-                    . . 2 e e 2 2 2 2 2 4 4 2 e . . 
-                    . . . 2 2 e e 4 4 4 2 e e . . . 
-                    . . . . . 2 2 e e e e . . . . . 
-                    `,
-                img`
-                    4 4 4 . . 4 4 4 4 4 . . . . . . 
-                    4 5 5 4 4 5 5 5 5 5 4 4 . . . . 
-                    b 4 5 5 1 5 1 1 1 5 5 5 4 . . . 
-                    . b 5 5 5 5 1 1 5 5 1 1 5 4 . . 
-                    . b d 5 5 5 5 5 5 5 5 1 1 5 4 . 
-                    b 4 5 5 5 5 5 5 5 5 5 5 1 5 4 . 
-                    c d 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-                    c d 4 5 5 5 5 5 5 5 5 5 5 1 5 4 
-                    c 4 5 5 5 d 5 5 5 5 5 5 5 5 5 4 
-                    c 4 d 5 4 5 d 5 5 5 5 5 5 5 5 4 
-                    . c 4 5 5 5 5 d d d 5 5 5 5 5 b 
-                    . c 4 d 5 4 5 d 4 4 d 5 5 5 4 c 
-                    . . c 4 4 d 4 4 4 4 4 d d 5 d c 
-                    . . . c 4 4 4 4 4 4 4 4 5 5 5 4 
-                    . . . . c c b 4 4 4 b b 4 5 4 4 
-                    . . . . . . c c c c c c b b 4 . 
-                    `,
-                img`
-                    . . 2 2 b b b b b . . . . . . . 
-                    . 2 b 4 4 4 4 4 4 b . . . . . . 
-                    2 2 4 4 4 4 d d 4 4 b . . . . . 
-                    2 b 4 4 4 4 4 4 d 4 b . . . . . 
-                    2 b 4 4 4 4 4 4 4 d 4 b . . . . 
-                    2 b 4 4 4 4 4 4 4 4 4 b . . . . 
-                    2 b 4 4 4 4 4 4 4 4 4 e . . . . 
-                    2 2 b 4 4 4 4 4 4 4 b e . . . . 
-                    . 2 b b b 4 4 4 b b b e . . . . 
-                    . . e b b b b b b b e e . . . . 
-                    . . . e e b 4 4 b e e e b . . . 
-                    . . . . . e e e e e e b d b b . 
-                    . . . . . . . . . . . b 1 1 1 b 
-                    . . . . . . . . . . . c 1 d d b 
-                    . . . . . . . . . . . c 1 b c . 
-                    . . . . . . . . . . . . c c . . 
-                    `,
-                img`
-                    . . . . . . 2 2 2 2 . . . . . . 
-                    . . . . 2 2 3 3 3 3 2 e . . . . 
-                    . . . 2 3 d 1 1 d d 3 2 e . . . 
-                    . . 2 3 1 d 3 3 3 d d 3 e . . . 
-                    . 2 3 1 3 3 3 3 3 d 1 3 b e . . 
-                    . 2 1 d 3 3 3 3 d 3 3 1 3 b b . 
-                    2 3 1 d 3 3 1 1 3 3 3 1 3 4 b b 
-                    2 d 3 3 d 1 3 1 3 3 3 1 3 4 4 b 
-                    2 d 3 3 3 1 3 1 3 3 3 1 b 4 4 e 
-                    2 d 3 3 3 1 1 3 3 3 3 1 b 4 4 e 
-                    e d 3 3 3 3 d 3 3 3 d d b 4 4 e 
-                    e d d 3 3 3 d 3 3 3 1 3 b 4 b e 
-                    e 3 d 3 3 1 d d 3 d 1 b b e e . 
-                    . e 3 1 1 d d 1 1 1 b b e e e . 
-                    . . e 3 3 3 3 3 3 b e e e e . . 
-                    . . . e e e e e e e e e e . . . 
-                    `,
-                img`
-                    . . . . . . b b b b . . . . . . 
-                    . . . . . . b 4 4 4 b . . . . . 
-                    . . . . . . b b 4 4 4 b . . . . 
-                    . . . . . b 4 b b b 4 4 b . . . 
-                    . . . . b d 5 5 5 4 b 4 4 b . . 
-                    . . . . b 3 2 3 5 5 4 e 4 4 b . 
-                    . . . b d 2 2 2 5 7 5 4 e 4 4 e 
-                    . . . b 5 3 2 3 5 5 5 5 e e e e 
-                    . . b d 7 5 5 5 3 2 3 5 5 e e e 
-                    . . b 5 5 5 5 5 2 2 2 5 5 d e e 
-                    . b 3 2 3 5 7 5 3 2 3 5 d d e 4 
-                    . b 2 2 2 5 5 5 5 5 5 d d e 4 . 
-                    b d 3 2 d 5 5 5 d d d 4 4 . . . 
-                    b 5 5 5 5 d d 4 4 4 4 . . . . . 
-                    4 d d d 4 4 4 . . . . . . . . . 
-                    4 4 4 4 . . . . . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . b b b b a a . . . . 
-                    . . . . b b d d d 3 3 3 a a . . 
-                    . . . b d d d 3 3 3 3 3 3 a a . 
-                    . . b d d 3 3 3 3 3 3 3 3 3 a . 
-                    . b 3 d 3 3 3 3 3 b 3 3 3 3 a b 
-                    . b 3 3 3 3 3 a a 3 3 3 3 3 a b 
-                    b 3 3 3 3 3 a a 3 3 3 3 d a 4 b 
-                    b 3 3 3 3 b a 3 3 3 3 3 d a 4 b 
-                    b 3 3 3 3 3 3 3 3 3 3 d a 4 4 e 
-                    a 3 3 3 3 3 3 3 3 3 d a 4 4 4 e 
-                    a 3 3 3 3 3 3 3 d d a 4 4 4 e . 
-                    a a 3 3 3 d d d a a 4 4 4 e e . 
-                    . e a a a a a a 4 4 4 4 e e . . 
-                    . . e e b b 4 4 4 4 b e e . . . 
-                    . . . e e e e e e e e . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . . . . . b b b . . . 
-                    . . . . . . . . b e e 3 3 b . . 
-                    . . . . . . b b e 3 2 e 3 a . . 
-                    . . . . b b 3 3 e 2 2 e 3 3 a . 
-                    . . b b 3 3 3 3 3 e e 3 3 3 a . 
-                    b b 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
-                    b 3 3 3 d d d d 3 3 3 3 3 d d a 
-                    b b b b b b b 3 d d d d d d 3 a 
-                    b d 5 5 5 5 d b b b a a a a a a 
-                    b 3 d d 5 5 5 5 5 5 5 d d d d a 
-                    b 3 3 3 3 3 3 d 5 5 5 d d d d a 
-                    b 3 d 5 5 5 3 3 3 3 3 3 b b b a 
-                    b b b 3 d 5 5 5 5 5 5 5 d d b a 
-                    . . . b b b 3 d 5 5 5 5 d d 3 a 
-                    . . . . . . b b b b 3 d d d b a 
-                    . . . . . . . . . . b b b a a . 
-                    `,
-                img`
-                    . . . . . 3 3 b 3 3 d d 3 3 . . 
-                    . . . . 3 1 1 d 3 d 1 1 1 1 3 . 
-                    . . . 3 d 1 1 1 d 1 1 1 d 3 1 3 
-                    . . 3 d d 1 1 1 d d 1 1 1 3 3 3 
-                    . 3 1 1 d 1 1 1 1 d d 1 1 b . . 
-                    . 3 1 1 1 d 1 1 1 1 1 d 1 1 3 . 
-                    . b d 1 1 1 d 1 1 1 1 1 1 1 3 . 
-                    . 4 b 1 1 1 1 d d 1 1 1 1 d 3 . 
-                    . 4 4 d 1 1 1 1 1 1 d d d b b . 
-                    . 4 d b d 1 1 1 1 1 1 1 1 3 . . 
-                    4 d d 5 b d 1 1 1 1 1 1 1 3 . . 
-                    4 5 d 5 5 b b d 1 1 1 1 d 3 . . 
-                    4 5 5 d 5 5 d b b b d d 3 . . . 
-                    4 5 5 5 d d d d 4 4 b 3 . . . . 
-                    . 4 5 5 5 4 4 4 . . . . . . . . 
-                    . . 4 4 4 . . . . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . . 6 . . . . . . . . 
-                    . . . . . . 8 6 6 . . . 6 8 . . 
-                    . . . e e e 8 8 6 6 . 6 7 8 . . 
-                    . . e 2 2 2 2 e 8 6 6 7 6 . . . 
-                    . e 2 2 4 4 2 7 7 7 7 7 8 6 . . 
-                    . e 2 4 4 2 6 7 7 7 6 7 6 8 8 . 
-                    e 2 4 5 2 2 6 7 7 6 2 7 7 6 . . 
-                    e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 . 
-                    e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 . 
-                    e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 . 
-                    e 2 4 2 2 2 2 2 2 2 2 2 e c 6 . 
-                    e 2 2 2 2 2 2 2 4 e 2 e e c . . 
-                    e e 2 e 2 2 4 2 2 e e e c . . . 
-                    e e e e 2 e 2 2 e e e c . . . . 
-                    e e e 2 e e c e c c c . . . . . 
-                    . c c c c c c c . . . . . . . . 
-                    `,
-                img`
-                    . . . . . . . . . . . 6 6 6 6 6 
-                    . . . . . . . . . 6 6 7 7 7 7 8 
-                    . . . . . . 8 8 8 7 7 8 8 6 8 8 
-                    . . e e e e c 6 6 8 8 . 8 7 8 . 
-                    . e 2 5 4 2 e c 8 . . . 6 7 8 . 
-                    e 2 4 2 2 2 2 2 c . . . 6 7 8 . 
-                    e 2 2 2 2 2 2 2 c . . . 8 6 8 . 
-                    e 2 e e 2 2 2 2 e e e e c 6 8 . 
-                    c 2 e e 2 2 2 2 e 2 5 4 2 c 8 . 
-                    . c 2 e e e 2 e 2 4 2 2 2 2 c . 
-                    . . c 2 2 2 e e 2 2 2 2 2 2 2 e 
-                    . . . e c c e c 2 2 2 2 2 2 2 e 
-                    . . . . . . . c 2 e e 2 2 e 2 c 
-                    . . . . . . . c e e e e e e 2 c 
-                    . . . . . . . . c e 2 2 2 2 c . 
-                    . . . . . . . . . c c c c c . . 
-                    `,
-                img`
-                    . . . . . . . e e e e . . . . . 
-                    . . . . . e e 4 5 5 5 e e . . . 
-                    . . . . e 4 5 6 2 2 7 6 6 e . . 
-                    . . . e 5 6 6 7 2 2 6 4 4 4 e . 
-                    . . e 5 2 2 7 6 6 4 5 5 5 5 4 . 
-                    . e 5 6 2 2 8 8 5 5 5 5 5 4 5 4 
-                    . e 5 6 7 7 8 5 4 5 4 5 5 5 5 4 
-                    e 4 5 8 6 6 5 5 5 5 5 5 4 5 5 4 
-                    e 5 c e 8 5 5 5 4 5 5 5 5 5 5 4 
-                    e 5 c c e 5 4 5 5 5 4 5 5 5 e . 
-                    e 5 c c 5 5 5 5 5 5 5 5 4 e . . 
-                    e 5 e c 5 4 5 4 5 5 5 e e . . . 
-                    e 5 e e 5 5 5 5 5 4 e . . . . . 
-                    4 5 4 e 5 5 5 5 e e . . . . . . 
-                    . 4 5 4 5 5 4 e . . . . . . . . 
-                    . . 4 4 e e e . . . . . . . . . 
-                    `
-                ]
-                all_labels = [
-                "Burger",
-                "Apple",
-                "Lemon",
-                "Drumstick",
-                "Ham",
-                "Pizza",
-                "Donut",
-                "Cake",
-                "Ice cream",
-                "Strawberry",
-                "Cherries",
-                "Taco"
-                ]
-                LevelHomeTown()
-            } else if (selectedIndex == 1) {
-                MenuOpen = false
-                SettingsView()
-            } else if (selectedIndex == 2) {
-                MenuOpen = false
-                DrawSaga()
-            }
-        })
     }
+    myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
+        myMenu.close()
+        if (selectedIndex == 0) {
+            MenuOpen = false
+            DrawToolbar()
+            SpawnCharecter()
+            make_toolbar()
+            all_items = [
+            assets.image`myImage0`,
+            img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . 4 a . . 
+                . . . . . . . . . . . 4 2 2 . . 
+                . . . . . . . . . . 4 8 2 . . . 
+                . . . . . . . . . 4 2 2 . . . . 
+                . . . . . . . . 4 c 2 . . . . . 
+                . . . . . . e 4 2 2 . . . . 2 . 
+                . e e . 4 4 4 e 2 . . . . . . . 
+                . . e 4 . 4 2 2 e . . 2 . . . . 
+                . . 2 e 4 4 2 2 . . . . . . . . 
+                . . . 2 c 4 . 2 . . . . . . . . 
+                . . . 4 2 e 4 . . . . . . . . . 
+                . . 4 . . 2 e e . . . . 2 . . . 
+                . . . . . . . e . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `,
+            img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . 6 d d 6 . . . . . . 
+                . . . e . . . e e . . . e . . . 
+                . . . 2 e e e e e e e e 2 . . . 
+                . e . 4 . e c e e 8 e . 4 . e . 
+                . 2 e . e e e e e e e e . e 2 . 
+                . . 2 e 2 . 2 e e 2 . 2 e 2 . . 
+                . . . 2 . . . d d . . . 2 . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . e e . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `,
+            img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . c c e . c . . 
+                . . . . . . . b c c . e e . . . 
+                . . . . . . . . . c e 2 e e . . 
+                . . . . . c . . c e e e . c . . 
+                . . . . . . c c . 2 e c c 8 . . 
+                . . . . . 8 . e e . c . 8 . . . 
+                . . . . . . . e e c . . a . . . 
+                . . . . . e e . . 8 . . . . . . 
+                . . . . e 2 e . 8 . 8 . . . . . 
+                . . e . e e . . . . . . . . . . 
+                . . . e . . . . . . . . . . . . 
+                . e e . e . . . . . . . . . . . 
+                . . e . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `
+            ]
+            all_labels = [
+            "Bow Of The Universe",
+            "Sword Of Life",
+            "Soul-Forged Hammer",
+            "Celeste, Staff of Chaos"
+            ]
+            add_item([Inventory.create_item(all_labels[0], all_items[0])])
+PlasticBottleIcon = sprites.create(img`
+                d 1 1 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 c e 1 d 
+                d 1 1 1 c c 8 a 1 d 
+                d 1 1 c c 8 a 1 1 d 
+                d 1 c c 8 a b 1 1 d 
+                d 1 c 8 a b 1 1 1 d 
+                d 1 8 a b 1 1 1 1 d 
+                d 1 1 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 1 1 d 
+                d d d d d d d d d d 
+                `, SpriteKind.Icon)
+            PlasticBottleIcon.setPosition(146, 6)
+            PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
+            LevelHomeTown()
+            HasGameStarted = true
+        } else if (selectedIndex == 1) {
+            MenuOpen = false
+            SettingsView()
+        } else if (selectedIndex == 2) {
+            MenuOpen = false
+            DrawSaga()
+        }
+    })
+}
+function moveSpriteInTime (sprite: Sprite, x: number, y: number, t: number) {
+    globalX = x
+    globalY = y
+    dx = x - sprite.x
+    dy = y - sprite.y
+    sprite.setVelocity(dx / t, dy / t)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
     LevelTheDeathGateHub()
@@ -367,8 +256,28 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.PlayerShot, function (sprite, otherSprite) {
+    if (started) {
+        info.changeScoreBy(20)
+        bossLife += -1
+        music.playTone(208, music.beat(BeatFraction.Eighth))
+        lifeBarPic.fillRect(bossLife * 2, 0, 96 - bossLife * 2, 5, 15)
+        lifeBar.setImage(lifeBarPic)
+        if (bossLife <= 0) {
+            game.over(true)
+        } else if (bossLife % 12 == 0) {
+            preSetBossPosition(80, 30)
+        }
+    }
+    otherSprite.destroy()
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    handle_b_key_in_inventory_toolbar()
+    handle_b_key_in_toolbar()
+    if (IsOverlapingNPCJhonny == true) {
+        triggerNPC = true
+        pause(2000)
+        triggerNPC = false
+    }
 })
 function DrawToolbar () {
     toolbar = Inventory.create_toolbar([], 4)
@@ -377,8 +286,15 @@ function DrawToolbar () {
     toolbar.z = 100
     toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
 }
+function spell1 () {
+    enemyShootAimingPlayer(boss, 90, 5)
+}
+function moveSpriteRandom (sprite: Sprite, yLowerBound: number, outerBound: number, v: number) {
+    moveSprite(sprite, randint(outerBound, scene.screenWidth() - outerBound), randint(outerBound, yLowerBound), v)
+}
 controller.combos.attachCombo("lA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, -50, 0)
+    projectileSprite.setKind(SpriteKind.PlayerShot)
 })
 function DrawSaga () {
     color.startFade(color.originalPalette, color.Black)
@@ -569,6 +485,17 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+sprites.onOverlap(SpriteKind.Monster, SpriteKind.PlayerShot, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.ashes, 500)
+    Monsters_Health.value += -1
+    sprite.destroy()
+})
+function nonSpell1 () {
+    for (let index22 = 0; index22 <= MAX - 1; index22++) {
+        shootBulletFromSprite(boss, 60, 360 / MAX * index22 + offset)
+    }
+    offset += 13
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
     CheckQualification(7)
     if (IsQualified == true) {
@@ -605,22 +532,27 @@ function Start_Game () {
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPCJhonny, function (sprite, otherSprite) {
     if (triggerNPC == true) {
-        story.spriteSayText(NPCJhonny2, "Hi!", 15, 4)
-        story.spriteSayText(NPCJhonny2, "Khan, the evil warlord has taken", 15, 4)
-        story.spriteSayText(NPCJhonny2, "over Province Town!", 15, 4)
-        story.spriteSayText(NPCJhonny2, "Go to the cave in the north of spawn to", 15, 4)
-        story.spriteSayText(NPCJhonny2, "go into different dungeons and", 15, 4)
-        story.spriteSayText(NPCJhonny2, "defeat monsters to get plastic, a", 15, 4)
-        story.spriteSayText(NPCJhonny2, "rare mineral! Use it to craft", 15, 4)
-        story.spriteSayText(NPCJhonny2, "weapons at the east of the village.", 15, 4)
-        story.spriteSayText(NPCJhonny2, "Use the weapons to defeat Khan!", 15, 4)
-        story.spriteSayText(NPCJhonny2, "Good luck! You will need it :)", 15, 4)
+        enable_movement(false)
+        story.printCharacterText("Hi!", "Jhonny")
+        story.printCharacterText("Khan, the evil warlord has taken over Province Town!", "Jhonny")
+        story.printCharacterText("You must help us to destroy him!", "Jhonny")
+        story.printCharacterText("Go to the cave in the north of spawn to go into different", "Jhonny")
+        story.printCharacterText("dungeons and defeat monsters to get plastic, a rare mineral!", "Jhonny")
+        story.printCharacterText("Use it to craft weapons at the east of the village.", "Jhonny")
+        story.printCharacterText("Use the weapons to defeat Khan!", "Jhonny")
+        story.printCharacterText("Good luck! You will need it :)", "Jhonny")
+        enable_movement(true)
         triggerNPC = false
         pause(36000)
     }
+    if (IsOverlapingNPCJhonny == false) {
+        IsOverlapingNPCJhonny = true
+        pause(2000)
+        IsOverlapingNPCJhonny = false
+    }
 })
 function Level__8__Shadow_Realm__Boss () {
-	
+    tiles.setCurrentTilemap(tilemap`level43`)
 }
 function LevelHomeTown () {
     SoundPhase = 2
@@ -630,18 +562,44 @@ function LevelHomeTown () {
 }
 controller.combos.attachCombo("dA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, 50)
+    projectileSprite.setKind(SpriteKind.PlayerShot)
+})
+function spell2 () {
+    for (let index = 0; index <= 4; index++) {
+        shootBulletFromSprite(boss, 60, offset + index * 30)
+    }
+    offset += 23
+}
+function handle_b_key_in_toolbar () {
+    toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) == toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
+        toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
+    }
+}
+statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
+    PlasticZombie.destroy(effects.ashes, 500)
+})
+function move_left_in_toolbar () {
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
+        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, -1)
+    }
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Monster, function (sprite, otherSprite) {
+    Players_Health.value += -5
+    pause(1500)
 })
 function Level__4__Future_Planet () {
-    tiles.setCurrentTilemap(tilemap`level43`)
+    tiles.setCurrentTilemap(tilemap`level44`)
 }
 function Level__5__Lost_City () {
-    tiles.setCurrentTilemap(tilemap`level44`)
     SpawnNPCJhonny(20, 30)
+    tiles.setCurrentTilemap(tilemap`level45`)
 }
 function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Text)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.NPCJhonny)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Monster)
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Messages)
@@ -662,15 +620,18 @@ function enable_movement (en: boolean) {
         controller.moveSprite(PlayerWarrior, 0, 0)
     }
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    scene.cameraShake(3, 200)
+    music.playTone(139, music.beat(BeatFraction.Eighth))
+    otherSprite.destroy()
+})
 function Level__2__Underwater_Palace () {
-    tiles.setCurrentTilemap(tilemap`DungeonLevel2`)
+    tiles.setCurrentTilemap(tilemap`Tilemap_Level 2 - Underwater Palace`)
 }
 function SpawnWarlord () {
     game.showLongText("You have made it to the end. Now you shall have the honour of getting killed by me. ", DialogLayout.Bottom)
-    NecronWarlord = sprites.create(assets.image`NecronWarlord`, SpriteKind.Enemy)
-    animation.runImageAnimation(
-    NecronWarlord,
-    [img`
+    boss = sprites.create(img`
         ........................
         ........................
         ........................
@@ -695,85 +656,15 @@ function SpawnWarlord () {
         ........................
         ........................
         ........................
-        `,img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11111111f.......
-        ......fd11111111df......
-        ......fd11111111df......
-        ......fddd1111dddf......
-        ......fbdbfddfbdbf......
-        ......fcdcf11fcdcf......
-        .......fb111111ffff.....
-        ......fffcdb1bc111cf....
-        ....fc111cbfbf1b1b1f....
-        ....f1b1b1ffffbfbfbf....
-        ....fbfbfffffff.........
-        .........fffff..........
-        ..........fff...........
-        ........................
-        ........................
-        ........................
-        ........................
-        `,img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11111111f.......
-        ......fd11111111df......
-        ......fd11111111df......
-        ......fddd1111dddf......
-        ......fbdbfddfbdbf......
-        ......fcdcf11fcdcf......
-        .......fb111111bf.......
-        ......fffcdb1bdffff.....
-        ....fc111cbfbfc111cf....
-        ....f1b1b1ffff1b1b1f....
-        ....fbfbffffffbfbfbf....
-        .........ffffff.........
-        ...........fff..........
-        ........................
-        ........................
-        ........................
-        ........................
-        `,img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11111111f.......
-        ......fd11111111df......
-        ......fd11111111df......
-        ......fddd1111dddf......
-        ......fbdbfddfbdbf......
-        ......fcdcf11fcdcf......
-        .....ffff111111bf.......
-        ....fc111cdb1bdfff......
-        ....f1b1bcbfbfc111cf....
-        ....fbfbfbffff1b1b1f....
-        .........fffffffbfbf....
-        ..........fffff.........
-        ...........fff..........
-        ........................
-        ........................
-        ........................
-        ........................
-        `],
-    500,
-    true
-    )
+        `, SpriteKind.Enemy)
+    boss.setPosition(-16, -16)
+    lifeBarPic = image.create(96, 5)
+    lifeBar = statusbars.create(80, 5, StatusBarKind.Health)
+    lifeBar.setFlag(SpriteFlag.Ghost, true)
+    offset = 0
+    MAX = 10
+    bossCanMove = true
+    preSetBossPosition(80, 30)
     music.playMelody(music.convertRTTTLToMelody("mkombat:d=4,o=5,b=70:16a#,16a#,16c#6,16a#,16d#6,16a#,16f6,16d#6,16c#6,16c#6,16f6,16c#6,16g#6,16c#6,16f6,16c#6,16g#,16g#,16c6,16g#,16c#6,16g#,16d#6,16c#6,16f#,16f#,16a#,16f#,16c#6,16f#,16c#6,16c6"), 120)
 }
 function CheckQualification (LevelNumber: number) {
@@ -785,12 +676,8 @@ function CheckQualification (LevelNumber: number) {
 }
 controller.combos.attachCombo("uA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, -50)
+    projectileSprite.setKind(SpriteKind.PlayerShot)
 })
-function give_item (idx: number) {
-    the_item = sprites.create(all_items[idx], SpriteKind.Food)
-    the_item.setPosition(PlayerWarrior.x, PlayerWarrior.y)
-    the_item.lifespan = 5000
-}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     CheckQualification(6)
     if (IsQualified == true) {
@@ -1182,7 +1069,7 @@ function DrawLoadingScreen () {
     IsLoadingScreenVisible = true
 }
 function Level__3__Jungle () {
-    tiles.setCurrentTilemap(tilemap`level33`)
+    tiles.setCurrentTilemap(tilemap`Tilemap_Level-3 - The Jungle`)
 }
 function SettingsView () {
     SettingsMenu = miniMenu.createMenu(
@@ -1224,13 +1111,30 @@ function SettingsView () {
         ................................cccccccccccc.
         `)
     )
+    SettingsMenu.setFrame(img`
+        d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d 3 3 3 3 3 3 3 3 3 3 3 d d 
+        d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d 
+        `)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
     LevelTheDeathGateHub()
 })
-function move_left_in_inventory_toolbar () {
-    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
-        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, -1)
+function move_right_in_toolbar () {
+    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) < toolbar.get_number(ToolbarNumberAttribute.MaxItems) - 1) {
+        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
     }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
@@ -1245,16 +1149,26 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
-function move_right_in_inventory_toolbar () {
-    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) < toolbar.get_number(ToolbarNumberAttribute.MaxItems) - 1) {
-        toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
-    }
+function preSetBossPosition (x: number, y: number) {
+    started = false
+    ready = false
+    offset = 0
+    moveSpriteInTime(boss, x, y, 1)
 }
+controller.B.onEvent(ControllerButtonEvent.Released, function () {
+    controller.moveSprite(PlayerWarrior)
+})
 function Level__6__Mossy_Dungeon () {
-	
+    tiles.setCurrentTilemap(tilemap`level47`)
 }
-function move_up_in_inventory_toolbar () {
-    toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
+function moveSpriteRandomFixedTime (sprite: Sprite, yLowerBound: number, outerBound: number, t: number) {
+    moveSpriteInTime(sprite, randint(outerBound, scene.screenWidth() - outerBound), randint(outerBound, yLowerBound), t)
+}
+function nonSpell2 () {
+    for (let index3 = 0; index3 <= MAX - 1; index3++) {
+        shootBulletFromSprite(boss, 60, 360 / MAX * index3 + offset)
+        shootBulletFromSprite(boss, 100, 360 / MAX * (index3 + 0.5) + offset)
+    }
 }
 function make_toolbar () {
     last_toolbar_select = 0
@@ -1274,6 +1188,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, 
 })
 controller.combos.attachCombo("rA", function () {
     projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 50, 0)
+    projectileSprite.setKind(SpriteKind.PlayerShot)
 })
 function SpawnCharecter () {
     PlayerWarrior = sprites.create(img`
@@ -1314,10 +1229,165 @@ function SpawnCharecter () {
         . . . e . . . 
         `)
 }
-function Level__7__Haunted_Mansion () {
-	
+function shootBulletFromSprite (sourceSprite: Sprite, speed: number, angle: number) {
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, sourceSprite, speed * Math.cos(angle / 57.3), speed * Math.sin(angle / 57.3))
+    projectile.setFlag(SpriteFlag.AutoDestroy, true)
+    if (sourceSprite.kind() == SpriteKind.Player) {
+        projectile.setKind(SpriteKind.PlayerShot)
+        projectile.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . 5 4 4 5 . . . . . . 
+            . . . . . 5 4 2 2 4 5 . . . . . 
+            . . . . . 5 4 2 2 4 5 . . . . . 
+            . . . . . . 5 4 4 5 . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    } else {
+        projectile.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 9 9 . . . . . . . 
+            . . . . . . 9 6 6 9 . . . . . . 
+            . . . . . 9 6 8 8 6 9 . . . . . 
+            . . . . . 9 6 8 8 6 9 . . . . . 
+            . . . . . . 9 6 6 9 . . . . . . 
+            . . . . . . . 9 9 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    }
 }
-function add_item (item_in_list: any[]) {
+function moveSprite (sprite: Sprite, x: number, y: number, v: number) {
+    globalX = x
+    globalY = y
+    dx = x - sprite.x
+    dy = y - sprite.y
+    speed = Math.sqrt(dx * dx + dy * dy)
+    if (speed != 0) {
+        sprite.setVelocity(dx / speed * v, dy / speed * v)
+    }
+}
+function Level__7__Haunted_Mansion () {
+    tiles.setCurrentTilemap(tilemap`level48`)
+}
+function enemyShootAimingPlayer (sprite: Sprite, speed: number, spread: number) {
+    shootBulletFromSprite(sprite, speed, Math.atan2(PlayerWarrior.y - sprite.y, PlayerWarrior.x - sprite.x) * 57.3 + randint(0 - spread, spread))
+}
+function SpawnNPCJhonny (cordsX: number, cordsY: number) {
+    NPCJhonnyCitizen = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPCJhonny)
+    tiles.placeOnTile(NPCJhonnyCitizen, tiles.getTileLocation(cordsX, cordsX))
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
+    DungeonLevel += 1
+    DestroySprites()
+    LevelHomeTown()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile15`)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile16`)
+})
+function Level__1__Ruins () {
+    tiles.setCurrentTilemap(tilemap`level10`)
+    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
+    SpawnPlasticZombie(5, 1)
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
+    DungeonLevel += 1
+    DestroySprites()
+    LevelHomeTown()
+})
+function LevelTheDeathGateHub () {
+    DestroySprites()
+    tiles.setCurrentTilemap(tilemap`DeathGateHub`)
+    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
+}
+let NPCJhonnyCitizen: Sprite = null
+let speed = 0
+let projectile: Sprite = null
+let last_toolbar_select = 0
+let ready = false
+let SettingsMenu: miniMenu.MenuSprite = null
+let LoadingAnimation: Sprite = null
+let LoadingTextSprite: TextSprite = null
+let LoadingSprite: StatusBarSprite = null
+let bossCanMove = false
+let Players_Health: StatusBarSprite = null
+let DungeonLevel = 0
+let offset = 0
+let MAX = 0
+let sagaSprite: Sprite = null
+let scroll = false
+let projectileSprite: Sprite = null
+let boss: Sprite = null
+let lifeBar: StatusBarSprite = null
+let lifeBarPic: Image = null
+let started = false
+let IsQualified = false
+let dy = 0
+let dx = 0
+let globalY = 0
+let globalX = 0
+let PlasticBottleIcon: Sprite = null
+let myMenu: miniMenu.MenuSprite = null
+let MenuOpen = false
+let PlayerWarrior: Sprite = null
+let Monsters_Health: StatusBarSprite = null
+let PlasticZombie: Sprite = null
+let HasGameStarted = false
+let SoundPhase = 0
+let ShowSaga = false
+let SagaTimeSpan = 0
+let triggerNPC = false
+let bossLife = 0
+let IsOverlapingNPCJhonny = false
+let IsLoadingScreenVisible = false
+let NecronWarlord = null
+let toolbar: Inventory.Toolbar = null
+let storyLines: string[] = []
+let star = null
+let lineAdjust = 0
+let sagaImage: Image = null
+let item2 = null
+let all_items: Image[] = []
+let all_labels: string[] = []
+let lifeBarProgress = 0
+let bossProgress = 0
+function add_item(item_in_list: any[]) {
     for (let item of toolbar.get_items()) {
         if (item.get_image().equals(item_in_list[0].get_image())) {
             if (item.get_text(ItemTextAttribute.Tooltip) == "") {
@@ -1332,84 +1402,13 @@ function add_item (item_in_list: any[]) {
     if (toolbar.get_items().length < toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
         toolbar.get_items().push(item_in_list[0])
         item_in_list[0].set_text(ItemTextAttribute.Tooltip, "")
-toolbar.update()
+        toolbar.update()
         return true
     }
     return false
 }
-function SpawnNPCJhonny (cordsX: number, cordsY: number) {
-    NPCJhonny2 = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPCJhonny)
-    tiles.placeOnTile(NPCJhonny2, tiles.getTileLocation(cordsX, cordsX))
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
-    LevelHomeTown()
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile15`)
-})
-function handle_b_key_in_inventory_toolbar () {
-    toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, 1)
-    if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) == toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
-        toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
-    }
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile16`)
-})
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    otherSprite.destroy()
-})
-function Level__1__Ruins () {
-    tiles.setCurrentTilemap(tilemap`level10`)
-    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
-    SpawnPlasticZombie(5, 1)
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
-    DungeonLevel += 1
-    DestroySprites()
-    LevelHomeTown()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    Players_Health.value += -5
-    pause(1500)
-})
-function LevelTheDeathGateHub () {
-    DestroySprites()
-    tiles.setCurrentTilemap(tilemap`DeathGateHub`)
-    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
-}
-let last_toolbar_select = 0
-let SettingsMenu: miniMenu.MenuSprite = null
-let LoadingAnimation: Sprite = null
-let LoadingTextSprite: TextSprite = null
-let LoadingSprite: StatusBarSprite = null
-let the_item: Sprite = null
-let NecronWarlord: Sprite = null
-let Players_Health: StatusBarSprite = null
-let NPCJhonny2: Sprite = null
-let DungeonLevel = 0
-let sagaSprite: Sprite = null
-let scroll = false
-let toolbar: Inventory.Toolbar = null
-let IsQualified = false
-let all_labels: string[] = []
-let all_items: Image[] = []
-let myMenu: miniMenu.MenuSprite = null
-let MenuOpen = false
-let PlayerWarrior: Sprite = null
-let PlasticZombie: Sprite = null
-let SoundPhase = 0
-let ShowSaga = false
-let SagaTimeSpan = 0
-let IsLoadingScreenVisible = false
-let storyLines: string[] = []
-let star = null
-let lineAdjust = 0
-let sagaImage: Image = null
-let projectileSprite: Sprite = null
-let triggerNPC = false
-let item2 = null
 IsLoadingScreenVisible = false
+IsOverlapingNPCJhonny = false
 namespace SpriteKind {
     export const Star = SpriteKind.create()
     export const Logo = SpriteKind.create()
@@ -1421,37 +1420,26 @@ namespace SpriteKind {
 }
 let DeathMessages = [
 "*Rage Incoming*",
-"b",
+"You died! Oh wait, you already know that!",
 "c",
-"",
-""
+"d",
+"e"
 ]
+bossLife = 48
 triggerNPC = false
-projectileSprite = null
 SagaTimeSpan = 34000
 ShowSaga = false
 DrawLoadingScreen()
 timer.debounce("Loading", 5000, function () {
     Start_Game()
     SoundPhase = 1
+    HasGameStarted = true
 })
 game.onUpdate(function () {
     if (ShowSaga == true) {
         if (sagaSprite.bottom < 0) {
             sagaSprite.destroy()
         }
-    }
-})
-forever(function () {
-    if (IsLoadingScreenVisible == true) {
-        while (LoadingSprite.value != 5000) {
-            pause(randint(50, 100))
-            LoadingSprite.value += 100
-            LoadingSprite.attachToSprite(LoadingAnimation)
-        }
-        LoadingAnimation.destroy(effects.ashes, 500)
-        LoadingTextSprite.destroy(effects.disintegrate, 500)
-        IsLoadingScreenVisible = false
     }
 })
 forever(function () {
@@ -1771,5 +1759,17 @@ forever(function () {
         Music.CatQuestVo1(songs.Seaside_town)
     } else if (SoundPhase == 3) {
         Music.CatQuestVo1(songs.Tavern)
+    }
+})
+forever(function () {
+    if (IsLoadingScreenVisible == true) {
+        while (LoadingSprite.value != 5000) {
+            pause(randint(50, 100))
+            LoadingSprite.value += 100
+            LoadingSprite.attachToSprite(LoadingAnimation)
+        }
+        LoadingAnimation.destroy(effects.ashes, 500)
+        LoadingTextSprite.destroy(effects.disintegrate, 500)
+        IsLoadingScreenVisible = false
     }
 })
