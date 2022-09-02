@@ -1301,7 +1301,7 @@ function moveSprite (sprite: Sprite, x: number, y: number, v: number) {
     }
 }
 function Level__7__Haunted_Mansion () {
-	
+    tiles.setCurrentTilemap(tilemap`level48`)
 }
 function enemyShootAimingPlayer (sprite: Sprite, speed: number, spread: number) {
     shootBulletFromSprite(sprite, speed, Math.atan2(PlayerWarrior.y - sprite.y, PlayerWarrior.x - sprite.x) * 57.3 + randint(0 - spread, spread))
