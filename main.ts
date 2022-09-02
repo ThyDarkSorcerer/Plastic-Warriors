@@ -1159,7 +1159,7 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
     controller.moveSprite(PlayerWarrior)
 })
 function Level__6__Mossy_Dungeon () {
-	
+    tiles.setCurrentTilemap(tilemap`level47`)
 }
 function moveSpriteRandomFixedTime (sprite: Sprite, yLowerBound: number, outerBound: number, t: number) {
     moveSpriteInTime(sprite, randint(outerBound, scene.screenWidth() - outerBound), randint(outerBound, yLowerBound), t)
