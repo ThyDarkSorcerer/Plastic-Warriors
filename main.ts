@@ -593,6 +593,7 @@ function Level__4__Future_Planet () {
 }
 function Level__5__Lost_City () {
     SpawnNPCJhonny(20, 30)
+    tiles.setCurrentTilemap(tilemap`level45`)
 }
 function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Text)
