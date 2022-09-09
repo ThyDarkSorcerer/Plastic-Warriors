@@ -29,6 +29,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "myImage0"
     },
+    "image7": {
+        "data": "hwQMABAAAAAA8P//D+AzAAD//zP+Pz0A8P//PuP//wDw/jPz3b5h/+8+M/PdE2H/7+4zM70TYQ/v7j4zvRNhD+/u7vPdE2H/8P7v892+Yf/w//8+4///AAD//zP+Pz0AAPD//w/gMwA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "PlasticZombie"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

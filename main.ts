@@ -24,24 +24,7 @@ namespace StatusBarKind {
 }
 function SpawnPlasticZombie (Amount: number, Health: number) {
     for (let index2 = 0; index2 <= Amount; index2++) {
-        PlasticZombie = sprites.create(img`
-            . . . . f f f f . . . . 
-            . . f f e e e e f f . . 
-            . f f e e e e e e f f . 
-            f f f f 3 e e e f f f f 
-            f f f 3 3 3 e e f f f f 
-            f f f 3 3 3 3 e e f f f 
-            f 3 e 3 3 3 3 3 3 e 3 f 
-            f 3 3 f f 3 3 f f 3 3 f 
-            f e 3 d d d d d d 3 e f 
-            . f e d d b b d d e f . 
-            . f f e 3 3 3 3 e f f . 
-            e 3 f b 1 1 1 1 b f 3 e 
-            3 d f 1 1 1 1 1 1 f d 3 
-            3 3 f 6 6 6 6 6 6 f 3 3 
-            . . . f f f f f f . . . 
-            . . . f f . . f f . . . 
-            `, SpriteKind.Monster)
+        PlasticZombie = sprites.create(assets.image`PlasticZombie`, SpriteKind.Monster)
         Monsters_Health = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
         Monsters_Health.value = Health
         Monsters_Health.attachToSprite(PlasticZombie)
@@ -269,11 +252,18 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.PlayerShot, function (sprite, oth
     otherSprite.destroy()
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    handle_b_key_in_toolbar()
-    if (IsOverlapingNPCJhonny == true) {
-        triggerNPC = true
-        pause(2000)
-        triggerNPC = false
+    if (HasGameStarted == true) {
+        handle_b_key_in_toolbar()
+        if (IsOverlapingShopTiles == true) {
+            triggerShop = true
+            pause(1000)
+            triggerShop = false
+        }
+        if (IsOverlapingNPCJhonny == true) {
+            triggerNPC = true
+            pause(2000)
+            triggerNPC = false
+        }
     }
 })
 function DrawToolbar () {
@@ -482,6 +472,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile73`, function (sprite, location) {
+    if (triggerShop == true) {
+        WeaponShopUI()
+        pause(1000)
+    }
+})
 sprites.onOverlap(SpriteKind.Monster, SpriteKind.PlayerShot, function (sprite, otherSprite) {
     otherSprite.destroy(effects.ashes, 500)
     Monsters_Health.value += -1
@@ -506,7 +502,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, l
     }
 })
 function BlockMap () {
-    tiles.setCurrentTilemap(tilemap`level8`)
+    tiles.setCurrentTilemap(tilemap`BlockMap`)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
     CheckQualification(2)
@@ -574,6 +570,9 @@ function handle_b_key_in_toolbar () {
 statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
     PlasticZombie.destroy(effects.ashes, 500)
 })
+function WeaponShopUI () {
+	
+}
 function move_left_in_toolbar () {
     if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
         toolbar.change_number(ToolbarNumberAttribute.SelectedIndex, -1)
@@ -584,7 +583,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Monster, function (sprite, other
     pause(1500)
 })
 function Level__4__Future_Planet () {
-    tiles.setCurrentTilemap(tilemap`level44`)
+    tiles.setCurrentTilemap(tilemap`Level4 - Futuristic City`)
 }
 function Level__5__Lost_City () {
     SpawnNPCJhonny(20, 30)
@@ -1066,27 +1065,34 @@ function DrawLoadingScreen () {
 function Level__3__Jungle () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level-3 - The Jungle`)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`triggerShopTilesGrass`, function (sprite, location) {
+    if (triggerShop == true) {
+        WeaponShopUI()
+        pause(1000)
+    }
+})
 function SettingsView () {
     if (!(SettingsOpen)) {
         SettingsOpen = true
         SettingsMenu = miniMenu.createMenu(
         miniMenu.createMenuItem("", img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
+            .............eee.....................eee.......ee...............................................................ee..............
+            ..eeeeeee..e22222e.................e22222e...222222.................eeeee.....................................222222............
+            e22222222222455542.................2455542...245554e..............22222222e...................................255554e...........
+            245555555542455542ceeeee.....eeee..2455542ee.245554eceeeee.......2455555552e..eeeee....ee...eee.eee..ee.....ee255554eeeeeee.....
+            24555555555422222222222222.222222222455542222245554e22222222....245555555552e2222222e2222222222222222222e.e22225555422222222e...
+            2455542455544555425555555224555555424555455542455542255555542...2555522455522455555522555544555455554555222555555554255555552e..
+            24555424555445554555445554245555555445555555544555425555555542ce25555555542245555555525555445554555555554255555555545554455542c.
+            24555424555445554555444422222224555445554455544555445554255552ce24555555554455552455545555445554555525555455552555545554444222cc
+            24555424555445554555555552245555555445554455544555445555555552ac22455555555455552455545555445554555525555455552555545555555422ac
+            24555424555445554255555555255555555445554455544555445555555552ac22222224555455552455545555445554555525555455552555544555555542ac
+            24555424555445554444425555455544555445554455544555445554222222ae25555424555455552455545555445554555525555455552555544442455552ac
+            24555555555445554555545554455555555445555555524555545555555542ac24555555555245555555524555555554555525555255555555545555455542ac
+            24555555554245554455555542245554555445555555222455542555555522ace245555555222455555522245554555455552555522555555554455555542eac
+            e22222222222222222222222222222222222222222222ae22222222222222aac.e222222222a222222222ae2222222222222222222222222222222222222eaac
+            .e22222222aae222ea222222eaae2222222222222222aaae2222ae22222eaaac..e222222eaaae22222eaaae222222222222e2222aae2222222aa222222aaacc
+            ..ccaaaaaaaaccaaaaaaaaaaaaccccaaaaaaaaaaaaaaaaccccaaaacaaaaaaac....ccaaaaaacccccaaaaacccccaaaaaaaaaaaaaaaaaccaaaaaaaaaaaaaaaacc.
+            ...cccccccccc.ccccccccccccc..ccccccccccccccccc...ccccccccccccc......cccccccc...ccccccc...cccccccccccccccccccccccccccccccccccc...
             `),
         miniMenu.createMenuItem("", img`
             ..............................e22222e........
@@ -1126,10 +1132,10 @@ function SettingsView () {
             d d d d d d d d d d d d d d d 
             `)
         myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
-            SettingsMenu.close()
             if (selectedIndex == 0) {
             	
             } else if (selectedIndex == 1) {
+                SettingsMenu.close()
                 SettingsOpen = false
                 DrawMenu()
             }
@@ -1162,9 +1168,6 @@ function preSetBossPosition (x: number, y: number) {
     offset = 0
     moveSpriteInTime(boss, x, y, 1)
 }
-controller.B.onEvent(ControllerButtonEvent.Released, function () {
-    controller.moveSprite(PlayerWarrior)
-})
 function Level__6__Mossy_Dungeon () {
     tiles.setCurrentTilemap(tilemap`level47`)
 }
@@ -1361,6 +1364,7 @@ let sagaSprite: Sprite = null
 let scroll = false
 let projectileSprite: Sprite = null
 let boss: Sprite = null
+let triggerShop = false
 let lifeBar: StatusBarSprite = null
 let lifeBarPic: Image = null
 let started = false
@@ -1369,13 +1373,13 @@ let dy = 0
 let dx = 0
 let globalY = 0
 let globalX = 0
+let HasGameStarted = false
 let PlasticBottleIcon: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
 let PlayerWarrior: Sprite = null
 let Monsters_Health: StatusBarSprite = null
 let PlasticZombie: Sprite = null
-let HasGameStarted = false
 let SoundPhase = 0
 let ShowSaga = false
 let SagaTimeSpan = 0
@@ -1384,18 +1388,20 @@ let bossLife = 0
 let IsOverlapingNPCJhonny = false
 let IsLoadingScreenVisible = false
 let SettingsOpen = false
-let bossProgress = 0
-let lifeBarProgress = 0
-SettingsOpen = false
-let all_labels: string[] = []
-let all_items: Image[] = []
-let item2 = null
-let sagaImage: Image = null
-let lineAdjust = 0
-let star = null
-let storyLines: string[] = []
-let toolbar: Inventory.Toolbar = null
+let IsOverlapingShopTiles = false
+IsOverlapingShopTiles = false
 let NecronWarlord = null
+let toolbar: Inventory.Toolbar = null
+let storyLines: string[] = []
+let star = null
+let lineAdjust = 0
+let sagaImage: Image = null
+let item2 = null
+let all_items: Image[] = []
+let all_labels: string[] = []
+let lifeBarProgress = 0
+let bossProgress = 0
+SettingsOpen = false
 function add_item(item_in_list: any[]) {
     for (let item of toolbar.get_items()) {
         if (item.get_image().equals(item_in_list[0].get_image())) {
@@ -1442,7 +1448,6 @@ DrawLoadingScreen()
 timer.debounce("Loading", 5000, function () {
     Start_Game()
     SoundPhase = 1
-    HasGameStarted = true
 })
 game.onUpdate(function () {
     if (ShowSaga == true) {

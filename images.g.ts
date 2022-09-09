@@ -139,6 +139,25 @@ e e f 6 6 6 6 6 6 f e e .
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
+            case "image7":
+            case "PlasticZombie":return img`
+. . . . f f f f . . . . 
+. . f f e e e e f f . . 
+. f f e e e e e e f f . 
+f f f f 3 e e e f f f f 
+f f f 3 3 3 e e f f f f 
+f f f 3 3 3 3 e e f f f 
+f 3 e 3 3 3 3 3 3 e 3 f 
+f 3 3 f f 3 3 f f 3 3 f 
+f e 3 d d d d d d 3 e f 
+. f e d d b b d d e f . 
+. f f e 3 3 3 3 e f f . 
+e 3 f b 1 1 1 1 b f 3 e 
+3 d f 1 1 1 1 1 1 f d 3 
+3 3 f 6 6 6 6 6 6 f 3 3 
+. . . f f f f f f . . . 
+. . . f f . . f f . . . 
+`;
         }
         return null;
     })
