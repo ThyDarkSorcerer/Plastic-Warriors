@@ -18,7 +18,8 @@
         "arcade-shader": "github:riknoll/arcade-shader#d2a2572906fdb68ff429f337e30606b069e688ea",
         "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
         "Inventory": "github:UnsignedArduino/Inventory#v1.1.1",
-        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
+        "InhouseLoadingAnimations": "github:ThyDarkSorcerer/InhouseLoadingAnimations#e69e24bf004ecf0b3221193cacb6d19eb22e14be"
     },
     "files": [
         "main.blocks",
