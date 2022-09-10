@@ -19,6 +19,7 @@ namespace SpriteKind {
     export const PlayerShot = SpriteKind.create()
     export const Monster = SpriteKind.create()
     export const Logo = SpriteKind.create()
+    export const VulkanAppSprite = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const Load = StatusBarKind.create()
@@ -281,8 +282,10 @@ function moveSpriteRandom (sprite: Sprite, yLowerBound: number, outerBound: numb
     moveSprite(sprite, randint(outerBound, scene.screenWidth() - outerBound), randint(outerBound, yLowerBound), v)
 }
 controller.combos.attachCombo("lA", function () {
-    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, -50, 0)
-    projectileSprite.setKind(SpriteKind.PlayerShot)
+    if (HasGameStarted == true) {
+        projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, -50, 0)
+        projectileSprite.setKind(SpriteKind.PlayerShot)
+    }
 })
 function DrawSaga () {
     color.startFade(color.originalPalette, color.Black)
@@ -553,8 +556,10 @@ function LevelHomeTown () {
     SpawnNPCJhonny(5, 5)
 }
 controller.combos.attachCombo("dA", function () {
-    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, 50)
-    projectileSprite.setKind(SpriteKind.PlayerShot)
+    if (HasGameStarted == true) {
+        projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, 50)
+        projectileSprite.setKind(SpriteKind.PlayerShot)
+    }
 })
 function spell2 () {
     for (let index = 0; index <= 4; index++) {
@@ -572,7 +577,174 @@ statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
     PlasticZombie.destroy(effects.ashes, 500)
 })
 function WeaponShopUI () {
-	
+    PlayerWarrior = sprites.create(assets.image`Curser`, SpriteKind.Player)
+    ShopBackground_Shop = sprites.create(img`
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        d111111111111111111111111111111111111111111111111111111111111111111111111111111d
+        d111111111111111111111111111111111111111111111111111111111111111111111111111111d
+        d111111111111111111111111111111111111111111111111111111111111111111111111111111d
+        d111111111111111111111111111111111111111111111111111111111111111111111111111111d
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        `, SpriteKind.VulkanAppSprite)
+    ShopTitle_Shop = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.VulkanAppSprite)
+    CloseButton_Shop = sprites.create(assets.image`CloseButton`, SpriteKind.VulkanAppSprite)
+    Item_SwordOfLife_Shop = sprites.create(img`
+        dddddddddddddddddddddddddddddddd
+        dffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffeffe2fffd
+        dffffffffffffffffffffffffee2fffd
+        dfffffffffffffffffffffffed2ffffd
+        dffffffffffffffffffffffee2fffffd
+        dffffffffffffffffffeffeb2ffffffd
+        dffffffffffffffffffffee2fffffffd
+        dfffffffffffffffffffea2ffffffffd
+        dffffffffffffffffffee2ffff2ffffd
+        dfffffffffffffffffe82ffffffffffd
+        dffffffffffffffffee2fffffffffffd
+        dfffffffffffff2fec2ffefffffffffd
+        dffffffffffffffee2fffffffefffffd
+        dffffffffffffeeeeffffffffffffffd
+        dffffe4fffeefefefffffffffffffffd
+        dffff44e2ff2eeeefffffefffffffffd
+        dfffffef22f24efffffff2fffffffffd
+        dfffff22eeee22effffffffffffffffd
+        dffffff2422effeffffffffffffffffd
+        dfffffffe42e2ffffffffffffffffffd
+        dffffffe4e4e22fffffffffffffffffd
+        dffff2e2ef22fefffffffffffffffffd
+        dffff2eefff2e44ffffffffffffffffd
+        dfffee22fffff4effffffffffffffffd
+        dfff2efffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffd
+        dddddddddddddddddddddddddddddddd
+        `, SpriteKind.VulkanAppSprite)
+    Item_SoulForgedHammer_Shop = sprites.create(img`
+        dddddddddddddddddddddddddddddddd
+        dffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffd
+        dffffffffffffffddffffffffffffffd
+        dffffffffffffd3bb3dffffffffffffd
+        dfffffffffe2ffdeedff2efffffffffd
+        dffffffefff22ffeeff22fffeffffffd
+        dfffff2e2eeee2feef2eeee2e2fffffd
+        dfffff4242eeeeeeeeeeee2424fffffd
+        dffffff2f42eceeeeeece24f2ffffffd
+        dffffff4ff4e8eeeeee8e4ff4ffffffd
+        dfffefffffeeeefeefeeeefffffefffd
+        dfff2efffee22ffeeff22eefffe2fffd
+        dffff2efeefffffddfffffeefe2ffffd
+        dfffff2ee2ffffddddffff2ee2fffffd
+        dffffff22fffffeeeefffff22ffffffd
+        dfffffffffffffeeeefffffffffffffd
+        dfffffffffffffdbbdfffffffffffffd
+        dfffffffffffffeeeefffffffffffffd
+        dfffffffffffffeeeefffffffffffffd
+        dfffffffffffffbbbbfffffffffffffd
+        dfffffffffffffbbbbfffffffffffffd
+        dfffffffffffffeeeefffffffffffffd
+        dfffffffffffffeeeefffffffffffffd
+        dfffffffffffffdbbdfffffffffffffd
+        dfffffffffffffeeeefffffffffffffd
+        dfffffffffffffeeeefffffffffffffd
+        dfffffffffffffddddfffffffffffffd
+        dffffffffffffffddffffffffffffffd
+        dffffffffffffffffffffffffffffffd
+        dffffffffffffffffffffffffffffffd
+        dddddddddddddddddddddddddddddddd
+        `, SpriteKind.VulkanAppSprite)
+    Item_Celeste_Staff_of_Chaos_Shop = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.VulkanAppSprite)
 }
 function move_left_in_toolbar () {
     if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
@@ -669,8 +841,10 @@ function CheckQualification (LevelNumber: number) {
     }
 }
 controller.combos.attachCombo("uA", function () {
-    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, -50)
-    projectileSprite.setKind(SpriteKind.PlayerShot)
+    if (HasGameStarted == true) {
+        projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, -50)
+        projectileSprite.setKind(SpriteKind.PlayerShot)
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     CheckQualification(6)
@@ -1224,8 +1398,10 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, 
     }
 })
 controller.combos.attachCombo("rA", function () {
-    projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 50, 0)
-    projectileSprite.setKind(SpriteKind.PlayerShot)
+    if (HasGameStarted == true) {
+        projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 50, 0)
+        projectileSprite.setKind(SpriteKind.PlayerShot)
+    }
 })
 function SpawnCharecter () {
     PlayerWarrior = sprites.create(img`
@@ -1763,6 +1939,12 @@ let SettingsMenu: miniMenu.MenuSprite = null
 let PlasticWarriorsSplash: Sprite = null
 let bossCanMove = false
 let Players_Health: StatusBarSprite = null
+let Item_Celeste_Staff_of_Chaos_Shop: Sprite = null
+let Item_SoulForgedHammer_Shop: Sprite = null
+let Item_SwordOfLife_Shop: Sprite = null
+let CloseButton_Shop: Sprite = null
+let ShopTitle_Shop: Sprite = null
+let ShopBackground_Shop: Sprite = null
 let DungeonLevel = 0
 let offset = 0
 let MAX = 0
@@ -1841,9 +2023,8 @@ namespace SpriteKind {
 let DeathMessages = [
 "*Rage Incoming*",
 "You died! Oh wait, you already know that!",
-"c",
-"d",
-"e"
+"Are you sure you want to respawn?",
+"I forgot to say this: L"
 ]
 bossLife = 48
 triggerNPC = false
