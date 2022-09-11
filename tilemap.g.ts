@@ -228,6 +228,32 @@ namespace myTiles {
     export const tile107 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile108 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile113 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile114 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile118 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile120 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile121 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile122 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile123 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile124 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile126 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile127 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile128 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile129 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile130 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -1405,6 +1431,25 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
+            case "level61":
+            case "level61":return tiles.createTilemap(hex`100010000208080908080808080909090809080407010101010101181b0101010101010a0d010101010101191a0101010101010b0701010101010101010101010101010a0701010101010101010101010101010a0d01010101010101010101010101010a0701010101010101010101010101010b071312010101010f0e0101010117160a071011010101010e0f0101010114150a0701010101010101010101010101010a0d01010101010101010101010101010b0701010101010101010101010101010a0701010101010101010101010101010a0701010101010101010101010101010a070101010101011c1c0101010101010b03060c0c060606060c060606060c0605`, img`
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 . . . . . . . . . . . . . . 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+`, [myTiles.transparency16,sprites.dungeon.floorDark2,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterSouth1,sprites.dungeon.greenOuterWest0,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterNorth1,sprites.dungeon.greenOuterEast0,sprites.dungeon.greenOuterEast1,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterWest1,sprites.dungeon.floorDarkDiamond,sprites.dungeon.floorDark5,myTiles.tile113,myTiles.tile114,myTiles.tile118,myTiles.tile120,myTiles.tile121,myTiles.tile122,myTiles.tile123,myTiles.tile124,myTiles.tile126,myTiles.tile127,myTiles.tile128,myTiles.tile129,myTiles.tile130], TileScale.Sixteen);
         }
         return null;
     })
@@ -1638,6 +1683,32 @@ namespace myTiles {
             case "tile107":return tile107;
             case "triggerShopTilesGrass":
             case "tile108":return tile108;
+            case "myTile80":
+            case "tile113":return tile113;
+            case "Workbench2":
+            case "tile114":return tile114;
+            case "Workbench4":
+            case "tile118":return tile118;
+            case "myTile81":
+            case "tile120":return tile120;
+            case "Workbench6":
+            case "tile121":return tile121;
+            case "myTile84":
+            case "tile122":return tile122;
+            case "myTile86":
+            case "tile123":return tile123;
+            case "Workbench7":
+            case "tile124":return tile124;
+            case "myTile89":
+            case "tile126":return tile126;
+            case "Workbench8":
+            case "tile127":return tile127;
+            case "Workbench9":
+            case "tile128":return tile128;
+            case "myTile90":
+            case "tile129":return tile129;
+            case "trigger_ShopEsacpe":
+            case "tile130":return tile130;
         }
         return null;
     })
