@@ -207,10 +207,9 @@ PlasticBottleIcon = sprites.create(img`
                 `, SpriteKind.Icon)
             PlasticBottleIcon.setPosition(146, 6)
             PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
-            info.setScore(23)
+            info.setScore(0)
             info.setLife(5)
             LevelHomeTown()
-            HandleShopBuy(1)
             HasGameStarted = true
         } else if (selectedIndex == 1) {
             MenuOpen = false
