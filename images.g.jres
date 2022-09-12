@@ -44,6 +44,21 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "CloseButton"
     },
+    "image10": {
+        "data": "hwQNABAAAAAA8Mz/APDfAAD/z///39QA8P/P/93//wDw//y/0b9r///////fTWT///z/3d29aw/Pz9/d3b1kD//M3//fTWT/8M//v9G/a//w////3f//AAD/z8z/39QAAMDM/wDw3wAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Npc_Hammer_Shop"
+    },
+    "image11": {
+        "data": "hwQNABAAAAAA8P//AAAAAPDPzP//AAAA8P/P3/3f/QD/z//f/U/UD//PzP/dTdT////8v9G9a//P/P//371r///8393dTWQP8M//3d2/aw/w//z/////AAD//P8AAAAAAAD/DwAAAAAAAP8AAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Npc_Sword_Shop"
+    },
+    "image12": {
+        "data": "hwQNABAAAAAAAP8AAAAAAAAA/w8AAAAAAP/8/wAAAADw//z/////APDP/93dv2sP//zf3d1NZA/P/P//371r/////L/RvWv//8/M/91N1P//z//f/U/UD/D/z9/93/0A8M/M//8AAAAA8P//AAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Npc_Sword_Shop0"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

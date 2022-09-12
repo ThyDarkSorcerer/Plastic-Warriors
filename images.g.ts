@@ -196,6 +196,63 @@ d f f f f f f f f f f f f f f d
 d f f f f f f f f f f f f f f d 
 d d d d d d d d d d d d d d d d 
 `;
+            case "image10":
+            case "Npc_Hammer_Shop":return img`
+. . . . f f f f . . . . . 
+. . f f f f c f f f . . . 
+. f f f f c f c f f f . . 
+f f f f f f c c c f f c . 
+c f f c f f f f f f f c . 
+c c c f f f d d f f c c . 
+f f f f f d d f f f c f . 
+f f f b f d d f b f c f . 
+. f d 1 f d d f 1 d f . . 
+. f d d d d d d d d f . . 
+. f f f d d d d f f f . . 
+f d f b 4 b b 4 b f d f . 
+f 4 f b 4 b 4 4 b f 4 f . 
+d d f 6 6 6 6 6 6 f d d . 
+. . . f f f f f f . . . . 
+. . . f f . . f f . . . . 
+`;
+            case "image11":
+            case "Npc_Sword_Shop":return img`
+. . . f f f f f . . . . . 
+. f f f f f c f f f . . . 
+. f f f f f c c f f f . . 
+f c f c c f f f c f f . . 
+f c f f c c f f f c c f f 
+f c c f c f f d f f f f f 
+f f f f f f f d d f f f . 
+f f d d f b f d d f f . . 
+. f d d d 1 f d d f . . . 
+. f f f d d d d d f . . . 
+. . f f d d d d f f . . . 
+. . d 4 4 b b 4 b f . . . 
+. . d 4 4 b b 4 b f . . . 
+. . f d d 6 6 6 6 f . . . 
+. . . f f f f f f . . . . 
+. . . . f f f . . . . . . 
+`;
+            case "image12":
+            case "Npc_Sword_Shop0":return img`
+. . . . . f f f f f . . . 
+. . . f f f c f f f f f . 
+. . f f f c c f f f f f . 
+. . f f c f f f c c f c f 
+f f c c f f f c c f f c f 
+f f f f f d f f c f c c f 
+. f f f d d f f f f f f f 
+. . f f d d f b f d d f f 
+. . . f d d f 1 d d d f . 
+. . . f d d d d d f f f . 
+. . . f f d d d d f f . . 
+. . . f b 4 b b 4 4 d . . 
+. . . f b 4 b b 4 4 d . . 
+. . . f 6 6 6 6 d d f . . 
+. . . . f f f f f f . . . 
+. . . . . . f f f . . . . 
+`;
         }
         return null;
     })

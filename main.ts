@@ -20,6 +20,10 @@ namespace SpriteKind {
     export const Monster = SpriteKind.create()
     export const Logo = SpriteKind.create()
     export const VulkanAppSprite = SpriteKind.create()
+    export const NPC = SpriteKind.create()
+    export const ShopNpc_Sword = SpriteKind.create()
+    export const ShopNPC_Hammer = SpriteKind.create()
+    export const ShopNPC_Staff = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const Load = StatusBarKind.create()
@@ -203,9 +207,10 @@ PlasticBottleIcon = sprites.create(img`
                 `, SpriteKind.Icon)
             PlasticBottleIcon.setPosition(146, 6)
             PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
-            info.setScore(0)
+            info.setScore(23)
             info.setLife(5)
             LevelHomeTown()
+            HandleShopBuy(1)
             HasGameStarted = true
         } else if (selectedIndex == 1) {
             MenuOpen = false
@@ -216,9 +221,6 @@ PlasticBottleIcon = sprites.create(img`
         }
     })
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile80`, function (sprite, location) {
-	
-})
 function moveSpriteInTime (sprite: Sprite, x: number, y: number, t: number) {
     globalX = x
     globalY = y
@@ -258,16 +260,18 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.PlayerShot, function (sprite, oth
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (HasGameStarted == true) {
-        handle_b_key_in_toolbar()
-        if (IsOverlapingShopTiles == true) {
-            triggerShop = true
-            pause(1000)
-            triggerShop = false
-        }
+        timer.background(function () {
+            handle_b_key_in_toolbar()
+        })
         if (IsOverlapingNPCJhonny == true) {
             triggerNPC = true
             pause(2000)
             triggerNPC = false
+        }
+        if (IsOverlapingShopTiles == true) {
+            triggerShop = true
+            pause(2000)
+            triggerShop = false
         }
     }
 })
@@ -455,6 +459,9 @@ function DrawSaga () {
         DrawMenu()
     })
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile60`, function (sprite, location) {
+    WeaponShopUI()
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
     CheckQualification(5)
     if (IsQualified == true) {
@@ -580,7 +587,15 @@ statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
     PlasticZombie.destroy(effects.ashes, 500)
 })
 function WeaponShopUI () {
+    DestroySprites()
     tiles.setCurrentTilemap(tilemap`level61`)
+    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorDarkDiamond)
+    TraderNPC_Sword = sprites.create(assets.image`Npc_Sword_Shop`, SpriteKind.ShopNpc_Sword)
+    tiles.placeOnTile(TraderNPC_Sword, tiles.getTileLocation(3, 8))
+    TraderNPC_Hammer = sprites.create(assets.image`Npc_Sword_Shop0`, SpriteKind.ShopNPC_Hammer)
+    tiles.placeOnTile(TraderNPC_Hammer, tiles.getTileLocation(12, 8))
+    TraderNPC_Staff = sprites.create(assets.image`Npc_Hammer_Shop`, SpriteKind.ShopNPC_Staff)
+    tiles.placeOnTile(TraderNPC_Staff, tiles.getTileLocation(7, 3))
 }
 function move_left_in_toolbar () {
     if (toolbar.get_number(ToolbarNumberAttribute.SelectedIndex) > 0) {
@@ -601,6 +616,9 @@ function DestroySprites () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Text)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.NPCJhonny)
+    sprites.destroyAllSpritesOfKind(SpriteKind.ShopNpc_Sword)
+    sprites.destroyAllSpritesOfKind(SpriteKind.ShopNPC_Hammer)
+    sprites.destroyAllSpritesOfKind(SpriteKind.ShopNPC_Staff)
     sprites.destroyAllSpritesOfKind(SpriteKind.Monster)
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
@@ -615,9 +633,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, 
 function move_down_in_inventory_toolbar () {
     toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, toolbar.get_number(ToolbarNumberAttribute.MaxItems) - 1)
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile81`, function (sprite, location) {
-	
-})
 function enable_movement (en: boolean) {
     if (en) {
         controller.moveSprite(PlayerWarrior)
@@ -700,6 +715,33 @@ function SpawnWarlord () {
     bossCanMove = true
     preSetBossPosition(80, 30)
     music.playMelody(music.convertRTTTLToMelody("mkombat:d=4,o=5,b=70:16a#,16a#,16c#6,16a#,16d#6,16a#,16f6,16d#6,16c#6,16c#6,16f6,16c#6,16g#6,16c#6,16f6,16c#6,16g#,16g#,16c6,16g#,16c#6,16g#,16d#6,16c#6,16f#,16f#,16a#,16f#,16c#6,16f#,16c#6,16c6"), 120)
+}
+function HandleShopBuy (ItemType: number) {
+    if (ItemType == 1) {
+        enable_movement(false)
+        story.printCharacterText("Would you like to buy Sword of Life?", "Markus")
+        story.printCharacterText("It costs 20 Plastic!", "Markus")
+        story.showPlayerChoices("Yes", "No")
+        if (story.checkLastAnswer("Yes")) {
+            if (info.score() >= 20) {
+                info.changeScoreBy(-20)
+                add_item([Inventory.create_item(all_labels[1], all_items[1])])
+enable_movement(true)
+            } else {
+                story.printCharacterText("You cannot buy this yet!", "Markus")
+                story.printCharacterText("Make sure you have 20 Plastic!", "Markus")
+                enable_movement(true)
+            }
+        } else {
+            story.printCharacterText("Oh ok! Make sure to buy it in the future!", "Markus")
+            enable_movement(true)
+        }
+    } else if (ItemType == 2) {
+    	
+    } else if (ItemType == 3) {
+    	
+    }
+    pause(10000)
 }
 function CheckQualification (LevelNumber: number) {
     if (DungeonLevel >= LevelNumber) {
@@ -2065,6 +2107,9 @@ let CloseButton_Shop: Sprite = null
 let ShopTitle_Shop: Sprite = null
 let ShopBackground_Shop: Sprite = null
 let Players_Health: StatusBarSprite = null
+let TraderNPC_Staff: Sprite = null
+let TraderNPC_Hammer: Sprite = null
+let TraderNPC_Sword: Sprite = null
 let DungeonLevel = 0
 let offset = 0
 let MAX = 0
@@ -2135,7 +2180,6 @@ IsOverlapingNPCJhonny = false
 namespace SpriteKind {
     export const Star = SpriteKind.create()
     export const Messages = SpriteKind.create()
-    export const NPC = SpriteKind.create()
     export const AOE = SpriteKind.create()
     export const Sphere_Of_Influence = SpriteKind.create()
     export const Load2 = StatusBarKind.create()
