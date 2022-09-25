@@ -7,8 +7,8 @@
         "Color Fading": "github:jwunderl/pxt-color#v0.2.2",
         "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.0.1",
         "animation": "*",
-        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#c8b01b9d47f85a5133c786f1c026b1f376fe4285",
-        "Songs": "github:lucasmayhew/rpgmuisic#f26c7df84609da0be7af7e16d2a64dcd095c1716",
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#10013ca1dcba54156faf7f4fefff9bc8db24ff26",
+        "Songs": "github:LucasMayhew/RPGMuisic#f26c7df84609da0be7af7e16d2a64dcd095c1716",
         "pxt-countup": "github:shakao/pxt-countup#v0.0.2",
         "arcade-sprite-events": "github:riknoll/arcade-sprite-events#dc93eec8412053ebbd2b8f01cf5b6ae285d28900",
         "pxt-rtttl": "github:pelikhan/pxt-rtttl#v0.0.12",
@@ -17,9 +17,9 @@
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.1",
         "arcade-shader": "github:riknoll/arcade-shader#d2a2572906fdb68ff429f337e30606b069e688ea",
         "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
-        "Inventory": "github:unsignedarduino/inventory#v1.1.1",
+        "Inventory": "github:UnsignedArduino/Inventory#v1.1.1",
         "arcade-text": "github:microsoft/arcade-text#v1.3.0",
-        "InhouseLoadingAnimations": "github:thydarksorcerer/inhouseloadinganimations#e69e24bf004ecf0b3221193cacb6d19eb22e14be"
+        "InhouseLoadingAnimations": "github:ThyDarkSorcerer/InhouseLoadingAnimations#e69e24bf004ecf0b3221193cacb6d19eb22e14be"
     },
     "files": [
         "main.blocks",
