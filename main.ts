@@ -241,6 +241,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
+    pause(2000)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.PlayerShot, function (sprite, otherSprite) {
     if (started) {
@@ -472,6 +473,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, l
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
+    pause(2000)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
     CheckQualification(1)
@@ -484,6 +486,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, l
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
+    pause(2000)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile73`, function (sprite, location) {
     if (triggerShop == true) {
@@ -513,6 +516,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, l
         IsQualified = false
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
+    pause(2000)
 })
 function BlockMap () {
     tiles.setCurrentTilemap(tilemap`BlockMap`)
@@ -528,6 +532,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, l
         IsQualified = false
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
+    pause(2000)
 })
 function Start_Game () {
     DungeonLevel = 1
@@ -560,6 +565,7 @@ function Level__8__Shadow_Realm__Boss () {
 }
 function LevelHomeTown () {
     SoundPhase = 2
+    DungeonLevel = 2
     tiles.setCurrentTilemap(tilemap`level1`)
     tiles.placeOnRandomTile(PlayerWarrior, assets.tile`HomeSpawn`)
     SpawnNPCJhonny(5, 5)
@@ -676,6 +682,8 @@ function InitialiseShopSpritesPositions () {
 }
 function Level__2__Underwater_Palace () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level 2 - Underwater Palace`)
+    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairNorth)
+    SpawnPlasticZombie(10, 1)
 }
 function SpawnWarlord () {
     game.showLongText("You have made it to the end. Now you shall have the honour of getting killed by me. ", DialogLayout.Bottom)
@@ -766,6 +774,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, l
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
+    pause(2000)
 })
 function DrawLoadingScreen () {
     scene.setBackgroundImage(img`
@@ -1174,6 +1183,8 @@ function DrawLoadingScreen () {
 }
 function Level__3__Jungle () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level-3 - The Jungle`)
+    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairWest)
+    SpawnPlasticZombie(15, 1)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`triggerShopTilesGrass`, function (sprite, location) {
     if (triggerShop == true) {
@@ -1271,6 +1282,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
+    pause(2000)
 })
 function preSetBossPosition (x: number, y: number) {
     started = false
@@ -1305,6 +1317,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, 
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
+    pause(2000)
 })
 controller.combos.attachCombo("rA", function () {
     if (HasGameStarted == true) {
@@ -1821,6 +1834,9 @@ function DrawLoadingScreenLegacy () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile56`, function (sprite, location) {
+    LevelHomeTown()
+})
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level10`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
@@ -2141,17 +2157,17 @@ let IsOverlapingNPCJhonny = false
 let IsLoadingScreenVisible = false
 let SettingsOpen = false
 let IsOverlapingShopTiles = false
-let NecronWarlord = null
-let toolbar: Inventory.Toolbar = null
-let storyLines: string[] = []
-let star = null
-let lineAdjust = 0
-let sagaImage: Image = null
-let item2 = null
-let all_items: Image[] = []
-let all_labels: string[] = []
-let lifeBarProgress = 0
 let bossProgress = 0
+let lifeBarProgress = 0
+let all_labels: string[] = []
+let all_items: Image[] = []
+let item2 = null
+let sagaImage: Image = null
+let lineAdjust = 0
+let star = null
+let storyLines: string[] = []
+let toolbar: Inventory.Toolbar = null
+let NecronWarlord = null
 IsOverlapingShopTiles = false
 SettingsOpen = false
 function add_item(item_in_list: any[]) {
