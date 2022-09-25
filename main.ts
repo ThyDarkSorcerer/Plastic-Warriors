@@ -35,27 +35,7 @@ function SpawnPlasticZombie (Amount: number, Health: number) {
         Monsters_Health.value = Health
         Monsters_Health.attachToSprite(PlasticZombie)
         PlasticZombie.follow(PlayerWarrior, 50)
-        if (CurrentDungeonLevel == 8) {
-        	
-        } else if (CurrentDungeonLevel == 7) {
-        	
-        } else if (CurrentDungeonLevel == 6) {
-        	
-        } else if (CurrentDungeonLevel == 5) {
-        	
-        } else if (CurrentDungeonLevel == 4) {
-        	
-        } else if (CurrentDungeonLevel == 3) {
-            if (randint(1, 2) == 1) {
-                tiles.placeOnRandomTile(PlasticZombie, assets.tile`SpawningOfZombies`)
-            } else {
-                tiles.placeOnRandomTile(PlasticZombie, assets.tile`SpawningOfZombies`)
-            }
-        } else if (CurrentDungeonLevel == 2) {
-            tiles.placeOnRandomTile(PlasticZombie, sprites.castle.tileDarkGrass3)
-        } else if (CurrentDungeonLevel == 1) {
-            tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
-        }
+        tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
     }
     PlasticZombie.follow(PlayerWarrior, 50)
 }
@@ -633,7 +613,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Monster, function (sprite, other
 })
 function Level__4__Future_Planet () {
     tiles.setCurrentTilemap(tilemap`Level4 - Futuristic City`)
-    tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairNorth)
 }
 function Level__5__Lost_City () {
     tiles.setCurrentTilemap(tilemap`level45`)
@@ -700,16 +679,6 @@ function InitialiseShopSpritesPositions () {
     Text_SoulForgedHammerText_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
     Item_Celeste_Staff_of_Chaos_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
     Text_CelesteStaffOfChaos_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-}
-function ExecuteEventWavesOfZombies (AmountOfZombiesPerWave: number, HealthOfZombies: number, AmountOfWaves: number, TimeForEachWave: number) {
-    for (let index = 0; index <= AmountOfWaves; index++) {
-        info.startCountdown(TimeForEachWave)
-        SpawnPlasticZombie(AmountOfZombiesPerWave, HealthOfZombies)
-        if (IsMobWavesInterrupted == true) {
-            break;
-        }
-        pause(TimeForEachWave * 1000)
-    }
 }
 function Level__2__Underwater_Palace () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level 2 - Underwater Palace`)
@@ -2188,12 +2157,8 @@ let IsOverlapingNPCJhonny = false
 let IsLoadingScreenVisible = false
 let SettingsOpen = false
 let IsOverlapingShopTiles = false
-let CurrentDungeonLevel = 0
-let IsMobWavesInterrupted = false
-IsMobWavesInterrupted = false
 let bossProgress = 0
 let lifeBarProgress = 0
-CurrentDungeonLevel = 0
 let all_labels: string[] = []
 let all_items: Image[] = []
 let item2 = null
