@@ -28,17 +28,6 @@ namespace SpriteKind {
 namespace StatusBarKind {
     export const Load = StatusBarKind.create()
 }
-function SpawnPlasticZombie (Amount: number, Health: number) {
-    for (let index2 = 0; index2 <= Amount; index2++) {
-        PlasticZombie = sprites.create(assets.image`PlasticZombie`, SpriteKind.Monster)
-        Monsters_Health = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
-        Monsters_Health.value = Health
-        Monsters_Health.attachToSprite(PlasticZombie)
-        PlasticZombie.follow(PlayerWarrior, 50)
-        tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
-    }
-    PlasticZombie.follow(PlayerWarrior, 50)
-}
 function DrawMenu () {
     if (!(MenuOpen)) {
         MenuOpen = true
@@ -192,7 +181,7 @@ function DrawMenu () {
             "Celeste, Staff of Chaos"
             ]
             add_item([Inventory.create_item(all_labels[0], all_items[0])])
-PlasticBottleIcon = sprites.create(img`
+            PlasticBottleIcon = sprites.create(img`
                 d 1 1 1 1 1 1 1 1 d 
                 d 1 1 1 1 1 1 1 1 d 
                 d 1 1 1 1 1 c e 1 d 
@@ -683,7 +672,6 @@ function InitialiseShopSpritesPositions () {
 function Level__2__Underwater_Palace () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level 2 - Underwater Palace`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairNorth)
-    SpawnPlasticZombie(10, 1)
 }
 function SpawnWarlord () {
     game.showLongText("You have made it to the end. Now you shall have the honour of getting killed by me. ", DialogLayout.Bottom)
@@ -733,7 +721,7 @@ function HandleShopBuy (ItemType: number) {
             if (info.score() >= 20) {
                 info.changeScoreBy(-20)
                 add_item([Inventory.create_item(all_labels[1], all_items[1])])
-enable_movement(true)
+                enable_movement(true)
             } else {
                 story.printCharacterText("You cannot buy this yet!", "Markus")
                 story.printCharacterText("Make sure you have 20 Plastic!", "Markus")
@@ -1181,10 +1169,19 @@ function DrawLoadingScreen () {
             `)
     })
 }
+function DrawPlasticZombie (Health: number) {
+    PlasticZombie = sprites.create(assets.image`PlasticZombie`, SpriteKind.Monster)
+    UNFS_UniqueNumberForSprite += 1
+    sprites.setDataNumber(PlasticZombie, "UNFS", UNFS_UniqueNumberForSprite)
+    sprites.setDataNumber(PlasticZombie, "Health", Health)
+    Monsters_Health = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
+    Monsters_Health.value = Health
+    Monsters_Health.attachToSprite(PlasticZombie)
+    PlasticZombie.follow(PlayerWarrior, randint(35, 75))
+}
 function Level__3__Jungle () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level-3 - The Jungle`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairWest)
-    SpawnPlasticZombie(15, 1)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`triggerShopTilesGrass`, function (sprite, location) {
     if (triggerShop == true) {
@@ -1440,6 +1437,26 @@ function Level__7__Haunted_Mansion () {
 }
 function enemyShootAimingPlayer (sprite: Sprite, speed: number, spread: number) {
     shootBulletFromSprite(sprite, speed, Math.atan2(PlayerWarrior.y - sprite.y, PlayerWarrior.x - sprite.x) * 57.3 + randint(0 - spread, spread))
+}
+function add_item (item_in_list: Inventory.Item[]) {
+    for (let item of toolbar.get_items()) {
+        if (item.get_image().equals(item_in_list[0].get_image())) {
+            if (item.get_text(ItemTextAttribute.Tooltip) == "") {
+                item.set_text(ItemTextAttribute.Tooltip, "2")
+            } else {
+                item.set_text(ItemTextAttribute.Tooltip, convertToText(parseFloat(item.get_text(ItemTextAttribute.Tooltip)) + 1))
+            }
+            toolbar.update()
+            return true
+        }
+    }
+    if (toolbar.get_items().length < toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
+        toolbar.get_items().push(item_in_list[0])
+        item_in_list[0].set_text(ItemTextAttribute.Tooltip, "")
+toolbar.update()
+        return true
+    }
+    return false
 }
 function SpawnNPCJhonny (cordsX: number, cordsY: number) {
     NPCJhonnyCitizen = sprites.create(assets.image`NPCJhonny`, SpriteKind.NPCJhonny)
@@ -1840,7 +1857,10 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile56`, function (sprite, 
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level10`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
-    SpawnPlasticZombie(5, 1)
+    for (let index = 0; index < 7; index++) {
+        DrawPlasticZombie(1)
+        tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
+    }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
     DungeonLevel += 1
@@ -2125,17 +2145,21 @@ let Players_Health: StatusBarSprite = null
 let TraderNPC_Staff: Sprite = null
 let TraderNPC_Hammer: Sprite = null
 let TraderNPC_Sword: Sprite = null
+let PlasticZombie: Sprite = null
 let DungeonLevel = 0
 let offset = 0
 let MAX = 0
+let Monsters_Health: StatusBarSprite = null
 let sagaSprite: Sprite = null
 let scroll = false
 let projectileSprite: Sprite = null
 let boss: Sprite = null
+let toolbar: Inventory.Toolbar = null
 let triggerShop = false
 let lifeBar: StatusBarSprite = null
 let lifeBarPic: Image = null
 let started = false
+let PlayerWarrior: Sprite = null
 let IsQualified = false
 let dy = 0
 let dx = 0
@@ -2143,11 +2167,10 @@ let globalY = 0
 let globalX = 0
 let HasGameStarted = false
 let PlasticBottleIcon: Sprite = null
+let all_labels: string[] = []
+let all_items: Image[] = []
 let myMenu: miniMenu.MenuSprite = null
 let MenuOpen = false
-let PlayerWarrior: Sprite = null
-let Monsters_Health: StatusBarSprite = null
-let PlasticZombie: Sprite = null
 let SoundPhase = 0
 let ShowSaga = false
 let SagaTimeSpan = 0
@@ -2157,39 +2180,19 @@ let IsOverlapingNPCJhonny = false
 let IsLoadingScreenVisible = false
 let SettingsOpen = false
 let IsOverlapingShopTiles = false
-let bossProgress = 0
-let lifeBarProgress = 0
-let all_labels: string[] = []
-let all_items: Image[] = []
-let item2 = null
-let sagaImage: Image = null
-let lineAdjust = 0
-let star = null
-let storyLines: string[] = []
-let toolbar: Inventory.Toolbar = null
+let UNFS_UniqueNumberForSprite = 0
+UNFS_UniqueNumberForSprite = 0
 let NecronWarlord = null
+let CurrentLoadedDungeon = 1
+let storyLines: string[] = []
+let star = null
+let lineAdjust = 0
+let sagaImage: Image = null
+let item2 = null
+let lifeBarProgress = 0
+let bossProgress = 0
 IsOverlapingShopTiles = false
 SettingsOpen = false
-function add_item(item_in_list: any[]) {
-    for (let item of toolbar.get_items()) {
-        if (item.get_image().equals(item_in_list[0].get_image())) {
-            if (item.get_text(ItemTextAttribute.Tooltip) == "") {
-                item.set_text(ItemTextAttribute.Tooltip, "2")
-            } else {
-                item.set_text(ItemTextAttribute.Tooltip, convertToText(parseFloat(item.get_text(ItemTextAttribute.Tooltip)) + 1))
-            }
-            toolbar.update()
-            return true
-        }
-    }
-    if (toolbar.get_items().length < toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
-        toolbar.get_items().push(item_in_list[0])
-        item_in_list[0].set_text(ItemTextAttribute.Tooltip, "")
-        toolbar.update()
-        return true
-    }
-    return false
-}
 IsLoadingScreenVisible = false
 IsOverlapingNPCJhonny = false
 namespace SpriteKind {
