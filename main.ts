@@ -198,6 +198,9 @@ function DrawMenu () {
             PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
             info.setScore(0)
             info.setLife(5)
+            if (DebugMode == true) {
+                InitDebugMode()
+            }
             LevelHomeTown()
             HasGameStarted = true
         } else if (selectedIndex == 1) {
@@ -640,38 +643,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     music.playTone(139, music.beat(BeatFraction.Eighth))
     otherSprite.destroy()
 })
-function InitialiseShopSpritesPositions () {
-    ShopBackground_Shop.setPosition(0, 0)
-    ShopTitle_Shop.setPosition(0, 0)
-    CloseButton_Shop.setPosition(0, 0)
-    Item_SwordOfLife_Shop.setPosition(0, 0)
-    Text_SwordOfLifeText_Shop.setPosition(0, 0)
-    Item_SoulForgedHammer_Shop.setPosition(0, 0)
-    Text_SoulForgedHammerText_Shop.setPosition(0, 0)
-    Item_Celeste_Staff_of_Chaos_Shop.setPosition(0, 0)
-    Text_CelesteStaffOfChaos_Shop.setPosition(0, 0)
-    ShopBackground_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    ShopTitle_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    CloseButton_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    Item_SwordOfLife_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    Text_SwordOfLifeText_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    Item_SoulForgedHammer_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    Text_SoulForgedHammerText_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    Item_Celeste_Staff_of_Chaos_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    Text_CelesteStaffOfChaos_Shop.setFlag(SpriteFlag.StayInScreen, true)
-    ShopBackground_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-    ShopTitle_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-    CloseButton_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-    Item_SwordOfLife_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-    Text_SwordOfLifeText_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-    Item_SoulForgedHammer_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-    Text_SoulForgedHammerText_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-    Item_Celeste_Staff_of_Chaos_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-    Text_CelesteStaffOfChaos_Shop.setFlag(SpriteFlag.RelativeToCamera, true)
-}
 function Level__2__Underwater_Palace () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level 2 - Underwater Palace`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairNorth)
+    for (let index = 0; index < 10; index++) {
+        DrawPlasticZombie(1)
+        tiles.placeOnRandomTile(PlasticZombie, sprites.castle.tileDarkGrass3)
+    }
 }
 function SpawnWarlord () {
     game.showLongText("You have made it to the end. Now you shall have the honour of getting killed by me. ", DialogLayout.Bottom)
@@ -1351,14 +1329,14 @@ function SpawnCharecter () {
     scene.cameraFollowSprite(PlayerWarrior)
     controller.moveSprite(PlayerWarrior)
     spriteutils.setLifeImage(img`
-        . . . . . . . 
-        . . e 4 e . . 
-        . . e 2 e . . 
-        e . e e e . e 
-        e e e 4 e e e 
-        . e 4 2 4 e . 
-        . . e 4 e . . 
-        . . . e . . . 
+        . 2 a a a 2 . 
+        2 2 c c c 2 2 
+        2 c c 7 c c 2 
+        6 c 7 7 7 c 6 
+        b c 4 4 4 c b 
+        e c c 4 c c e 
+        e e c c c e e 
+        . e 8 8 8 e . 
         `)
 }
 function shootBulletFromSprite (sourceSprite: Sprite, speed: number, angle: number) {
@@ -1470,6 +1448,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable0`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile15`)
 })
+function InitDebugMode () {
+    DungeonLevel = 8
+}
 function DrawLoadingScreenLegacy () {
     scene.setBackgroundImage(img`
         ffffffffffffff4444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccccccffffffffffffffffffffffcccfffccccffffffffe4eeeeeeeccfffcce44444444ecffffffffffeffffffffffffff
@@ -1857,7 +1838,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile56`, function (sprite, 
 function Level__1__Ruins () {
     tiles.setCurrentTilemap(tilemap`level10`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairEast)
-    for (let index = 0; index < 7; index++) {
+    for (let index = 0; index < 5; index++) {
         DrawPlasticZombie(1)
         tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
     }
@@ -1867,255 +1848,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, 
     DestroySprites()
     LevelHomeTown()
 })
-function InitialiseShopSprites () {
-    PlayerWarrior = sprites.create(assets.image`Curser`, SpriteKind.Player)
-    ShopBackground_Shop = sprites.create(img`
-        fddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        fddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        f111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-        f111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-        f111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-        f111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-        f111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-        f111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1
-        f111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-        `, SpriteKind.VulkanAppSprite)
-    ShopTitle_Shop = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.VulkanAppSprite)
-    CloseButton_Shop = sprites.create(assets.image`CloseButton`, SpriteKind.VulkanAppSprite)
-    Item_SwordOfLife_Shop = sprites.create(img`
-        dddddddddddddddddddddddddddddddd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffeffe2fffd
-        dffffffffffffffffffffffffee2fffd
-        dfffffffffffffffffffffffed2ffffd
-        dffffffffffffffffffffffee2fffffd
-        dffffffffffffffffffeffeb2ffffffd
-        dffffffffffffffffffffee2fffffffd
-        dfffffffffffffffffffea2ffffffffd
-        dffffffffffffffffffee2ffff2ffffd
-        dfffffffffffffffffe82ffffffffffd
-        dffffffffffffffffee2fffffffffffd
-        dfffffffffffff2fec2ffefffffffffd
-        dffffffffffffffee2fffffffefffffd
-        dffffffffffffeeeeffffffffffffffd
-        dffffe4fffeefefefffffffffffffffd
-        dffff44e2ff2eeeefffffefffffffffd
-        dfffffef22f24efffffff2fffffffffd
-        dfffff22eeee22effffffffffffffffd
-        dffffff2422effeffffffffffffffffd
-        dfffffffe42e2ffffffffffffffffffd
-        dffffffe4e4e22fffffffffffffffffd
-        dffff2e2ef22fefffffffffffffffffd
-        dffff2eefff2e44ffffffffffffffffd
-        dfffee22fffff4effffffffffffffffd
-        dfff2efffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dddddddddddddddddddddddddddddddd
-        `, SpriteKind.VulkanAppSprite)
-    Text_SwordOfLifeText_Shop = textsprite.create("Sword Of Life - 20 Plastic", 0, 1)
-    Item_SoulForgedHammer_Shop = sprites.create(img`
-        dddddddddddddddddddddddddddddddd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffddffffffffffffffd
-        dffffffffffffd3bb3dffffffffffffd
-        dfffffffffe2ffdeedff2efffffffffd
-        dffffffefff22ffeeff22fffeffffffd
-        dfffff2e2eeee2feef2eeee2e2fffffd
-        dfffff4242eeeeeeeeeeee2424fffffd
-        dffffff2f42eceeeeeece24f2ffffffd
-        dffffff4ff4e8eeeeee8e4ff4ffffffd
-        dfffefffffeeeefeefeeeefffffefffd
-        dfff2efffee22ffeeff22eefffe2fffd
-        dffff2efeefffffddfffffeefe2ffffd
-        dfffff2ee2ffffddddffff2ee2fffffd
-        dffffff22fffffeeeefffff22ffffffd
-        dfffffffffffffeeeefffffffffffffd
-        dfffffffffffffdbbdfffffffffffffd
-        dfffffffffffffeeeefffffffffffffd
-        dfffffffffffffeeeefffffffffffffd
-        dfffffffffffffbbbbfffffffffffffd
-        dfffffffffffffbbbbfffffffffffffd
-        dfffffffffffffeeeefffffffffffffd
-        dfffffffffffffeeeefffffffffffffd
-        dfffffffffffffdbbdfffffffffffffd
-        dfffffffffffffeeeefffffffffffffd
-        dfffffffffffffeeeefffffffffffffd
-        dfffffffffffffddddfffffffffffffd
-        dffffffffffffffddffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dddddddddddddddddddddddddddddddd
-        `, SpriteKind.VulkanAppSprite)
-    Text_SoulForgedHammerText_Shop = textsprite.create("Soul Forged Hammer - 50 Plastic", 0, 1)
-    Item_Celeste_Staff_of_Chaos_Shop = sprites.create(img`
-        dddddddddddddddddddddddddddddddd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffff8fffcfccffd
-        dfffffffffffffffffffa8fa882ccffd
-        dfffffffffffffffffffffff8f22fffd
-        dffffffffffffffffffff2ef28f8cffd
-        dfffffffffffffffffffe2f22288fffd
-        dfffffffffffffffffffffe22ffafffd
-        dffffffffffffffffffff2eefefffffd
-        dffffffffffffffffffee22f22f88ffd
-        dffffffffffffffffe2e2effeffafffd
-        dffffffffffffffefffeeefffffffffd
-        dffffffffffffffff2ef2ffffffffffd
-        dfffffffffffffefe22feffffffffffd
-        dffffffffffffeff2efffffffffffffd
-        dffffffffeefe2f2fffefffffffffffd
-        dfffffffffffff2ffefffffffffffffd
-        dfffffffffefe2f2effffffffffffffd
-        dfffffffff22eefefffffffffffffffd
-        dffffffffff22ffffffffffffffffffd
-        dffffffffe2f2efefffffffffffffffd
-        dfffffff2eeffffefffffffffffffffd
-        dffff2ef22fffffffffffffffffffffd
-        dfffffeefffffffffffffffffffffffd
-        dffffeeeeffffffffffffffffffffffd
-        dffef2ef2ffffffffffffffffffffffd
-        dff2effffffffffffffffffffffffffd
-        dff22efffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dffffffffffffffffffffffffffffffd
-        dddddddddddddddddddddddddddddddd
-        `, SpriteKind.VulkanAppSprite)
-    Text_CelesteStaffOfChaos_Shop = textsprite.create("Celeste - Staff of Chaos - 100 Plastic", 0, 1)
-}
 function LevelTheDeathGateHub () {
     DestroySprites()
     tiles.setCurrentTilemap(tilemap`DeathGateHub`)
@@ -2132,15 +1864,6 @@ let ready = false
 let SettingsMenu: miniMenu.MenuSprite = null
 let PlasticWarriorsSplash: Sprite = null
 let bossCanMove = false
-let Text_CelesteStaffOfChaos_Shop: TextSprite = null
-let Item_Celeste_Staff_of_Chaos_Shop: Sprite = null
-let Text_SoulForgedHammerText_Shop: TextSprite = null
-let Item_SoulForgedHammer_Shop: Sprite = null
-let Text_SwordOfLifeText_Shop: TextSprite = null
-let Item_SwordOfLife_Shop: Sprite = null
-let CloseButton_Shop: Sprite = null
-let ShopTitle_Shop: Sprite = null
-let ShopBackground_Shop: Sprite = null
 let Players_Health: StatusBarSprite = null
 let TraderNPC_Staff: Sprite = null
 let TraderNPC_Hammer: Sprite = null
@@ -2181,6 +1904,8 @@ let IsLoadingScreenVisible = false
 let SettingsOpen = false
 let IsOverlapingShopTiles = false
 let UNFS_UniqueNumberForSprite = 0
+let DebugMode = false
+DebugMode = false
 UNFS_UniqueNumberForSprite = 0
 let NecronWarlord = null
 let CurrentLoadedDungeon = 1
