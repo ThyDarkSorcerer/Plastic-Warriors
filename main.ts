@@ -687,7 +687,6 @@ function SpawnWarlord () {
     MAX = 10
     bossCanMove = true
     preSetBossPosition(80, 30)
-    music.playMelody(music.convertRTTTLToMelody("mkombat:d=4,o=5,b=70:16a#,16a#,16c#6,16a#,16d#6,16a#,16f6,16d#6,16c#6,16c#6,16f6,16c#6,16g#6,16c#6,16f6,16c#6,16g#,16g#,16c6,16g#,16c#6,16g#,16d#6,16c#6,16f#,16f#,16a#,16f#,16c#6,16f#,16c#6,16c6"), 120)
 }
 function HandleShopBuy (ItemType: number) {
     if (ItemType == 1) {
@@ -1952,6 +1951,25 @@ game.onUpdate(function () {
     }
 })
 forever(function () {
+    if (SoundPhase == 1) {
+        Music.CatQuestVo1(songs.Ocean)
+    } else if (SoundPhase == 2) {
+        Music.CatQuestVo1(songs.Seaside_town)
+    } else if (SoundPhase == 3) {
+        Music.CatQuestVo1(songs.Tavern)
+    } else if (SoundPhase == 4) {
+        Music.CatQuestVo1(songs.Room)
+    } else if (SoundPhase == 5) {
+        Music.CatQuestVo1(songs.Town)
+    } else if (SoundPhase == 6) {
+        music.playMelody(music.convertRTTTLToMelody("mkombat:d=4,o=5,b=70:16a#,16a#,16c#6,16a#,16d#6,16a#,16f6,16d#6,16c#6,16c#6,16f6,16c#6,16g#6,16c#6,16f6,16c#6,16g#,16g#,16c6,16g#,16c#6,16g#,16d#6,16c#6,16f#,16f#,16a#,16f#,16c#6,16f#,16c#6,16c6"), 120)
+    } else if (SoundPhase == 7) {
+        music.playMelody(music.convertRTTTLToMelody("MissionImp:d=16,o=6,b=95:32d,32d#,32d,32d#,32d,32d#,32d,32d#,32d,32d,32d#,32e,32f,32f#,32g,g,8p,g,8p,a#,p,c7,p,g,8p,g,8p,f,p,f#,p,g,8p,g,8p,a#,p,c7,p,g,8p,g,8p,f,p,f#,p,a#,g,2d,32p,a#,g,2c#,32p,a#,g,2c,a#5,8c,2p,32p,a#5,g5,2f#,32p,a#5,g5,2f,32p,a#5,g5,2e,d#,8d"), 120)
+    } else if (SoundPhase == 8) {
+    	
+    }
+})
+forever(function () {
     if (IsLoadingScreenVisible == true) {
         pause(200)
         LoadingTextSprite.setText("Loading.")
@@ -2260,15 +2278,6 @@ forever(function () {
     500,
     characterAnimations.rule(Predicate.MovingRight)
     )
-})
-forever(function () {
-    if (SoundPhase == 1) {
-        Music.CatQuestVo1(songs.Ocean)
-    } else if (SoundPhase == 2) {
-        Music.CatQuestVo1(songs.Seaside_town)
-    } else if (SoundPhase == 3) {
-        Music.CatQuestVo1(songs.Tavern)
-    }
 })
 forever(function () {
     if (IsLoadingScreenVisible == true) {
