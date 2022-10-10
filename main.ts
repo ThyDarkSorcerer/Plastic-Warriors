@@ -196,11 +196,8 @@ function DrawMenu () {
                 `, SpriteKind.Icon)
             PlasticBottleIcon.setPosition(146, 6)
             PlasticBottleIcon.setFlag(SpriteFlag.RelativeToCamera, true)
-            info.setScore(0)
+            info.setScore(DungeonLevel)
             info.setLife(5)
-            if (DebugMode == true) {
-                InitDebugMode()
-            }
             LevelHomeTown()
             HasGameStarted = true
         } else if (selectedIndex == 1) {
@@ -223,18 +220,16 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
     LevelTheDeathGateHub()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
-    CheckQualification(4)
-    if (IsQualified == true) {
-        IsQualified = false
+    if (HasCompletedLvl3 = true) {
         Level__4__Future_Planet()
     } else {
         music.zapped.play()
-        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
     pause(2000)
 })
+// Overlaps for Dungeon Exit
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.PlayerShot, function (sprite, otherSprite) {
     if (started) {
         info.changeScoreBy(20)
@@ -455,26 +450,21 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile60`, function (sprite, 
     WeaponShopUI()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
-    CheckQualification(5)
-    if (IsQualified == true) {
-        IsQualified = false
+    if (HasCompletedLvl4 = true) {
         Level__5__Lost_City()
     } else {
         music.zapped.play()
-        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
     pause(2000)
 })
+// Tilemaps
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
-    CheckQualification(1)
-    if (IsQualified == true) {
-        IsQualified = false
+    if (HasCompletedLvl0 == true) {
         Level__1__Ruins()
     } else {
         music.zapped.play()
-        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
@@ -489,6 +479,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile73`, function (sprite, 
 sprites.onOverlap(SpriteKind.Monster, SpriteKind.PlayerShot, function (sprite, otherSprite) {
     otherSprite.destroy(effects.ashes, 500)
     Monsters_Health.value += -1
+    info.changeScoreBy(1)
     sprite.destroy()
 })
 function nonSpell1 () {
@@ -498,14 +489,11 @@ function nonSpell1 () {
     offset += 13
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
-    CheckQualification(7)
-    if (IsQualified == true) {
-        IsQualified = false
+    if (HasCompletedLvl6 = true) {
         Level__7__Haunted_Mansion()
     } else {
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        IsQualified = false
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
     pause(2000)
@@ -514,20 +502,20 @@ function BlockMap () {
     tiles.setCurrentTilemap(tilemap`BlockMap`)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
-    CheckQualification(2)
-    if (IsQualified == true) {
-        IsQualified = false
+    if (HasCompletedLvl1 = true) {
         Level__2__Underwater_Palace()
     } else {
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
-        IsQualified = false
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
     pause(2000)
 })
 function Start_Game () {
     DungeonLevel = 1
+    if (DebugMode == true) {
+        InitDebugMode()
+    }
     IsQualified = false
     DrawMenu()
 }
@@ -569,8 +557,8 @@ controller.combos.attachCombo("dA", function () {
     }
 })
 function spell2 () {
-    for (let index = 0; index <= 4; index++) {
-        shootBulletFromSprite(boss, 60, offset + index * 30)
+    for (let index4 = 0; index4 <= 4; index4++) {
+        shootBulletFromSprite(boss, 60, offset + index4 * 30)
     }
     offset += 23
 }
@@ -715,13 +703,6 @@ function HandleShopBuy (ItemType: number) {
     }
     pause(10000)
 }
-function CheckQualification (LevelNumber: number) {
-    if (DungeonLevel >= LevelNumber) {
-        IsQualified = true
-    } else {
-        IsQualified = false
-    }
-}
 controller.combos.attachCombo("uA", function () {
     if (HasGameStarted == true) {
         projectileSprite = sprites.createProjectileFromSprite(assets.image`projectileSprite`, PlayerWarrior, 0, -50)
@@ -729,13 +710,10 @@ controller.combos.attachCombo("uA", function () {
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
-    CheckQualification(6)
-    if (IsQualified == true) {
-        IsQualified = false
+    if (HasCompletedLvl5 = true) {
         Level__6__Mossy_Dungeon()
     } else {
         music.zapped.play()
-        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
@@ -1159,6 +1137,14 @@ function DrawPlasticZombie (Health: number) {
 function Level__3__Jungle () {
     tiles.setCurrentTilemap(tilemap`Tilemap_Level-3 - The Jungle`)
     tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.stairWest)
+    for (let index = 0; index < 10; index++) {
+        DrawPlasticZombie(1)
+        if (randint(0, 1) == 1) {
+            tiles.placeOnRandomTile(PlasticZombie, assets.tile`myTile71`)
+        } else {
+            tiles.placeOnRandomTile(PlasticZombie, assets.tile`myTile72`)
+        }
+    }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`triggerShopTilesGrass`, function (sprite, location) {
     if (triggerShop == true) {
@@ -1246,13 +1232,10 @@ function move_right_in_toolbar () {
     }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
-    CheckQualification(3)
-    if (IsQualified == true) {
-        IsQualified = false
+    if (HasCompletedLvl2 = true) {
         Level__3__Jungle()
     } else {
         music.zapped.play()
-        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
@@ -1271,9 +1254,9 @@ function moveSpriteRandomFixedTime (sprite: Sprite, yLowerBound: number, outerBo
     moveSpriteInTime(sprite, randint(outerBound, scene.screenWidth() - outerBound), randint(outerBound, yLowerBound), t)
 }
 function nonSpell2 () {
-    for (let index3 = 0; index3 <= MAX - 1; index3++) {
-        shootBulletFromSprite(boss, 60, 360 / MAX * index3 + offset)
-        shootBulletFromSprite(boss, 100, 360 / MAX * (index3 + 0.5) + offset)
+    for (let index32 = 0; index32 <= MAX - 1; index32++) {
+        shootBulletFromSprite(boss, 60, 360 / MAX * index32 + offset)
+        shootBulletFromSprite(boss, 100, 360 / MAX * (index32 + 0.5) + offset)
     }
 }
 function make_toolbar () {
@@ -1281,13 +1264,10 @@ function make_toolbar () {
     DrawToolbar()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, location) {
-    CheckQualification(8)
-    if (IsQualified == true) {
-        IsQualified = false
+    if (HasCompletedLvl7 = true) {
         Level__8__Shadow_Realm__Boss()
     } else {
         music.zapped.play()
-        IsQualified = false
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
@@ -1430,7 +1410,7 @@ function add_item (item_in_list: Inventory.Item[]) {
     if (toolbar.get_items().length < toolbar.get_number(ToolbarNumberAttribute.MaxItems)) {
         toolbar.get_items().push(item_in_list[0])
         item_in_list[0].set_text(ItemTextAttribute.Tooltip, "")
-toolbar.update()
+        toolbar.update()
         return true
     }
     return false
@@ -1831,6 +1811,7 @@ function DrawLoadingScreenLegacy () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - Breakable`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile16`)
 })
+// Level 2
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile56`, function (sprite, location) {
     LevelHomeTown()
 })
@@ -1842,8 +1823,9 @@ function Level__1__Ruins () {
         tiles.placeOnRandomTile(PlasticZombie, sprites.dungeon.darkGroundCenter)
     }
 }
+// Overlaps for Dungeon Level Entry
+// Level 1
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
-    DungeonLevel += 1
     DestroySprites()
     LevelHomeTown()
 })
@@ -1868,7 +1850,7 @@ let TraderNPC_Staff: Sprite = null
 let TraderNPC_Hammer: Sprite = null
 let TraderNPC_Sword: Sprite = null
 let PlasticZombie: Sprite = null
-let DungeonLevel = 0
+let IsQualified = false
 let offset = 0
 let MAX = 0
 let Monsters_Health: StatusBarSprite = null
@@ -1882,12 +1864,12 @@ let lifeBar: StatusBarSprite = null
 let lifeBarPic: Image = null
 let started = false
 let PlayerWarrior: Sprite = null
-let IsQualified = false
 let dy = 0
 let dx = 0
 let globalY = 0
 let globalX = 0
 let HasGameStarted = false
+let DungeonLevel = 0
 let PlasticBottleIcon: Sprite = null
 let all_labels: string[] = []
 let all_items: Image[] = []
@@ -1902,12 +1884,10 @@ let IsOverlapingNPCJhonny = false
 let IsLoadingScreenVisible = false
 let SettingsOpen = false
 let IsOverlapingShopTiles = false
+let HasCompletedLvl0 = false
 let UNFS_UniqueNumberForSprite = 0
 let DebugMode = false
-DebugMode = false
-UNFS_UniqueNumberForSprite = 0
 let NecronWarlord = null
-let CurrentLoadedDungeon = 1
 let storyLines: string[] = []
 let star = null
 let lineAdjust = 0
@@ -1915,6 +1895,17 @@ let sagaImage: Image = null
 let item2 = null
 let lifeBarProgress = 0
 let bossProgress = 0
+let HasCompletedLvl7 = false
+let HasCompletedLvl2 = false
+let HasCompletedLvl5 = false
+let HasCompletedLvl1 = false
+let HasCompletedLvl6 = false
+let HasCompletedLvl4 = false
+let HasCompletedLvl3 = false
+DebugMode = true
+UNFS_UniqueNumberForSprite = 0
+let CurrentLoadedDungeon = 1
+HasCompletedLvl0 = true
 IsOverlapingShopTiles = false
 SettingsOpen = false
 IsLoadingScreenVisible = false
