@@ -331,6 +331,12 @@ function DrawMenu () {
         }
     })
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`Exit_Level7HauntedMansion`, function (sprite, location) {
+    console.log("Exited Level 7")
+    HasCompletedLvl7 = true
+    DestroySprites()
+    LevelHomeTown()
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile76`, function (sprite, location) {
     LevelHomeTown()
 })
@@ -372,6 +378,12 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.PlayerShot, function (sprite, oth
         }
     }
     otherSprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile92`, function (sprite, location) {
+    console.log("Exited Level 8")
+    HasCompletedLvl7 = true
+    DestroySprites()
+    LevelHomeTown()
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (HasGameStarted == true) {
@@ -626,9 +638,18 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, l
     }
     pause(2000)
 })
+function Level__6__The_Labyrinith () {
+    tiles.setCurrentTilemap(tilemap`Level 6 The Labyrinth`)
+}
 function BlockMap () {
     tiles.setCurrentTilemap(tilemap`BlockMap`)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`Exit_Level5_AncientJungle`, function (sprite, location) {
+    console.log("Exited Level 5")
+    HasCompletedLvl5 = true
+    DestroySprites()
+    LevelHomeTown()
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
     if (HasCompletedLvl1 = true) {
         Level__2__Underwater_Palace()
@@ -638,6 +659,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, l
         tiles.placeOnRandomTile(PlayerWarrior, sprites.dungeon.floorLight0)
     }
     pause(2000)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`Exit_Level6_TheLabyrinith`, function (sprite, location) {
+    console.log("Exited Level 6")
+    HasCompletedLvl6 = true
+    DestroySprites()
+    LevelHomeTown()
 })
 function Start_Game () {
     DungeonLevel = 1
@@ -669,7 +696,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPCJhonny, function (sprite, oth
     }
 })
 function Level__8__Shadow_Realm__Boss () {
-    tiles.setCurrentTilemap(tilemap`level43`)
+    tiles.setCurrentTilemap(tilemap`Level8_ShadowRealm`)
 }
 function LevelHomeTown () {
     SoundPhase = 2
@@ -720,7 +747,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Monster, function (sprite, other
     pause(1500)
 })
 function Level__4__Future_Planet () {
-    tiles.setCurrentTilemap(tilemap`Level4 - Futuristic City`)
+    tiles.setCurrentTilemap(tilemap`Level4 - GrassyFields`)
 }
 function Level__5__Lost_City () {
     tiles.setCurrentTilemap(tilemap`level45`)
@@ -839,7 +866,7 @@ controller.combos.attachCombo("uA", function () {
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     if (HasCompletedLvl5 = true) {
-        Level__6__Mossy_Dungeon()
+        Level__6__The_Labyrinith()
     } else {
         music.zapped.play()
         game.splash("You are not powerful enough to do this level", "Do the previous one first!")
@@ -1253,9 +1280,6 @@ function preSetBossPosition (x: number, y: number) {
     offset = 0
     moveSpriteInTime(boss, x, y, 1)
 }
-function Level__6__Mossy_Dungeon () {
-    tiles.setCurrentTilemap(tilemap`Level 6 Mossy Dungeon`)
-}
 function moveSpriteRandomFixedTime (sprite: Sprite, yLowerBound: number, outerBound: number, t: number) {
     moveSpriteInTime(sprite, randint(outerBound, scene.screenWidth() - outerBound), randint(outerBound, yLowerBound), t)
 }
@@ -1273,7 +1297,7 @@ function make_toolbar () {
     DrawToolbar()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, location) {
-    if (HasCompletedLvl7 = true) {
+    if (HasCompletedGame = true) {
         Level__8__Shadow_Realm__Boss()
     } else {
         music.zapped.play()
@@ -1399,7 +1423,7 @@ function moveSprite (sprite: Sprite, x: number, y: number, v: number) {
     }
 }
 function Level__7__Haunted_Mansion () {
-    tiles.setCurrentTilemap(tilemap`level48`)
+    tiles.setCurrentTilemap(tilemap`Level7_HauntedMansion`)
 }
 function enemyShootAimingPlayer (sprite: Sprite, speed: number, spread: number) {
     shootBulletFromSprite(sprite, speed, Math.atan2(PlayerWarrior.y - sprite.y, PlayerWarrior.x - sprite.x) * 57.3 + randint(0 - spread, spread))
@@ -1823,13 +1847,13 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`RuinsTile - 2 - Horizontal - 
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile56`, function (sprite, location) {
     console.log("Exited Level 3")
-    HasCompletedLvl2 = true
+    HasCompletedLvl3 = true
     DestroySprites()
     LevelHomeTown()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`Level4-Exit`, function (sprite, location) {
     console.log("Exited Level 4")
-    HasCompletedLvl1 = true
+    HasCompletedLvl4 = true
     DestroySprites()
     LevelHomeTown()
 })
@@ -1907,21 +1931,22 @@ let IsOverlapingShopTiles = false
 let UNFS_UniqueNumberForSprite = 0
 let DebugMode = false
 let HasCompletedLvl0 = false
-let HasCompletedLvl7 = false
-let HasCompletedLvl6 = false
-let HasCompletedLvl5 = false
-let HasCompletedLvl4 = false
-let HasCompletedLvl3 = false
-let HasCompletedLvl2 = false
-let HasCompletedLvl1 = false
-let bossProgress = 0
-let lifeBarProgress = 0
-let item2 = null
-let sagaImage: Image = null
-let lineAdjust = 0
-let star = null
-let storyLines: string[] = []
 let NecronWarlord = null
+let storyLines: string[] = []
+let star = null
+let lineAdjust = 0
+let sagaImage: Image = null
+let item2 = null
+let lifeBarProgress = 0
+let bossProgress = 0
+let HasCompletedLvl1 = false
+let HasCompletedLvl2 = false
+let HasCompletedLvl3 = false
+let HasCompletedLvl4 = false
+let HasCompletedLvl5 = false
+let HasCompletedLvl6 = false
+let HasCompletedLvl7 = false
+let HasCompletedGame = false
 HasCompletedLvl0 = true
 DebugMode = true
 UNFS_UniqueNumberForSprite = 0

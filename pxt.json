@@ -20,7 +20,9 @@
         "Inventory": "github:UnsignedArduino/Inventory#v1.1.1",
         "arcade-text": "github:microsoft/arcade-text#v1.3.0",
         "InhouseLoadingAnimations": "github:ThyDarkSorcerer/InhouseLoadingAnimations#e69e24bf004ecf0b3221193cacb6d19eb22e14be",
-        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0"
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0",
+        "Achievements": "github:UnsignedArduino/Achievements#a578c77dd75467b9b0b5238a9a31c5fdc427cb9d",
+        "SystemMenuBlocks": "github:UnsignedArduino/SystemMenuBlocks#11b7264d682ea79f618f3538a06dc9d60d1acf78"
     },
     "files": [
         "main.blocks",
@@ -43,5 +45,5 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
