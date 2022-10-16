@@ -1454,7 +1454,7 @@ function SpawnNPCJhonny (cordsX: number, cordsY: number) {
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
     console.log("Exited Level 2")
-    HasCompletedLvl1 = true
+    HasCompletedLvl2 = true
     DestroySprites()
     LevelHomeTown()
 })
@@ -1869,7 +1869,7 @@ function Level__1__Ruins () {
 // Level 1
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
     // Level 2
-    HasCompletedLvl2 = true
+    HasCompletedLvl1 = true
     DestroySprites()
     LevelHomeTown()
 })
@@ -1948,7 +1948,7 @@ let star = null
 let storyLines: string[] = []
 let NecronWarlord = null
 HasCompletedLvl0 = true
-DebugMode = true
+DebugMode = false
 UNFS_UniqueNumberForSprite = 0
 let CurrentLoadedDungeon = 1
 HasCompletedLvl0 = true
