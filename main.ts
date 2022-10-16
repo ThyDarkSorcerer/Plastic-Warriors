@@ -1454,7 +1454,7 @@ function SpawnNPCJhonny (cordsX: number, cordsY: number) {
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
     console.log("Exited Level 2")
-    HasCompletedLvl1 = true
+    HasCompletedLvl2 = true
     DestroySprites()
     LevelHomeTown()
 })
@@ -1869,7 +1869,7 @@ function Level__1__Ruins () {
 // Level 1
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
     // Level 2
-    HasCompletedLvl2 = true
+    HasCompletedLvl1 = true
     DestroySprites()
     LevelHomeTown()
 })
@@ -1912,6 +1912,7 @@ let dy = 0
 let dx = 0
 let globalY = 0
 let globalX = 0
+let HasCompletedLvl7 = false
 let HasGameStarted = false
 let DungeonLevel = 0
 let PlasticBottleIcon: Sprite = null
@@ -1931,24 +1932,23 @@ let IsOverlapingShopTiles = false
 let UNFS_UniqueNumberForSprite = 0
 let DebugMode = false
 let HasCompletedLvl0 = false
-let NecronWarlord = null
-let storyLines: string[] = []
-let star = null
-let lineAdjust = 0
-let sagaImage: Image = null
-let item2 = null
-let lifeBarProgress = 0
-let bossProgress = 0
-let HasCompletedLvl1 = false
-let HasCompletedLvl2 = false
-let HasCompletedLvl3 = false
-let HasCompletedLvl4 = false
-let HasCompletedLvl5 = false
-let HasCompletedLvl6 = false
-let HasCompletedLvl7 = false
 let HasCompletedGame = false
+let HasCompletedLvl6 = false
+let HasCompletedLvl5 = false
+let HasCompletedLvl4 = false
+let HasCompletedLvl3 = false
+let HasCompletedLvl2 = false
+let HasCompletedLvl1 = false
+let bossProgress = 0
+let lifeBarProgress = 0
+let item2 = null
+let sagaImage: Image = null
+let lineAdjust = 0
+let star = null
+let storyLines: string[] = []
+let NecronWarlord = null
 HasCompletedLvl0 = true
-DebugMode = true
+DebugMode = false
 UNFS_UniqueNumberForSprite = 0
 let CurrentLoadedDungeon = 1
 HasCompletedLvl0 = true
