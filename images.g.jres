@@ -24,11 +24,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "myImage0"
     },
-    "image7": {
-        "data": "hwQMABAAAAAA8P//D+AzAAD//zP+Pz0A8P//PuP//wDw/jPz3b5h/+8+M/PdE2H/7+4zM70TYQ/v7j4zvRNhD+/u7vPdE2H/8P7v892+Yf/w//8+4///AAD//zP+Pz0AAPD//w/gMwA=",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "PlasticZombie"
-    },
     "image8": {
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAkN2QAAAAAADZkAEBAAAAANAZAAkAAAAAAAERAAAAAACQAJEAAAAAAACRAAEAAAAAAAAAEAAAAAAAAAAACQAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -58,6 +53,11 @@
         "data": "hwQNABAAAAAAAP8AAAAAAAAA/w8AAAAAAP/8/wAAAADw//z/////APDP/93dv2sP//zf3d1NZA/P/P//371r/////L/RvWv//8/M/91N1P//z//f/U/UD/D/z9/93/0A8M/M//8AAAAA8P//AAAAAA==",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "Npc_Sword_Shop0"
+    },
+    "image7": {
+        "data": "hwQYABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMwAAAAAAAAAAAAAwLYAAAAAAAAAzMwMbMsAAAAAAADMmbnMbLYAAAAAAMBrZpm5bMsAAAAAAMBmZrlszMYMAAAAAGxmZvZvucwMAAAAAGxmZpZmy8zMAAAAAGxmZpZmtszMAAAAAGxmZvZvy8zMAAAAAMBmZrlsybYMAAAAAMBrZpm5bMsAAAAAAADMmbnMbLYAAAAAAAAAzMwMbMsAAAAAAAAAAAAAzLYAAAAAAAAAAAAAwMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "PlasticGhosts"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
