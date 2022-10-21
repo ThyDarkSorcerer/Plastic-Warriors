@@ -628,17 +628,6 @@ function nonSpell1 () {
     }
     offset += 13
 }
-function DrawPlasticGhosts (Health: number) {
-    PlasticGhost = sprites.create(assets.image`PlasticGhosts`, SpriteKind.Monster)
-    UNFS_UniqueNumberForSprite += 1
-    sprites.setDataNumber(PlasticGhost, "UNFS", UNFS_UniqueNumberForSprite)
-    sprites.setDataNumber(PlasticGhost, "Health", Health)
-    Monsters_Health = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
-    Monsters_Health.value = Health
-    Monsters_Health.attachToSprite(PlasticGhost)
-    PlasticGhost.follow(PlayerWarrior, randint(35, 75))
-    PlasticGhost.setFlag(SpriteFlag.GhostThroughWalls, true)
-}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
     if (HasCompletedLvl6 = true) {
         Level__7__Haunted_Mansion()
@@ -1169,24 +1158,7 @@ function DrawLoadingScreen () {
     })
 }
 function DrawPlasticZombie (Health: number) {
-    PlasticZombie = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Monster)
+    PlasticZombie = sprites.create(assets.image`PlasticZombie`, SpriteKind.Monster)
     UNFS_UniqueNumberForSprite += 1
     sprites.setDataNumber(PlasticZombie, "UNFS", UNFS_UniqueNumberForSprite)
     sprites.setDataNumber(PlasticZombie, "Health", Health)
@@ -1482,7 +1454,7 @@ function SpawnNPCJhonny (cordsX: number, cordsY: number) {
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile53`, function (sprite, location) {
     console.log("Exited Level 2")
-    HasCompletedLvl2 = true
+    HasCompletedLvl1 = true
     DestroySprites()
     LevelHomeTown()
 })
@@ -1897,7 +1869,7 @@ function Level__1__Ruins () {
 // Level 1
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile35`, function (sprite, location) {
     // Level 2
-    HasCompletedLvl1 = true
+    HasCompletedLvl2 = true
     DestroySprites()
     LevelHomeTown()
 })
@@ -1923,7 +1895,6 @@ let TraderNPC_Hammer: Sprite = null
 let TraderNPC_Sword: Sprite = null
 let PlasticZombie: Sprite = null
 let IsQualified = false
-let PlasticGhost: Sprite = null
 let offset = 0
 let MAX = 0
 let Monsters_Health: StatusBarSprite = null
@@ -1961,23 +1932,23 @@ let IsOverlapingShopTiles = false
 let UNFS_UniqueNumberForSprite = 0
 let DebugMode = false
 let HasCompletedLvl0 = false
-let NecronWarlord = null
-let storyLines: string[] = []
-let star = null
-let lineAdjust = 0
-let sagaImage: Image = null
-let item2 = null
-let lifeBarProgress = 0
-let bossProgress = 0
-let HasCompletedLvl1 = false
-let HasCompletedLvl2 = false
-let HasCompletedLvl3 = false
-let HasCompletedLvl4 = false
-let HasCompletedLvl5 = false
-let HasCompletedLvl6 = false
 let HasCompletedGame = false
+let HasCompletedLvl6 = false
+let HasCompletedLvl5 = false
+let HasCompletedLvl4 = false
+let HasCompletedLvl3 = false
+let HasCompletedLvl2 = false
+let HasCompletedLvl1 = false
+let bossProgress = 0
+let lifeBarProgress = 0
+let item2 = null
+let sagaImage: Image = null
+let lineAdjust = 0
+let star = null
+let storyLines: string[] = []
+let NecronWarlord = null
 HasCompletedLvl0 = true
-DebugMode = false
+DebugMode = true
 UNFS_UniqueNumberForSprite = 0
 let CurrentLoadedDungeon = 1
 HasCompletedLvl0 = true
